@@ -1,0 +1,9 @@
+GLC motif asset layout (compact SVG; brand tokens match glc-site/src/styles/glc-base.css)
+
+Source note: Public Images/Ground Level Logo.svg embeds a PNG (no vector paths). Traced files are hand-built vectors aligned to that lockup.
+
+stylized/     — Motifs 01–04 (includes motif 4 horizontal + vertical border tiles)
+traced/       — Traced variants + GLC-lockup-traced-compact.svg (full small lockup)
+watermarks/   — Background accents (7), grey + yellow at varied opacities
+
+Run node _extract-logo-png.mjs only if you need to re-extract the embedded PNG (large file).

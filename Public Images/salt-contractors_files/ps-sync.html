@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- saved from url=(0280)https://cdn.taboola.com/scripts/ps-sync.html?gdpr=&gdpr_consent=&us_privacy=&gpp=&gpp_sid=&redirect=https%3A%2F%2Fprebid-server.rubiconproject.com%2Fsetuid%3Fbidder%3Dtaboola%26gdpr%3D%26gdpr_consent%3D%26us_privacy%3D%26gpp%3D%26gpp_sid%3D%26account%3D%26f%3Db%26uid%3D%3CTUID%3E -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script async="" src="./ifs.js.download"></script><script type="text/javascript">
+        function _slicedToArray(r, t) {
+            return _arrayWithHoles(r) || _iterableToArrayLimit(r, t) || _unsupportedIterableToArray(r, t) || _nonIterableRest()
+        }
+
+        function _nonIterableRest() {
+            throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+        }
+
+        function _unsupportedIterableToArray(r, t) {
+            if (r) {
+                if ("string" == typeof r) return _arrayLikeToArray(r, t);
+                var e = Object.prototype.toString.call(r).slice(8, -1);
+                return "Object" === e && r.constructor && (e = r.constructor.name), "Map" === e || "Set" === e ? Array.from(r) : "Arguments" === e || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e) ? _arrayLikeToArray(r, t) : void 0
+            }
+        }
+
+        function _arrayLikeToArray(r, t) {
+            (null == t || t > r.length) && (t = r.length);
+            for (var e = 0, n = new Array(t); e < t; e++) n[e] = r[e];
+            return n
+        }
+
+        function _iterableToArrayLimit(r, t) {
+            var e = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+            if (null != e) {
+                var n = [], o = !0, a = !1, c, i;
+                try {
+                    for (e = e.call(r); !(o = (c = e.next()).done) && (n.push(c.value), !t || n.length !== t); o = !0) ;
+                } catch (r) {
+                    a = !0, i = r
+                } finally {
+                    try {
+                        o || null == e["return"] || e["return"]()
+                    } finally {
+                        if (a) throw i
+                    }
+                }
+                return n
+            }
+        }
+
+        function _arrayWithHoles(r) {
+            if (Array.isArray(r)) return r
+        }
+
+        !function () {
+            try {
+                var r = "taboola global:user-id", t = "trc_cookie_storage", e = "t_gid", n = "user-id",
+                    o = new URL(window.location.href).searchParams, a = [], c = o.get("gdpr"), i = o.get("redirect");
+                c && a.push("gdpr=".concat(c, "&gdpr_consent=").concat(o.get("gdpr_consent") || ""));
+                var u = o.get("us_privacy");
+                u && a.push("us_privacy=".concat(u));
+                var l = o.get("gpp");
+                l && a.push("gpp=".concat(l));
+                var d = function t() {
+                    var e = null;
+                    try {
+                        var s = window.localStorage;
+                        e = s.getItem(r)
+                    } catch (r) {
+                        e = null
+                    }
+                    return e
+                }, p = function r(t, e) {
+                    var n, o, a = _slicedToArray(t.split("".concat(e, "=")), 2)[1], c;
+                    return void 0 === a ? "" : a
+                }, f = function r(t) {
+                    for (var e = "".concat(t, "="), n, o = decodeURIComponent(document.cookie).split(";"), a = 0; a < o.length; a++) {
+                        for (var c = o[a]; " " === c.charAt(0);) c = c.substring(1);
+                        if (0 === c.indexOf(e)) return c.substring(e.length, c.length)
+                    }
+                    return ""
+                }, y, g = function r() {
+                    var t = document.createElement("script");
+                    t.async = !0, t.src = "https://cdn.taboola.com/scripts/ifs.js";
+                    var e = document.getElementsByTagName("script")[0];
+                    e.parentNode.insertBefore(t, e)
+                }, h = function r(t) {
+                    try {
+                        if ("function" != typeof window.fetch) {
+                            var e = new XMLHttpRequest;
+                            e.open("GET", t, !1), e.send()
+                        } else fetch(t, {credentials: "include"})
+                    } catch (r) {
+                        return
+                    }
+                }, v = function r() {
+                    var o = d();
+                    if (o) return o;
+                    var a = p(f(t), n) || f(e);
+                    if (a) return a;
+                    var c = window.TRC ? window.TRC.user_id : void 0;
+                    return c || void 0
+                }();
+                v ? h(i.replace("<TUID>", v)) : (a.push("redirect=".concat(encodeURIComponent(i))), h("https://trc.taboola.com/sg/ps/1/cm?".concat(a.join("&")))), g()
+            } catch (r) {
+                return
+            }
+        }();
+
+    </script>
+</head>
+<body marginwidth="0" marginheight="0">
+
+
+</body></html>

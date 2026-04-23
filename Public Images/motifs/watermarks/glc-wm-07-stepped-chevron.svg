@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+  <polyline fill="none" stroke="#202020" stroke-width="2" stroke-linejoin="miter" opacity="0.12"
+            points="80,120 160,80 240,120 320,80 400,120 480,80 560,120 640,80 720,120"/>
+  <polyline fill="none" stroke="#D9A004" stroke-width="1.5" opacity="0.16"
+            points="80,140 160,100 240,140 320,100 400,140 480,100 560,140 640,100 720,140"/>
+</svg>

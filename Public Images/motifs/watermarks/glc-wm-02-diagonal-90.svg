@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+  <g opacity="0.9">
+    <line x1="-80" y1="220" x2="880" y2="-20" stroke="#202020" stroke-width="2" opacity="0.12"/>
+    <line x1="-40" y1="240" x2="840" y2="0" stroke="#F2B705" stroke-width="3" opacity="0.18"/>
+    <line x1="0" y1="260" x2="800" y2="20" stroke="#D9A004" stroke-width="1.5" opacity="0.14"/>
+  </g>
+</svg>
