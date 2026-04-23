@@ -1,0 +1,234 @@
+﻿{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "GeneralContractor",
+      "@id": "https://groundlevelcontracting.com/services/excavation-site-preparation#excavationOfferCatalog",
+      "name": "Ground Level Contracting",
+      "description": "Excavation & site preparation contractor serving Barrie, Orillia, Wasaga Beach, Innisfil & Simcoe County.",
+      "url": "https://groundlevelcontracting.com/",
+      "telephone": "+17056194902",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "PO BOX 193 STN Main",
+        "addressLocality": "Barrie",
+        "addressRegion": "ON",
+        "postalCode": "L4M 4T2",
+        "addressCountry": "CA"
+      },
+      "areaServed": [
+        "Barrie",
+        "Orillia",
+        "Wasaga Beach",
+        "Innisfil",
+        "Simcoe County"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Excavation & Site Preparation Services",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Residential & Commercial Excavation in Barrie & Simcoe County",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-residential-commercial"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Subdivision Grading Contractor | Multi-Lot, Road Beds & Storm Systems ΓÇö Simcoe County",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-subdivision-grading"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Custom Home Grading | Sloped & Complex Lots in Barrie & Simcoe County",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-custom-home-grading"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Pool Excavation Barrie | Custom In-Ground Pool Digging ΓÇö Simcoe County",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-pool-excavation"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Trenching Contractor Barrie | Utilities, Water & Sanitary Lines ΓÇö Simcoe County",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-trenching"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Site Preparation Contractor Barrie | Residential, Commercial & Multi-Unit",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-site-prep"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Lot Clearing Simcoe County | Tree, Stump & Debris Removal for New Construction",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-lot-clearing"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 8,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Hydro Vacuum Excavation Barrie | Non-Destructive Digging Near Utilities & Roots",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-hydrovac"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 9,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Heavy Civil Site Prep Barrie | Industrial Parks & Commercial Developments ΓÇö Simcoe County",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-heavy-civil"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 10,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Backfilling & Compaction Contractor Barrie | All Project Types ΓÇö Simcoe County",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-backfill"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 11,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Lot Grading Barrie | Final Grade Certificates & Subgrade Prep ΓÇö Simcoe County",
+                "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/#exc-svc-lot-grading-final"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://groundlevelcontracting.com/services/excavation-site-preparation#faq",
+      "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does excavation cost in Barrie, Ontario?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Excavation costs in Barrie vary based on depth, soil conditions, site access, and project scope. Residential foundation digs typically range from $3,000ΓÇô$15,000+. Pool excavation runs $2,000ΓÇô$8,000 depending on size. We provide free on-site estimates ΓÇö contact us for accurate project pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you need a permit for excavation in Barrie or Simcoe County?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most structural excavation (foundations, septic, large grading) requires permits through the City of Barrie or relevant municipality. We advise clients on what's required and can coordinate with inspectors. Utility trenching requires locates through Ontario One Call (1-800-400-2255) before any dig."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas do you serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We serve Barrie, Orillia, Innisfil, Wasaga Beach, Angus, Springwater, Essa, Oro-Medonte, Collingwood, Midland, Bradford, and throughout Simcoe County. Contact us to confirm availability for your location."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does excavation take for a new home?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A standard residential foundation excavation in Barrie typically takes 1ΓÇô3 days depending on size, soil conditions, and site access. We'll give you a timeline estimate during our free on-site visit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is hydro vacuum excavation and when is it required?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hydrovac (hydro vacuum excavation) uses pressurized water and vacuum to expose buried utilities without mechanical damage. It's required ΓÇö and often mandated ΓÇö when excavating within utility corridors. We offer hydrovac services for utility locates, potholing, and sensitive digging throughout Simcoe County."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a lot grading certificate and do I need one?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A lot grading certificate confirms your property drains according to the approved municipal grading plan. Most municipalities in Simcoe County require it before issuing occupancy permits. We perform final lot grading and can refer you to licensed inspectors for certification."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://groundlevelcontracting.com/services/excavation-site-preparation#webpage",
+      "url": "https://groundlevelcontracting.com/services/excavation-site-preparation/",
+      "name": "Excavation & Site Preparation",
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://groundlevelcontracting.com/"
+      },
+      "about": {
+        "@id": "https://groundlevelcontracting.com/services/excavation-site-preparation#excavationOfferCatalog"
+      }
+    }
+  ]
+}

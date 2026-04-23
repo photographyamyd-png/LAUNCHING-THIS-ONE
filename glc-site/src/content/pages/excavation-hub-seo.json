@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "title": "Excavation & Site Preparation Barrie | Simcoe County Contractor",
+    "description": "Expert excavation & site preparation across Barrie, Orillia, Wasaga Beach, Innisfil & Simcoe County. Grading, clearing, trenching, pool digging, hydrovac & more. Free estimates."
+  },
+  "hero": {
+    "eyebrow": "Excavation & Site Preparation",
+    "title": {
+      "line1": "Excavation & Site",
+      "line2": "Preparation Across",
+      "line3": "Barrie, Orillia & Simcoe County",
+      "emphasizeLine": 3
+    },
+    "subheadline": "From Foundation Digs to Full Subdivision Grading — We Move Earth, You Build Dreams",
+    "lede": "Whether you're breaking ground on a custom home in Barrie, grading a new subdivision in Innisfil, excavating a pool in Wasaga Beach, or preparing a commercial site in Orillia — our team delivers precision earthworks on time and on budget. Fully licensed, fully insured, serving Simcoe County and surrounding areas.",
+    "primaryCtaLabel": "Get Your Free Estimate Today",
+    "coverageTags": ["Barrie", "Orillia", "Wasaga Beach", "Innisfil", "Simcoe County"]
+  },
+  "parallaxBackgroundImage": "/images/hero-armour-stone-retaining-walls.png",
+  "parallaxBand": {
+    "eyebrow": "Field operations",
+    "title": "Earthworks keyed to your schedule",
+    "subtitle": "GPS-ready equipment, licensed crews, and inspection-aware sequencing across Barrie, Orillia, Wasaga Beach, Innisfil, and Simcoe County.",
+    "image": "/images/hero-armour-stone-retaining-walls.png",
+    "imageAlt": "Excavator on commercial excavation and grading site Barrie Ontario Simcoe County"
+  },
+  "canonSection": {
+    "eyebrow": "Capabilities",
+    "heading": "Excavation & site preparation services",
+    "intro": "Every scope below is executed with licensed crews, modern equipment, and municipal coordination across Simcoe County."
+  },
+  "services": [
+    {
+      "id": "exc-svc-residential-commercial",
+      "title": "Residential & Commercial Excavation in Barrie & Simcoe County",
+      "paragraphs": [
+        "From single-family home foundations to large-scale commercial builds, our excavation crews are equipped to handle every depth, every scale, and every soil condition across Simcoe County. We operate a modern fleet of excavators, track hoes, and support equipment — meaning we arrive ready to work, minimize downtime, and execute your dig with precision.",
+        "We provide residential excavation for new home foundations, basement expansions, additions, and waterproofing access. For commercial projects, we handle multi-storey foundation excavations, underground parking prep, sump pits, and footings for structures of any size. Whether you're a homeowner, general contractor, or developer, we work to your spec and your timeline.",
+        "Serving Barrie, Orillia, Innisfil, Wasaga Beach, Angus, Springwater, and all of Simcoe County. Licensed and insured. Call for a free on-site estimate."
+      ]
+    },
+    {
+      "id": "exc-svc-subdivision-grading",
+      "title": "Subdivision Grading Contractor | Multi-Lot, Road Beds & Storm Systems — Simcoe County",
+      "paragraphs": [
+        "Developing a new subdivision in Barrie, Innisfil, or anywhere across Simcoe County demands precise mass grading executed to engineering drawings — on schedule, with no surprises. We specialize in multi-lot residential subdivision grading, road sub-base preparation, storm water management earthworks, and bulk cut-and-fill operations.",
+        "Our operators work from digital grade plans using GPS-equipped equipment to achieve precise tolerances across large sites. We coordinate with civil engineers, site supervisors, and municipal inspectors to ensure every phase passes grade approval. From initial site stripping and topsoil removal, to sub-base compaction ready for road construction — we are your single source for subdivision earthworks.",
+        "Currently active on residential subdivisions throughout Simcoe County. Contact us for large-project pricing and equipment availability."
+      ]
+    },
+    {
+      "id": "exc-svc-custom-home-grading",
+      "title": "Custom Home Grading | Sloped & Complex Lots in Barrie & Simcoe County",
+      "paragraphs": [
+        "High-end custom homes often sit on the most challenging lots — steep slopes, irregular terrain, rocky outcroppings, or tight urban infill sites. Standard grading contractors can't always handle it. We specialize in complex lot grading for custom home builders and luxury residential developers across Barrie, Oro-Medonte, Springwater, and the broader Simcoe County region.",
+        "We work directly from architectural and geotechnical plans to shape your lot for proper drainage, foundation suitability, and curb appeal. Precision matters: a poorly graded luxury lot creates drainage problems, foundation risks, and costly re-work. We get it right the first time. Services include rough grading to grade stakes, finish grading after construction, and site reshaping to match landscape design intent."
+      ]
+    },
+    {
+      "id": "exc-svc-pool-excavation",
+      "title": "Pool Excavation Barrie | Custom In-Ground Pool Digging — Simcoe County",
+      "paragraphs": [
+        "Dreaming of a custom in-ground pool in Barrie, Wasaga Beach, Innisfil, or anywhere across Simcoe County? The excavation is the first — and most critical — step. Our pool excavation team digs to exact dimensions specified by your pool contractor or designer, ensuring clean walls, accurate depth profiles, and proper drainage management throughout the dig.",
+        "We excavate all pool types: concrete/gunite pools, fibreglass shells, vinyl liner pools, and spa combinations. We handle soil disposal, backfill staging, and access coordination with your pool installer. Tight residential backyards and lakefront properties are our specialty — we use compact equipment where needed and full-size excavators when the site allows.",
+        "Fast turnarounds, competitive pricing, and guaranteed depth accuracy. Call today for pool excavation pricing in Barrie and surrounding areas."
+      ]
+    },
+    {
+      "id": "exc-svc-trenching",
+      "title": "Trenching Contractor Barrie | Utilities, Water & Sanitary Lines — Simcoe County",
+      "paragraphs": [
+        "Accurate trenching is essential for safe and code-compliant installation of underground utilities, water mains, sanitary sewer lines, storm drainage, electrical conduit, gas lines, and telecommunications infrastructure. Our trenching crews serve residential, commercial, and municipal clients throughout Barrie, Orillia, Wasaga Beach, Innisfil, and Simcoe County.",
+        "We trench to specified depths and widths, provide proper bedding material preparation, and backfill and compact after installation. We work closely with utility contractors, plumbers, electricians, and site supervisors to keep projects moving. All trenching is completed in compliance with Ontario Building Code and TSSA requirements. We also offer vacuum excavation for locates near existing live utilities."
+      ]
+    },
+    {
+      "id": "exc-svc-site-prep",
+      "title": "Site Preparation Contractor Barrie | Residential, Commercial & Multi-Unit",
+      "paragraphs": [
+        "Before any structure goes up, the site must come down — stripped, graded, compacted, and ready for construction. We provide comprehensive site preparation services for residential builders, commercial developers, and multi-unit housing projects across Barrie, Orillia, Innisfil, Wasaga Beach, and Simcoe County.",
+        "Our site prep packages include topsoil stripping and stockpiling, rough grading to civil drawings, sub-base preparation, temporary drainage, and erosion control installation. We work from permit drawings and coordinate with your GC, civil engineer, and municipality to ensure every phase of prep meets approval standards before framing begins. No project is too large or too complex."
+      ]
+    },
+    {
+      "id": "exc-svc-lot-clearing",
+      "title": "Lot Clearing Simcoe County | Tree, Stump & Debris Removal for New Construction",
+      "paragraphs": [
+        "Before you can build, you have to clear. Our land clearing teams remove trees, stumps, brush, debris, and existing structures from raw land and infill lots throughout Simcoe County — from Barrie and Innisfil to Wasaga Beach, Orillia, and beyond. We handle lots of any size, any vegetation density, and any terrain.",
+        "Services include full tree felling and removal, stump grinding and extraction, brush and debris clearing, site stripping of topsoil and organic material, and grubbing of root systems. All cleared material is hauled off site or processed on site per your preference. We leave you with a clean, stripped lot ready for grade and construction. Contact us for clearing estimates — we typically provide same-week quotes."
+      ]
+    },
+    {
+      "id": "exc-svc-hydrovac",
+      "title": "Hydro Vacuum Excavation Barrie | Non-Destructive Digging Near Utilities & Roots",
+      "paragraphs": [
+        "When you can't afford to cut a gas line, sever a fibre optic cable, or damage tree roots, hydro vacuum excavation (hydrovac) is the only safe option. We provide hydrovac services throughout Barrie, Orillia, Simcoe County, Wasaga Beach, and Innisfil for utility locates, daylighting underground services, potholing, and precision excavation around sensitive infrastructure.",
+        "Our vacuum excavation process uses pressurized water to break up soil, which is then extracted via industrial vacuum into a debris tank — leaving buried utilities 100% intact and visible. This method is increasingly required by utilities, municipalities, and engineers for all work within utility corridors. We also use hydrovac for tree root exposure during landscaping and arborist work, and for tight-space excavation where mechanical equipment cannot access."
+      ]
+    },
+    {
+      "id": "exc-svc-heavy-civil",
+      "title": "Heavy Civil Site Prep Barrie | Industrial Parks & Commercial Developments — Simcoe County",
+      "paragraphs": [
+        "Large commercial and industrial developments demand a contractor with the equipment capacity, project management systems, and site coordination experience to operate at scale. We provide heavy civil site preparation for industrial park developments, commercial strip malls, big-box retail pads, warehouse and logistics facilities, and mixed-use commercial projects across Simcoe County.",
+        "Our heavy civil services include mass grading and bulk earthworks, underground servicing corridors, storm water pond construction, road base preparation, retaining structure earthworks, and imported fill management. We hold appropriate WSIB and liability coverage for commercial contracts and can provide subcontract documentation packages. Contact our commercial project team for capacity and scheduling information."
+      ]
+    },
+    {
+      "id": "exc-svc-backfill",
+      "title": "Backfilling & Compaction Contractor Barrie | All Project Types — Simcoe County",
+      "paragraphs": [
+        "Improper backfilling is one of the most common causes of foundation settlement, utility trench collapse, and drainage failures. We provide engineered backfill and compaction services for foundations, utility trenches, retaining walls, pool shells, and general site fills across Barrie, Orillia, Innisfil, Wasaga Beach, and all of Simcoe County.",
+        "We supply and place granular A, granular B, clear stone, and structural fill materials. Compaction is performed in lifts with vibrating plate compactors and drum rollers as required, with density testing available where specified by engineers. Whether you need a foundation backfilled the day after your waterproofing is done or a large commercial trench compacted to 95% Proctor — we work to the spec."
+      ]
+    },
+    {
+      "id": "exc-svc-lot-grading-final",
+      "title": "Lot Grading Barrie | Final Grade Certificates & Subgrade Prep — Simcoe County",
+      "paragraphs": [
+        "In Ontario, most municipalities including the City of Barrie, the Town of Innisfil, Orillia, and Wasaga Beach require a final lot grading certificate before you receive occupancy. We provide final lot grading services that meet all municipal grading plans — directing surface drainage away from structures, toward catch basins, and along approved swales.",
+        "We also provide subgrade preparation before concrete flatwork, interlock, or asphalt installation. Proper subgrade depth, compaction, and granular base application determine how long your surfaces last. Cutting corners at the subgrade stage means cracked driveways, heaving interlock, and costly repairs. Our team grades to spec, compacts to standard, and documents the work. Lot grading certificates available through licensed grading inspectors."
+      ]
+    }
+  ],
+  "research": {
+    "eyebrow": "Planning reference",
+    "heading": "Keyword & intent map",
+    "triggerLabel": "Open the full planning reference",
+    "triggerHint": "For researchers, estimators, and SEO — optional depth; every term stays on the page for crawlers.",
+    "primaryHeading": "Primary Keywords (High Volume — Use in H1 & Meta Titles)",
+    "primaryKeywords": [
+      "excavation contractor Barrie Ontario",
+      "site preparation Barrie ON",
+      "excavation company Simcoe County",
+      "grading contractor Barrie",
+      "excavation services Orillia",
+      "excavation Wasaga Beach",
+      "excavation Innisfil",
+      "lot grading Barrie",
+      "pool excavation Barrie",
+      "land clearing Simcoe County"
+    ],
+    "secondaryHeading": "Secondary Keywords (Medium Volume — Use in H2, Page Body)",
+    "secondaryKeywords": [
+      "residential excavation Barrie",
+      "commercial excavation Simcoe County",
+      "subdivision grading contractor Ontario",
+      "trenching contractor Barrie",
+      "utility trenching Simcoe County",
+      "hydrovac Barrie",
+      "vacuum excavation Orillia",
+      "backfill and compaction contractor Barrie",
+      "custom home grading Simcoe County",
+      "foundation excavation Barrie",
+      "site stripping Barrie",
+      "bulk excavation contractor Ontario",
+      "heavy civil site prep Barrie",
+      "industrial site preparation Simcoe County"
+    ],
+    "longTailHeading": "Long-Tail Keywords (Lower Volume, High Intent — Use in Body Copy & FAQ)",
+    "longTailKeywords": [
+      "excavation contractor for new home build Barrie Ontario",
+      "how much does excavation cost in Barrie",
+      "pool excavation contractor near Barrie ON",
+      "grading contractor for new subdivision Simcoe County",
+      "hydro excavation safe around utilities Barrie",
+      "lot clearing for new home build Orillia",
+      "final lot grading certificate Barrie",
+      "commercial site preparation contractor Innisfil",
+      "stump and debris removal before construction Simcoe County",
+      "trenching for water and sanitary lines Wasaga Beach",
+      "excavation for custom pool Barrie Ontario",
+      "subgrade preparation residential Barrie",
+      "grading sloped lot for custom home Simcoe County",
+      "vacuum excavation tree roots Barrie",
+      "site prep for multi-unit development Barrie"
+    ],
+    "geoHeading": "Geo-Modifier Keywords (Use in Location Pages & Service Pages)",
+    "geoLines": [
+      "excavation Barrie · Orillia · Wasaga Beach · Innisfil · Collingwood",
+      "site preparation Springwater · Angus · Essa · Oro-Medonte",
+      "grading contractor Midland · Penetanguishene · Bradford",
+      "contractor serving Simcoe County · Lake Simcoe area"
+    ]
+  },
+  "trust": {
+    "eyebrow": "Field proof",
+    "heading": "Built for contracts that do not forgive shortcuts",
+    "pullquote": "Real job site photos outperform stock photography by 3–5x for trust.",
+    "stats": [
+      { "value": "15+", "label": "Years in Business" },
+      { "value": "500+", "label": "Projects Completed Across Simcoe County" }
+    ],
+    "licensedLine": "Licensed & Insured — display WSIB clearance, $2M+ liability, and trade credentials with every mobilization.",
+    "reviewsPlaceholder": "Google Reviews widget — embed live rating when available (aim for 20+ reviews, 4.8+ stars).",
+    "galleryNote": "Before & After Photo Gallery — organize by service type; caption every photo with location and service type.",
+    "mapNote": "Project or service-area map — mark completed projects when available."
+  },
+  "parallaxCta": {
+    "heading": "Get Your Free Estimate Today",
+    "responsePromise": "We respond to all estimates within 24 hours"
+  },
+  "geoHub": {
+    "eyebrow": "Local dispatch",
+    "heading": "Simcoe County & Lake Simcoe area coverage",
+    "intro": "Excavation Barrie · Orillia · Wasaga Beach · Innisfil · Collingwood — plus site preparation across Springwater, Angus, Essa, and Oro-Medonte. Grading support extends to Midland, Penetanguishene, and Bradford. We are a contractor serving Simcoe County and the Lake Simcoe area with equipment staged for rapid mobilization.",
+    "territories": [
+      {
+        "name": "Barrie",
+        "sentence": "Full-scope earthworks for Barrie's residential boom, custom builds, and commercial expansion — from subdivisions and waterfront to corridor projects."
+      },
+      {
+        "name": "Orillia",
+        "sentence": "Residential excavation, pools, trenching, grading, and site prep around Lake Couchiching, Highway 11, and Severn/Ramara with crews tuned to clay soils and local bylaws."
+      },
+      {
+        "name": "Wasaga Beach",
+        "sentence": "Pool, foundation, grading, and site prep for Wasaga's subdivisions, cottages, and commercial pads — operators who understand beachfront sand and inland variability."
+      },
+      {
+        "name": "Innisfil",
+        "sentence": "Production-lot and estate excavation across Innisfil's growth corridors, coordinated with Town grading requirements from Alcona to lakeshore communities."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "How much does excavation cost in Barrie, Ontario?",
+      "answer": "Excavation costs in Barrie vary based on depth, soil conditions, site access, and project scope. Residential foundation digs typically range from $3,000–$15,000+. Pool excavation runs $2,000–$8,000 depending on size. We provide free on-site estimates — contact us for accurate project pricing."
+    },
+    {
+      "question": "Do you need a permit for excavation in Barrie or Simcoe County?",
+      "answer": "Most structural excavation (foundations, large grading, deep utility work) requires permits through the City of Barrie or relevant municipality. We advise clients on what's required and can coordinate with inspectors. Utility trenching requires locates through Ontario One Call (1-800-400-2255) before any dig."
+    },
+    {
+      "question": "What areas do you serve?",
+      "answer": "We serve Barrie, Orillia, Innisfil, Wasaga Beach, Angus, Springwater, Essa, Oro-Medonte, Collingwood, Midland, Bradford, and throughout Simcoe County. Contact us to confirm availability for your location."
+    },
+    {
+      "question": "How long does excavation take for a new home?",
+      "answer": "A standard residential foundation excavation in Barrie typically takes 1–3 days depending on size, soil conditions, and site access. We'll give you a timeline estimate during our free on-site visit."
+    },
+    {
+      "question": "What is hydro vacuum excavation and when is it required?",
+      "answer": "Hydrovac (hydro vacuum excavation) uses pressurized water and vacuum to expose buried utilities without mechanical damage. It's required — and often mandated — when excavating within utility corridors. We offer hydrovac services for utility locates, potholing, and sensitive digging throughout Simcoe County."
+    },
+    {
+      "question": "What is a lot grading certificate and do I need one?",
+      "answer": "A lot grading certificate confirms your property drains according to the approved municipal grading plan. Most municipalities in Simcoe County require it before issuing occupancy permits. We perform final lot grading and can refer you to licensed inspectors for certification."
+    }
+  ]
+}

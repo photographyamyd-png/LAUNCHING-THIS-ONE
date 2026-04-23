@@ -1,0 +1,242 @@
+1. BRAND IDENTITY & AESTHETIC PHILOSOPHY
+The brand identity is "Industrial Authority." Every page must feel built, not just designed. We prioritize structural strength, high-contrast readability, and B2B reliability.
+Tone: Engineering-grade, reliable, 
+
+
+
+
+
+
+3. COMPONENT PATTERNS & LAYOUT RULES
+A. The "500-Word Rule" (Tabbed Content System)
+Any section where content exceeds 500 words MUST use the Industrial Tab System.
+Structure: Horizontal icon-based navigation bar.
+Logic: Toggles between Residential, Commercial, Logistics, and Compliance.
+Visuals: White active state with a border-b-4 border-brand-gold. Dark inactive state.
+Purpose: Prevents "Wall of Text" fatigue and improves user retention on high-authority SEO pages.
+B. The Sticky Jump Menu (Scannability Anchor)
+Location: Fixed to the top of the viewport (below main header).
+Appearance: bg-brand-dark (Dark background), gold active-link underlining.
+Interaction: Smooth-scroll to target IDs (Overview, Capabilities, Hauling, FAQ).
+C. Asymmetric Layouts (The 7/12 Rule)
+Formula: 7/12 width for text content, 5/12 width for visual assets.
+Visual Accents: Images in these sections must have a border-b-8 border-brand-gold.
+The "Light Element": Use a decorative backing frame (an empty bg-brand-light box) offset by -2rem behind images to create depth.
+D. Card Blocks (Industrial Grid)
+Hover State: Cards must transition from bg-white (Light) to bg-brand-dark (Dark) or vice versa.
+Borders: Heavy top borders (border-t-8 border-brand-gold).
+Icons: Large (w-12 h-12), stroke width 1, color brand-gold.
+
+4. MOTION & INTERACTION DESIGN
+A. Scroll Reveals (The Parallax Effect)
+Hero Images: Utilize animate-slow-zoom (10% scale increase over 20s).
+Typography: All headers use the RevealOnScroll hook (Fade-in + 12px Y-axis translate-up).
+Staggered Delays: Child elements in a grid must use incremental delays (0ms, 150ms, 300ms).
+B. Mouse Hover Dynamics
+CTA Buttons:
+Primary: Gold to White transition with a -1px transform translate-y on hover.
+Secondary: Outlined to Solid transition.
+
+
+Service Cards: Subtle scale-up (scale-105) and grayscale-to-color transition on imagery.
+C. Micro-Animations
+The Pulse: Every "24/7" or "Now Booking" badge must feature a pulse animation on a 2px radial dot.
+Engineering Grid: Dark sections must utilize a radial-gradient background (30px grid) that stays static as the page content scrolls over it.
+
+5. SECTION DIVIDERS & STRUCTURAL ELEMENTS
+The Structural Divider: A 1px gray-200 line across the full width, with a 24px brand-gold bar at the start of the container.
+Hero-to-Body Transition: Use a "Floating Card" overlay (overlapping the hero section by -64px) to bridge sections.
+Contact Blocks: Always split 50/50. Left is "Emergency/Dark" (Red/Dark themes). Right is "Quote/Gold" (Gold/Light themes).
+
+6. LOCAL SEO TECHNICAL REQUIREMENTS
+Schema Injections: Every page must render Service and FAQPage JSON-LD via the usePageSEO hook.
+Word Count Target: 2,000–2,500 words per parent service page.
+Image Strategy: Minimum 12 images per parent page. Every image must use the OptimizedImage component with location-specific alt tags (e.g., "Excavation
+PAGE COMPONENT PATTERNS
+Hero Section
+Purpose: First impression, main value proposition, primary conversion point
+Key Elements:
+Full-screen or near-full height (h-[90vh] min-h-[700px])
+Background image with dark gradient overlay (30% opacity)
+Small badge/label with icon (service differentiator)
+Large headline (H1 - your exact SEO title)
+Brief description paragraph (50-100 words)
+Two CTA buttons (primary gold + secondary outlined)
+Border-left accent on content area
+Best Practices:
+Keep headline punchy and keyword-rich
+Background image should support service context
+CTAs should be action-oriented ("Get Free Quote", "Call Dispatch")
+Sticky Jump Navigation
+Purpose: Quick access to page sections, improves UX on long pages
+Key Elements:
+Horizontal bar that sticks below main header
+5-7 navigation links maximum
+Smooth scroll to section IDs
+Hover underline animation
+Hidden on mobile (shows above md breakpoint)
+Best Practices:
+Use clear, concise labels (Overview, Services, Process, FAQ)
+Each link targets a section ID in the page
+Keep labels to 1-2 words when possible
+Introduction/Overview Section
+Purpose: Establish authority, provide context, introduce main content
+Layout Style: Asymmetric two-column
+Larger column (7/12): Text content with headline and paragraphs
+Smaller column (5/12): Visual element (image, stat callout, or graphic)
+Key Elements:
+Small label with accent line
+H2 section headline
+150-250 words of introduction text
+Inline CTA or link
+Supporting visual with decorative framing
+Best Practices:
+This is where you establish expertise and service area
+Include primary keywords naturally in first paragraph
+Mention all service locations (Barrie, Orillia, Simcoe County, etc.)
+Tabbed Content Section
+Purpose: Organize extensive service details into scannable categories
+When to Use:
+You have 1,000+ words of service descriptions
+Content naturally breaks into 3-5 distinct categories
+Want to avoid overwhelming "wall of text" scroll
+Structure:
+Horizontal tab bar with icon-labeled buttons
+Active tab styling (gold background, elevated)
+Content area with minimum 600px height
+Border-left gold accent on content box
+Content Per Tab:
+H3 category title
+3-4 paragraphs (250-500 words)
+Bullet list with checkmark icons (4-6 items)
+Image placeholder with descriptive alt text
+CTA buttons at bottom (quote + phone)
+Best Practices:
+Keep tab labels short (2-3 words)
+Use icons that clearly represent category
+Each tab should feel complete (not cut off mid-thought)
+Keywords should be distributed across all tabs
+Grid Cards Section
+Purpose: Visual showcase of 3-4 main offerings or categories
+Structure:
+3 or 4 column grid on desktop
+Cards with background images and text overlay
+Numbered badges (01, 02, 03...)
+Hover effects (color shift, image desaturate/scale)
+Fixed card height for alignment
+Card Elements:
+Icon in corner
+Small label (category type)
+Large title (service name)
+Brief description (1-2 sentences)
+Background image at low opacity
+Best Practices:
+Images should be high-contrast and support the service
+Keep descriptions brief (50 words max)
+Hover effects should be smooth, not jarring
+Split-Screen Section
+Purpose: Create dramatic contrast for dual concepts
+Layout: 50/50 split (or 60/40)
+One side: Content (text, headline, CTA)
+Other side: Image or contrasting content
+Common Uses:
+Problem vs Solution
+Service Type A vs Service Type B
+Content vs Visual showcase
+Emergency vs Planned services
+Styling Variations:
+Dark/Light split (bg-brand-dark + bg-white)
+Content/Image split
+Emergency/Standard split (red + white)
+Best Practices:
+Maintain vertical balance between sides
+Use high-quality images that fill space
+Content side should be scannable (short paragraphs)
+Process/Steps Section
+Purpose: Explain workflow, procedures, or how service works
+Display Format: Grid of cards or vertical timeline
+3-6 steps ideal
+Each step: Icon + title + description
+Numbered or sequential layout
+Best Practices:
+Keep step descriptions brief (2-3 sentences)
+Use action-oriented titles ("Schedule Consultation", not "Consultation")
+Visual consistency (all icons same style, all cards same size)
+Sticky Sidebar Layout
+Purpose: Long-form content with persistent CTAs or info cards
+Structure:
+Main content column (2/3 width) - scrolls
+Sidebar column (1/3 width) - sticks to viewport
+Sidebar Card Types:
+Primary CTA card (project inquiry, quote form)
+Quick contact card (phone number display)
+Trust signal card (credentials, certifications)
+Best Practices:
+2-3 sidebar cards maximum
+Top card should be most important action
+Sticky positioning: sticky top-32
+FAQ Accordion Section
+Purpose: Address common questions, build SEO with long-tail keywords
+Structure:
+Single column layout (not grid)
+Narrow max-width for readability (max-w-4xl)
+Click to expand/collapse
+Chevron icon indicates state
+Styling:
+Question: Bold, larger text
+Answer: Normal weight, smaller text, gray color
+Subtle border between items
+Hover background highlight
+Best Practices:
+10-20 questions ideal
+Questions should include location keywords when relevant
+Answers should be 2-4 sentences (not too long)
+Include FAQ schema markup
+Emergency/Urgent Section
+Purpose: Highlight time-sensitive services or emergency response
+Styling:
+Background: Red (bg-red-700 or bg-red-600)
+Animated icons (pulse, bounce)
+Large, bold typography
+Prominent phone number or emergency CTA
+Best Practices:
+Use sparingly (only for truly urgent services)
+Make phone number largest element
+Include "24/7" or "Emergency" badge
+Trust Signals Section
+Purpose: Build credibility with credentials and proof points
+Common Elements:
+Insurance info ($5M liability, WSIB)
+Years in business
+Certifications/licenses
+Equipment owned vs rented
+Service guarantees
+Display Options:
+Badge grid (icons + short text)
+Stat counters (large numbers)
+Checkmark list
+Best Practices:
+Keep it concise (not a full section, more like a callout)
+Use border accents (border-y-4 border-brand-gold)
+4-7 trust items maximum
+Final CTA Section
+Purpose: Last conversion opportunity before footer
+Structure:
+Full-width, centered content
+Dark background (bg-brand-dark)
+Heavy top border (border-t-[16px] border-brand-gold)
+Massive headline
+Two prominent CTA buttons
+Best Practices:
+Keep copy brief and punchy
+CTAs should be clear next steps
+Optional: background image at very low opacity
+Contact Form Section
+Purpose: Provide dual-path conversion (emergency + planned)
+Layout: Split design
+Left half: Emergency/urgent contact (dark background)
+Right half: Planned/quote request (gold background)
+Best Practices:
+Make phone number huge and tappable
+Provide both immediate and scheduled options
+Keep forms short (or link to full form page)

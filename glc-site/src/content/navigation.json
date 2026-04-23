@@ -1,0 +1,173 @@
+{
+  "utility": {
+    "locationLine": "Barrie • Midland • Orillia • Simcoe County",
+    "phoneDisplay": "705-619-4902",
+    "phoneHref": "tel:+17056194902"
+  },
+  "utilityRotator": [
+    "Available for Site Dispatch — Commercial Projects",
+    "Licensed & Insured — Barrie, Midland, Orillia & Simcoe County",
+    "From Concept to Creation"
+  ],
+  "primary": [
+    { "label": "About", "href": "/about/" },
+    { "label": "Process", "href": "/#process" },
+    { "label": "Coverage", "href": "/#coverage" },
+    { "label": "Projects", "href": "/#testimonials" }
+  ],
+  "megaMenu": {
+    "kicker": "What we do",
+    "intro": "Six core service lines for commercial excavation, civil infrastructure, site logistics, and winter operations across Barrie, Midland, Orillia, and Simcoe County.",
+    "viewAllHref": "/services/",
+    "viewAllLabel": "View all services",
+    "cards": [
+      {
+        "slug": "excavation-site-preparation",
+        "num": "01",
+        "title": "Excavation & Site Prep",
+        "description": "Mass grading, cut-and-fill, clearing",
+        "gridTitle": ["Excavation &", "Site Preparation"],
+        "gridDescription": "Mass grading, cut-and-fill operations, topsoil stripping, and site clearing for commercial development projects of all scales."
+      },
+      {
+        "slug": "site-preparation-grading",
+        "num": "02",
+        "title": "Site Prep & Grading",
+        "description": "Rough & fine grade, compaction, pads",
+        "gridTitle": ["Site Preparation", "& Grading"],
+        "gridDescription": "Rough and fine grading, pad and building line preparation, compaction coordination, and survey-driven finish tolerances for commercial sites."
+      },
+      {
+        "slug": "foundations-civil-infrastructure",
+        "num": "03",
+        "title": "Foundations & Civil",
+        "description": "Footings, shoring, infrastructure",
+        "gridTitle": ["Foundations &", "Civil Infrastructure"],
+        "gridDescription": "Footing trenches, frost wall excavation, shoring, and civil infrastructure installation for commercial and industrial construction."
+      },
+      {
+        "slug": "drainage-hardscaping",
+        "num": "04",
+        "title": "Drainage & Hardscaping",
+        "description": "Storm systems, grading, pavers",
+        "gridTitle": ["Drainage &", "Hardscaping"],
+        "gridDescription": "Grading for surface drainage, storm pipe installation, catch basins, armor stone, interlock pavers, and retaining structures."
+      },
+      {
+        "slug": "hauling-site-clearing-logistics",
+        "num": "05",
+        "title": "Hauling & Clearing",
+        "description": "Haulage, demo, site logistics",
+        "gridTitle": ["Hauling, Site Clearing", "& Logistics"],
+        "gridDescription": "Material hauling, demolition debris removal, tree clearing, rock breaking, and full site logistics management."
+      },
+      {
+        "slug": "snow-removal",
+        "num": "06",
+        "title": "Snow Removal",
+        "description": "Commercial plowing & salting",
+        "gridTitle": ["Snow Removal", "Services"],
+        "gridDescription": "Commercial snow plowing, salting, and site management contracts for parking lots, roadways, and commercial properties across Barrie, Midland, Orillia, and Simcoe County."
+      }
+    ]
+  },
+  "companyMega": {
+    "kicker": "Company",
+    "intro": "Who we are, how we work, where we operate, and how to reach dispatch for commercial sites.",
+    "columns": [
+      {
+        "title": "Ground Level",
+        "links": [
+          { "label": "About", "href": "/about/" },
+          { "label": "Contact", "href": "/contact/" },
+          { "label": "Our Process", "href": "/#process" },
+          { "label": "Coverage Area", "href": "/#coverage" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "label": "All services", "href": "/services/" },
+          { "label": "Why Ground Level", "href": "/#why" },
+          { "label": "Client Projects", "href": "/#testimonials" },
+          { "label": "Site consultation", "href": "/#cta-band" }
+        ]
+      }
+    ],
+    "dispatchBand": {
+      "kicker": "Dispatch",
+      "title": "Available for Site Dispatch — Commercial Projects",
+      "sub": "Call direct for quotes, mobilization, and same-day assessments.",
+      "phoneDisplay": "705-619-4902",
+      "phoneHref": "tel:+17056194902"
+    }
+  },
+  "mobile": {
+    "links": [
+      { "label": "About", "href": "/about/" },
+      { "label": "All Services", "href": "/services/" },
+      { "label": "Services overview", "href": "/#services" },
+      { "label": "Our Process", "href": "/#process" },
+      { "label": "Coverage Area", "href": "/#coverage" },
+      { "label": "Projects", "href": "/#testimonials" }
+    ]
+  },
+  "footer": {
+    "tagline": "\"From Concept to Creation\" — excavation and civil infrastructure for commercial builds across Barrie, Midland, Orillia, and Simcoe County.",
+    "columns": [
+      {
+        "title": "Services",
+        "links": [
+          {
+            "label": "Excavation & Site Preparation",
+            "href": "/services/excavation-site-preparation/"
+          },
+          {
+            "label": "Site Preparation & Grading",
+            "href": "/services/site-preparation-grading/"
+          },
+          {
+            "label": "Foundations & Civil Infrastructure",
+            "href": "/services/foundations-civil-infrastructure/"
+          },
+          {
+            "label": "Drainage & Hardscaping",
+            "href": "/services/drainage-hardscaping/"
+          },
+          {
+            "label": "Hauling, Site Clearing & Logistics",
+            "href": "/services/hauling-site-clearing-logistics/"
+          },
+          {
+            "label": "Snow Removal Services",
+            "href": "/services/snow-removal/"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          { "label": "About Us", "href": "/about/" },
+          { "label": "Contact", "href": "/contact/" },
+          { "label": "Why Ground Level", "href": "/#why" },
+          { "label": "Our Process", "href": "/#process" },
+          { "label": "Coverage Area", "href": "/#coverage" },
+          { "label": "Client Projects", "href": "/#testimonials" }
+        ]
+      },
+      {
+        "title": "Coverage",
+        "links": [
+          { "label": "Barrie, ON", "href": "/#coverage" },
+          { "label": "Midland", "href": "/#coverage" },
+          { "label": "Orillia", "href": "/#coverage" },
+          { "label": "Simcoe County", "href": "/#coverage" }
+        ]
+      }
+    ],
+    "legal": [
+      { "label": "Privacy Policy", "href": "/privacy/" },
+      { "label": "Terms of Use", "href": "/terms/" }
+    ]
+  }
+}

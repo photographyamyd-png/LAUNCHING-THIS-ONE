@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* glc-base.css is imported from layout.tsx (separate chunk) so Tailwind/PostCSS does not parse the full design system through @import "tailwindcss". */
+
+/* Map next/font CSS variables to GLC design tokens (see layout.tsx). */
+html {
+  --font-display: var(--font-oswald), "Oswald", sans-serif;
+  --font-body: var(--font-plus-jakarta), "Plus Jakarta Sans", sans-serif;
+  --font-accent: var(--font-source-serif), "Source Serif 4", serif;
+}

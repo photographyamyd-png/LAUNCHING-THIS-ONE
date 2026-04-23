@@ -1,0 +1,20 @@
+{
+  "name": "Ground Level Contracting",
+  "legalName": "Ground Level Contracting Inc.",
+  "url": "https://groundlevelcontracting.com",
+  "telephone": "+17056194902",
+  "telephoneDisplay": "705-619-4902",
+  "email": "info@groundlevelcontracting.com",
+  "slogan": "From Concept to Creation",
+  "description": "Commercial excavation, foundations, drainage, and civil infrastructure for Barrie, Midland, Orillia, and Simcoe County.",
+  "address": {
+    "streetAddress": "PO BOX 193 STN Main",
+    "addressLocality": "Barrie",
+    "addressRegion": "ON",
+    "postalCode": "L4M 4T2",
+    "addressCountry": "CA"
+  },
+  "areaServed": ["Barrie", "Midland", "Orillia", "Simcoe County"],
+  "locale": "en-CA",
+  "copyrightYear": 2026
+}

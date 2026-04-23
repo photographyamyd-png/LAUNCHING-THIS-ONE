@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<!--
+╔══════════════════════════════════════════════════════════════════════════════════════
+║  GROUND LEVEL CONTRACTING — MASTER BUILD SYSTEM
+║  Version: 2026-03-31 | Design DNA: PCL Construction (pcl.com) layout system
+║  Brand system sourced from: .cursorrules (groundlevelcontracting.com)
+║
+║  ┌─────────────────────────────────────────────────────────────────────────────
+║  │  HOW TO USE THIS FILE IN CURSOR
+║  └─────────────────────────────────────────────────────────────────────────────
+║  This file is the SINGLE SOURCE OF TRUTH for the entire GLC website build.
+║  When building additional pages in Cursor, give it this instruction:
+║
+║  "Using GLC_MASTER_SYSTEM.html as the design reference:
+║   - Replicate the exact CSS token system from :root
+║   - Use the same nav/footer HTML structure (copy verbatim from <!-- NAV --> and <!-- FOOTER -->)
+║   - Choose layout patterns from the COMPONENT LIBRARY section (<!-- COMPONENT: ... -->)
+║   - Follow all 3-plane depth rules (Ground → Structure → Read)
+║   - Never use border-radius except 50% on decorative circles
+║   - Fonts: Oswald (display), Plus Jakarta Sans (body), Source Serif 4 (accent only)
+║   - Brand yellow is ONLY #F2B705 — never approximate"
+║
+║  ┌─────────────────────────────────────────────────────────────────────────────
+║  │  SITE PAGES MAP
+║  └─────────────────────────────────────────────────────────────────────────────
+║  /index.html                          ← THIS FILE (Homepage)
+║  /about/index.html                    ← About Page (template at bottom)
+║  /services/index.html                 ← Services Hub
+║  /services/excavation/index.html      ← Service detail page
+║  /services/foundations/index.html
+║  /services/septic-utilities/index.html
+║  /services/drainage-hardscaping/index.html
+║  /services/hauling-clearing/index.html
+║  /services/snow-removal/index.html
+║  /projects/index.html                 ← Projects / Portfolio
+║  /coverage/index.html                 ← Coverage areas
+║  /contact/index.html                  ← Contact
+║
+║  ┌─────────────────────────────────────────────────────────────────────────────
+║  │  PCL DNA EXTRACTED — TRANSLATED TO GLC
+║  └─────────────────────────────────────────────────────────────────────────────
+║  PCL: Preloader intro animation             → GLC: Charcoal → logo reveal
+║  PCL: Full-bleed hero slider (3-5 images)  → GLC: 3-slide crossfade hero
+║  PCL: Mega-menu sticky nav                  → GLC: Mega nav (Services + Company)
+║  PCL: Rotating declaratives strip           → GLC: Yellow marquee trust ticker
+║  PCL: Editorial white-space split sections  → GLC: About split (charcoal ground)
+║  PCL: Project photo tile grid w/ overlays   → GLC: 6 Services photo tile grid
+║  PCL: Animated stats dashboard              → GLC: 4-stat counter row
+║  PCL: Featured project case-study showcase  → GLC: 2 featured project panels
+║  PCL: Zigzag split why-us section           → GLC: "Why Ground Level" 4-reason split
+║  PCL: Office/coverage map section           → GLC: Coverage region list + map
+║  PCL: News + Insights editorial grid        → GLC: Testimonials 3-card grid
+║  PCL: Dual CTA ("Project / Career")         → GLC: Dual CTA ("Project / Contact")
+║  PCL: 4-col dark footer w/ sustainability   → GLC: 4-col dark footer
+╚══════════════════════════════════════════════════════════════════════════════════════
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ground Level Contracting | Commercial Excavation — Barrie &amp; Simcoe County, Ontario</title>
+<meta name="description" content="Ground Level Contracting delivers commercial excavation, foundations, drainage, and civil infrastructure across Barrie, Simcoe County, Muskoka &amp; Sudbury. From Concept to Creation. Call 705-619-4902.">
+<link rel="canonical" href="https://groundlevelcontracting.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@1,8..60,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — GLC MASTER TOKENS
+   These are the only values Cursor should ever reference.
+   DO NOT hardcode hex values — always use var(--token-name)
+═══════════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* ── BRAND COLORS ─────────────────────────────────────────────────────── */
+  --yellow-core:     #F2B705;   /* CANONICAL brand yellow — never approximate */
+  --gold:            #D9A004;   /* Darker yellow — hover states only */
+  --yellow-tint:     rgba(242,183,5,0.08);
+  --yellow-tint-md:  rgba(242,183,5,0.14);
+  --yellow-tint-lg:  rgba(242,183,5,0.22);
+  --yellow-glow:     0 0 0 3px rgba(242,183,5,0.28);
+
+  /* ── NEUTRALS ─────────────────────────────────────────────────────────── */
+  --charcoal:        #202020;   /* Primary dark — section backgrounds */
+  --charcoal-deep:   #1E1C1A;   /* Deepest dark — footer, nav, overlays */
+  --charcoal-mid:    #3A3632;   /* Mid dark — borders, rails */
+  --white:           #FFFFFF;
+  --off-white:       #F2F2F2;   /* Alternating section bg — NOT same as white */
+  --soft-smoke:      #F2F2F2;   /* Alias for --off-white */
+
+  /* ── TEXT INK ─────────────────────────────────────────────────────────── */
+  --text-900:        #0E0D0C;   /* Headlines on light bg */
+  --text-700:        #3A3632;   /* Strong body on light */
+  --text-500:        #6B6560;   /* Body prose — use on 3-layer sections only */
+  --text-400:        #9C9690;   /* Captions, labels */
+  --gray-200:        #E0DEDA;   /* Hairlines, dividers */
+  --gray-100:        #F7F6F4;   /* Very subtle tint wells */
+
+  /* ── TYPOGRAPHY ───────────────────────────────────────────────────────── */
+  --font-display:    'Oswald', sans-serif;         /* Headlines, section titles */
+  --font-body:       'Plus Jakarta Sans', sans-serif; /* All prose, UI, nav */
+  --font-accent:     'Source Serif 4', serif;      /* Italic pull-quotes only */
+
+  /* ── LAYOUT ───────────────────────────────────────────────────────────── */
+  --container-max:   1200px;    /* HARD MAX — never exceed this anywhere */
+  --section-v:       96px;      /* Standard vertical section padding */
+  --section-v-sm:    64px;      /* Compact vertical padding */
+  --gap-grid:        2px;       /* Grid gap between tiles (intentional tight) */
+
+  /* ── BORDER RADIUS ────────────────────────────────────────────────────── */
+  /* ALL ZERO. Only exception: border-radius:50% on purely decorative circles */
+  --r:               0;
+  --r-sm:            0;
+  --r-md:            0;
+  --r-lg:            0;
+  --r-xl:            0;
+
+  /* ── SHADOWS ──────────────────────────────────────────────────────────── */
+  --shadow-sm:       0 2px 8px rgba(0,0,0,0.08);
+  --shadow-card:     0 4px 24px rgba(0,0,0,0.12);
+  --shadow-elevate:  0 8px 40px rgba(0,0,0,0.20);
+  --shadow-editorial:0 1px 0 rgba(0,0,0,0.10);
+  --shadow-heavy:    0 16px 60px rgba(0,0,0,0.30);
+
+  /* ── EASING ───────────────────────────────────────────────────────────── */
+  --ease-expo:       cubic-bezier(0.22, 1, 0.36, 1);  /* CANONICAL — all transitions */
+  --ease-out:        var(--ease-expo);                  /* Alias — do NOT redefine */
+
+  /* ── Z-INDEX STACK ────────────────────────────────────────────────────── */
+  --z-header:        900;
+  --z-mega:          850;
+  --z-backdrop:      800;
+  --z-drawer:        910;
+  --z-preloader:     999;
+
+  /* ── HEADER HEIGHT (for offset calculations) ──────────────────────────── */
+  --header-utility-h: 36px;
+  --header-nav-h:     68px;
+  --header-total-h:   calc(var(--header-utility-h) + var(--header-nav-h) + 3px); /* +3 = gold strip */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   BASE RESET
+═══════════════════════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);color:var(--text-900);background:var(--white);line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{text-decoration:none;color:inherit}
+ul,ol{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+svg{flex-shrink:0}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   LAYOUT UTILITIES
+═══════════════════════════════════════════════════════════════════════════════ */
+.container{max-width:var(--container-max);margin:0 auto;padding:0 40px}
+.section-pad{padding:var(--section-v) 0}
+.section-pad-sm{padding:var(--section-v-sm) 0}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY SYSTEM
+   Cursor: Use these classes. Never create one-off type styles.
+═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Display headline — Oswald, used for all H1/H2 section titles */
+.gl-h1{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(52px,6.5vw,88px);line-height:1.0;letter-spacing:-0.01em;
+}
+.gl-h2{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(36px,3.5vw,54px);line-height:1.05;letter-spacing:0.01em;
+}
+.gl-h3{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,2vw,28px);line-height:1.1;letter-spacing:0.02em;
+}
+/* Eyebrow / kicker — always above a headline */
+.gl-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-body);font-size:11px;font-weight:800;
+  letter-spacing:0.16em;text-transform:uppercase;color:var(--yellow-core);
+}
+.gl-eyebrow::before{content:'';display:block;width:28px;height:2px;background:currentColor;flex-shrink:0}
+.gl-eyebrow--dark{color:var(--charcoal-deep)}
+.gl-eyebrow--light{color:rgba(255,255,255,0.55)}
+.gl-eyebrow--light::before{background:var(--yellow-core)}
+/* Body prose — never place flat on section bg without §2.2 compliance */
+.gl-prose{font-size:15px;line-height:1.75;color:var(--text-500)}
+.gl-prose--light{color:rgba(255,255,255,0.62)}
+.gl-prose--sm{font-size:13px;line-height:1.65}
+/* Stat metric */
+.gl-metric{font-family:var(--font-display);font-weight:700;line-height:1;letter-spacing:-0.03em}
+.gl-metric--lg{font-size:clamp(48px,5vw,72px)}
+.gl-metric--md{font-size:clamp(32px,3vw,48px)}
+.gl-metric--accent{color:var(--yellow-core)}
+/* Pull quote — Source Serif 4 italic, flagship use only */
+.gl-pullquote{
+  font-family:var(--font-accent);font-style:italic;font-weight:500;
+  font-size:clamp(18px,2vw,26px);line-height:1.5;color:var(--text-900);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   BUTTON SYSTEM
+   Cursor: Use only these classes for all CTAs. No one-off button styles.
+═══════════════════════════════════════════════════════════════════════════════ */
+.gl-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-body);font-size:13px;font-weight:800;
+  letter-spacing:0.08em;text-transform:uppercase;
+  padding:14px 28px;border-radius:var(--r);
+  transition:background 0.2s,color 0.2s,border-color 0.2s,transform 0.3s var(--ease-expo),box-shadow 0.3s;
+  white-space:nowrap;position:relative;overflow:hidden;
+}
+.gl-btn .gl-btn__arrow{transition:transform 0.2s var(--ease-expo)}
+.gl-btn:hover .gl-btn__arrow{transform:translateX(4px)}
+.gl-btn:active{transform:scale(0.98)!important}
+/* Primary — yellow fill */
+.gl-btn--primary{background:var(--yellow-core);color:var(--charcoal-deep)}
+.gl-btn--primary:hover{background:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(242,183,5,0.35)}
+/* Ghost on dark */
+.gl-btn--ghost{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.3)}
+.gl-btn--ghost:hover{border-color:var(--yellow-core);color:var(--yellow-core);background:var(--yellow-tint);transform:translateY(-2px)}
+/* Ghost on light */
+.gl-btn--ghost-dark{background:transparent;color:var(--charcoal-deep);border:2px solid var(--charcoal-deep)}
+.gl-btn--ghost-dark:hover{border-color:var(--yellow-core);color:var(--charcoal-deep);background:var(--yellow-tint-md);transform:translateY(-2px)}
+/* Text link */
+.gl-btn--link{padding:0;background:none;border:none;color:var(--yellow-core);font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase}
+.gl-btn--link:hover{color:var(--gold)}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SCROLL REVEAL SYSTEM
+   Cursor: Add .gl-reveal to any element. JS handles the rest.
+═══════════════════════════════════════════════════════════════════════════════ */
+.gl-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s var(--ease-expo),transform 0.6s var(--ease-expo)}
+.gl-reveal.is-visible{opacity:1;transform:translateY(0)}
+.gl-reveal--up{transform:translateY(40px)}
+.gl-reveal--left{transform:translateX(-40px)}
+.gl-reveal--right{transform:translateX(40px)}
+.gl-reveal--scale{transform:scale(0.94)}
+.gl-delay-1{transition-delay:0.10s}
+.gl-delay-2{transition-delay:0.20s}
+.gl-delay-3{transition-delay:0.30s}
+.gl-delay-4{transition-delay:0.40s}
+.gl-delay-5{transition-delay:0.50s}
+@media(prefers-reduced-motion:reduce){.gl-reveal{opacity:1;transform:none;transition:none}}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   PRELOADER — PCL DNA: opening animation
+═══════════════════════════════════════════════════════════════════════════════ */
+#gl-preloader{
+  position:fixed;inset:0;z-index:var(--z-preloader);
+  background:var(--charcoal-deep);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  transition:opacity 0.6s var(--ease-expo),visibility 0.6s;
+}
+#gl-preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.gl-preloader__mark{
+  width:56px;height:56px;
+  animation:preloader-pulse 1.2s ease-in-out infinite;
+}
+@keyframes preloader-pulse{0%,100%{opacity:0.4;transform:scale(0.92)}50%{opacity:1;transform:scale(1)}}
+.gl-preloader__bar{
+  width:120px;height:2px;background:rgba(255,255,255,0.12);overflow:hidden;
+}
+.gl-preloader__bar-fill{
+  height:100%;width:0;background:var(--yellow-core);
+  animation:preloader-fill 1.4s var(--ease-expo) forwards;
+}
+@keyframes preloader-fill{to{width:100%}}
+.gl-preloader__label{
+  font-family:var(--font-body);font-size:10px;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   HEADER / NAV — PCL DNA: sticky mega-menu
+   Cursor: Never alter the .gl-header__ class tree. Extend by adding modifiers.
+═══════════════════════════════════════════════════════════════════════════════ */
+#gl-header{
+  position:fixed;top:0;left:0;right:0;
+  z-index:var(--z-header);
+}
+/* Utility bar */
+.gl-header__utility{
+  background:var(--charcoal-deep);height:var(--header-utility-h);
+  display:flex;align-items:center;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.gl-header__utility-inner{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;width:100%;
+}
+.gl-util-group{display:flex;align-items:center;gap:24px}
+.gl-util-item{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:600;letter-spacing:0.04em;
+  color:rgba(255,255,255,0.5);
+}
+.gl-util-item a{color:inherit;transition:color 0.2s}
+.gl-util-item a:hover{color:var(--yellow-core)}
+.gl-util-item svg{color:var(--yellow-core);opacity:0.8}
+.gl-util-dispatch{
+  font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--yellow-core);
+}
+/* Gold strip */
+.gl-header__strip{height:3px;background:var(--yellow-core)}
+/* Nav row */
+.gl-header__nav{
+  background:var(--charcoal-deep);height:var(--header-nav-h);
+  transition:background 0.5s,backdrop-filter 0.5s,box-shadow 0.5s;
+}
+#gl-header.scrolled .gl-header__nav{
+  background:rgba(30,28,26,0.94);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  box-shadow:0 1px 0 rgba(0,0,0,0.15);
+}
+.gl-header__nav-inner{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+  height:100%;display:flex;align-items:center;gap:8px;
+}
+/* Logo */
+.gl-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;text-decoration:none}
+.gl-logo__mark{width:38px;height:38px}
+.gl-logo__text{display:flex;flex-direction:column;gap:1px}
+.gl-logo__name{
+  font-family:var(--font-display);font-size:16px;font-weight:700;
+  color:var(--white);text-transform:uppercase;letter-spacing:0.05em;line-height:1;
+}
+.gl-logo__sub{
+  font-family:var(--font-body);font-size:9px;font-weight:700;
+  color:var(--yellow-core);text-transform:uppercase;letter-spacing:0.2em;
+}
+/* Nav links */
+.gl-nav__links{display:flex;align-items:center;margin-left:auto;gap:2px}
+.gl-nav__item{position:relative}
+.gl-nav__link{
+  display:flex;align-items:center;gap:5px;
+  font-family:var(--font-body);font-size:13px;font-weight:700;
+  color:rgba(255,255,255,0.75);padding:8px 14px;letter-spacing:0.04em;
+  transition:color 0.2s;position:relative;
+}
+.gl-nav__link::after{
+  content:'';position:absolute;bottom:4px;left:14px;right:14px;height:2px;
+  background:var(--yellow-core);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.2s var(--ease-expo);
+}
+.gl-nav__link:hover{color:var(--white)}
+.gl-nav__link:hover::after{transform:scaleX(1)}
+.gl-nav__chevron{
+  width:12px;height:12px;stroke:currentColor;stroke-width:2;fill:none;
+  transition:transform 0.3s;
+}
+.gl-nav__item:hover .gl-nav__chevron{transform:rotate(180deg)}
+/* CTA */
+.gl-header__cta{margin-left:16px;flex-shrink:0}
+/* Mobile hamburger */
+.gl-header__mobile{
+  display:none;align-items:center;justify-content:space-between;
+  padding:0 20px;height:60px;background:var(--charcoal-deep);
+}
+.gl-hamburger{
+  width:36px;height:36px;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:6px;
+}
+.gl-hamburger span{display:block;height:2px;background:var(--white);transition:transform 0.3s var(--ease-expo),opacity 0.2s}
+.gl-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.gl-hamburger.open span:nth-child(2){opacity:0}
+.gl-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ── MEGA MENU ──────────────────────────────────────────────────────────── */
+.gl-mega{
+  position:absolute;top:100%;left:0;right:0;
+  background:var(--charcoal-deep);
+  border-top:2px solid var(--yellow-core);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  z-index:var(--z-mega);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(-8px);
+  transition:opacity 0.25s var(--ease-expo),transform 0.25s var(--ease-expo),visibility 0.25s;
+}
+.gl-nav__item:hover .gl-mega{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);
+}
+.gl-mega__inner{
+  max-width:var(--container-max);margin:0 auto;padding:40px;
+  display:grid;gap:40px;
+}
+.gl-mega--services .gl-mega__inner{grid-template-columns:220px 1fr}
+.gl-mega--company  .gl-mega__inner{grid-template-columns:1fr 1fr 1fr}
+/* Mega sidebar */
+.gl-mega__sidebar{}
+.gl-mega__sidebar-label{
+  font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);margin-bottom:16px;
+}
+.gl-mega__sidebar-intro{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.5);margin-bottom:24px}
+/* Mega card grid */
+.gl-mega__cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.gl-mega__card{
+  display:flex;align-items:flex-start;gap:14px;padding:16px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0);
+  transition:background 0.2s,border-color 0.2s;
+  text-decoration:none;
+}
+.gl-mega__card:hover{background:var(--yellow-tint);border-color:rgba(242,183,5,0.2)}
+.gl-mega__card-icon{width:32px;height:32px;flex-shrink:0;margin-top:2px;color:var(--yellow-core)}
+.gl-mega__card-title{
+  font-size:13px;font-weight:700;color:var(--white);text-transform:uppercase;
+  letter-spacing:0.04em;line-height:1.2;margin-bottom:3px;
+}
+.gl-mega__card-sub{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.4}
+/* Mega column links */
+.gl-mega__col-title{
+  font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);margin-bottom:16px;
+  padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.gl-mega__col-links{display:flex;flex-direction:column;gap:2px}
+.gl-mega__col-link{
+  font-size:13px;font-weight:600;color:rgba(255,255,255,0.6);
+  padding:7px 0;display:flex;align-items:center;gap:8px;
+  transition:color 0.2s;
+}
+.gl-mega__col-link::before{content:'';width:0;height:2px;background:var(--yellow-core);transition:width 0.2s var(--ease-expo)}
+.gl-mega__col-link:hover{color:var(--white)}
+.gl-mega__col-link:hover::before{width:14px}
+/* Mega backdrop */
+.gl-header__backdrop{
+  position:fixed;top:var(--header-total-h);left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.5);z-index:var(--z-backdrop);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity 0.25s,visibility 0.25s;
+}
+.gl-header__backdrop.active{opacity:1;visibility:visible;pointer-events:auto}
+/* Mobile drawer */
+.gl-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(340px,90vw);
+  background:var(--charcoal-deep);z-index:var(--z-drawer);
+  transform:translateX(100%);transition:transform 0.35s var(--ease-expo);
+  overflow-y:auto;padding:72px 32px 40px;
+}
+.gl-drawer.open{transform:translateX(0)}
+.gl-drawer__close{position:absolute;top:20px;right:20px;color:var(--white);font-size:22px;padding:4px 8px}
+.gl-drawer__link{
+  display:block;font-family:var(--font-display);font-size:22px;font-weight:600;
+  color:var(--white);text-transform:uppercase;letter-spacing:0.04em;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.07);transition:color 0.2s;
+}
+.gl-drawer__link:hover{color:var(--yellow-core)}
+.gl-drawer__phone{
+  font-family:var(--font-display);font-size:18px;font-weight:700;
+  color:var(--yellow-core);margin-top:32px;display:block;
+}
+.gl-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);
+  z-index:calc(var(--z-drawer) - 5);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity 0.35s,visibility 0.35s;
+}
+.gl-overlay.open{opacity:1;visibility:visible;pointer-events:auto}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   HERO — PCL DNA: full-bleed crossfade slider
+   Pattern: Ground(photo+scrim) → Structure(watermark+blueprint) → Read(copy+stat cards)
+═══════════════════════════════════════════════════════════════════════════════ */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  padding-top:var(--header-total-h);
+  overflow:hidden;background:var(--charcoal-deep);
+}
+/* GROUND — photo crossfade */
+.hero__slides{position:absolute;inset:0;z-index:0}
+.hero__slide{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity 1.2s ease-in-out;
+}
+.hero__slide.active{opacity:1}
+.hero__slide-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  animation:hero-zoom 20s ease-in-out infinite alternate;
+  transform-origin:center;
+}
+@keyframes hero-zoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+.hero__scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(14,13,12,0.90) 0%,rgba(30,28,26,0.75) 50%,rgba(14,13,12,0.30) 100%);
+}
+/* STRUCTURE — blueprint watermark */
+.hero__watermark{
+  position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+}
+.hero__watermark svg{
+  position:absolute;right:-60px;top:50%;transform:translateY(-50%);
+  width:600px;height:600px;opacity:0.035;
+}
+/* READ — content stack */
+.hero__content{
+  position:relative;z-index:2;flex:1;
+  display:flex;align-items:center;padding:64px 0 96px;
+}
+.hero__content-inner{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+  display:grid;grid-template-columns:1fr 360px;gap:64px;align-items:center;width:100%;
+}
+.hero__copy{}
+.hero__eyebrow{margin-bottom:24px;color:var(--yellow-core)}
+.hero__title{
+  font-family:var(--font-display);font-size:clamp(52px,6.5vw,88px);font-weight:700;
+  color:var(--white);text-transform:uppercase;line-height:1.0;letter-spacing:-0.01em;
+  margin-bottom:28px;
+}
+.hero__title em{font-style:normal;color:var(--yellow-core)}
+.hero__lede{
+  font-size:16px;font-weight:500;color:rgba(255,255,255,0.7);
+  max-width:520px;line-height:1.7;margin-bottom:40px;
+}
+.hero__cta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+/* Slide nav dots */
+.hero__dots{
+  position:absolute;bottom:110px;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;gap:10px;
+}
+.hero__dot{
+  width:28px;height:3px;background:rgba(255,255,255,0.25);cursor:pointer;
+  transition:background 0.3s,width 0.3s;
+}
+.hero__dot.active{background:var(--yellow-core);width:48px}
+/* Stat cards panel */
+.hero__stats-panel{display:flex;flex-direction:column;gap:12px}
+.hero__stat-card{
+  background:rgba(14,13,12,0.75);border:1px solid rgba(255,255,255,0.08);
+  border-left:3px solid var(--yellow-core);padding:20px 24px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.hero__stat-num{
+  font-family:var(--font-display);font-size:44px;font-weight:700;
+  color:var(--yellow-core);line-height:1;letter-spacing:-0.02em;
+}
+.hero__stat-label{font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.14em;text-transform:uppercase;margin-top:4px}
+.hero__area-card{
+  background:rgba(14,13,12,0.75);border:1px solid rgba(255,255,255,0.08);
+  padding:20px 24px;backdrop-filter:blur(12px);
+}
+.hero__area-label{font-size:10px;font-weight:800;color:var(--yellow-core);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:10px}
+.hero__area-tags{display:flex;flex-wrap:wrap;gap:6px}
+.hero__area-tag{
+  font-size:11px;font-weight:700;color:rgba(255,255,255,0.75);
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
+  padding:5px 10px;
+}
+/* Service bar */
+.hero__service-bar{
+  position:relative;z-index:2;background:rgba(14,13,12,0.92);
+  border-top:1px solid rgba(255,255,255,0.05);
+  backdrop-filter:blur(8px);
+}
+.hero__service-bar-grid{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+  display:grid;grid-template-columns:repeat(6,1fr);
+}
+.hero__svc-item{
+  padding:16px 14px;display:flex;align-items:center;gap:10px;
+  border-right:1px solid rgba(255,255,255,0.05);
+  transition:background 0.2s;cursor:pointer;
+}
+.hero__svc-item:last-child{border-right:none}
+.hero__svc-item:hover{background:var(--yellow-tint)}
+.hero__svc-icon{width:24px;height:24px;color:var(--yellow-core)}
+.hero__svc-name{font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:0.03em;line-height:1.3}
+.hero__svc-item:hover .hero__svc-name{color:var(--yellow-core)}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MARQUEE / TRUST TICKER — PCL DNA: rotating declaratives strip
+═══════════════════════════════════════════════════════════════════════════════ */
+.gl-marquee{background:var(--yellow-core);overflow:hidden;padding:13px 0;position:relative;z-index:10}
+.gl-marquee__track{
+  display:flex;width:max-content;
+  animation:marquee 30s linear infinite;
+}
+.gl-marquee__track:hover{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.gl-marquee__item{
+  display:flex;align-items:center;gap:10px;padding:0 40px;
+  font-family:var(--font-body);font-size:12px;font-weight:800;
+  color:var(--charcoal-deep);letter-spacing:0.1em;text-transform:uppercase;
+}
+.gl-marquee__sep{
+  width:5px;height:5px;background:rgba(30,28,26,0.35);
+  display:inline-block;border-radius:50%;margin:0 8px;flex-shrink:0;
+}
+@media(prefers-reduced-motion:reduce){.gl-marquee__track{animation:none}}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   INTRO SPLIT — PCL DNA: editorial white-space "who we are"
+   Pattern (B2): Full-bleed media split. Ground=charcoal, Structure=clip+scrim, Read=copy panel
+═══════════════════════════════════════════════════════════════════════════════ */
+#about{background:var(--charcoal);position:relative;overflow:hidden}
+#about::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 65% 65% at 85% 50%,rgba(242,183,5,0.045) 0%,transparent 60%),
+    repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.02) 39px,rgba(255,255,255,0.02) 40px);
+}
+.about__inner{
+  max-width:var(--container-max);margin:0 auto;padding:var(--section-v) 40px;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  position:relative;z-index:1;
+}
+/* Photo side — STRUCTURE plane */
+.about__media{position:relative}
+.about__photo-shell{
+  width:100%;aspect-ratio:4/5;overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% 90%,90% 100%,0 100%);
+  position:relative;
+}
+.about__photo-placeholder{
+  width:100%;height:100%;
+  background:linear-gradient(145deg,#1a3020 0%,#0d1e14 100%);
+  display:flex;align-items:flex-end;padding:28px;
+}
+.about__photo-placeholder::after{
+  content:'EXCAVATION SITE — BARRIE, ON';
+  font-size:10px;font-weight:700;letter-spacing:0.16em;
+  color:rgba(255,255,255,0.28);text-transform:uppercase;
+}
+/* Float chips (off-grid catalog A4) */
+.about__float-stat{
+  position:absolute;right:-24px;bottom:64px;
+  background:var(--yellow-core);padding:18px 22px;z-index:2;
+}
+.about__float-stat-num{font-family:var(--font-display);font-size:38px;font-weight:700;color:var(--charcoal-deep);line-height:1;letter-spacing:-0.02em}
+.about__float-stat-label{font-size:10px;font-weight:800;color:rgba(30,28,26,0.6);letter-spacing:0.14em;text-transform:uppercase;margin-top:3px}
+.about__float-badge{
+  position:absolute;left:-18px;top:44px;
+  background:var(--charcoal-deep);border:1px solid rgba(255,255,255,0.1);
+  padding:13px 17px;z-index:2;
+}
+.about__float-badge-text{font-size:11px;font-weight:700;color:var(--yellow-core);letter-spacing:0.12em;text-transform:uppercase}
+/* Copy side — READ SURFACE */
+.about__copy{}
+.about__heading{color:var(--white);margin:20px 0 8px}
+.about__heading em{font-style:normal;color:var(--yellow-core)}
+.about__rule{width:48px;height:3px;background:var(--yellow-core);margin:20px 0}
+.about__credentials{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0 36px}
+.about__cred{
+  padding:12px 16px;background:rgba(255,255,255,0.03);
+  border-left:2px solid rgba(242,183,5,0.25);
+  transition:background 0.2s,border-color 0.2s;
+}
+.about__cred:hover{background:var(--yellow-tint);border-color:var(--yellow-core)}
+.about__cred-title{font-size:12px;font-weight:800;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px}
+.about__cred-sub{font-size:11px;font-weight:500;color:rgba(255,255,255,0.38);letter-spacing:0.04em}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   STATS ROW — PCL DNA: animated numbers dashboard
+   Pattern (C2): Tri-column specs/stats. Ground=white, Structure=rails, Read=stat cells
+═══════════════════════════════════════════════════════════════════════════════ */
+#stats{background:var(--white);position:relative;overflow:hidden}
+.stats__rail{position:absolute;top:0;left:0;right:0;height:4px;background:var(--charcoal-deep)}
+.stats__inner{
+  max-width:var(--container-max);margin:0 auto;padding:80px 40px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  position:relative;z-index:1;
+}
+.stat-cell{
+  padding:40px 28px;text-align:center;
+  border-right:1px solid var(--gray-200);position:relative;
+}
+.stat-cell:last-child{border-right:none}
+.stat-cell::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:3px;background:var(--yellow-core);
+  transition:width 0.5s var(--ease-expo);
+}
+.stat-cell:hover::after{width:60%}
+.stat-cell__num{
+  font-family:var(--font-display);font-size:clamp(48px,5vw,68px);font-weight:700;
+  color:var(--charcoal-deep);line-height:1;letter-spacing:-0.03em;display:block;
+}
+.stat-cell__suffix{color:var(--yellow-core)}
+.stat-cell__label{
+  display:block;font-size:11px;font-weight:800;
+  color:var(--text-500);letter-spacing:0.14em;text-transform:uppercase;margin-top:8px;
+}
+.stat-cell__sub{display:block;font-size:12px;font-weight:500;color:var(--text-400);margin-top:4px}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SERVICES TILE GRID — PCL DNA: project photo tiles with hover overlays
+   Pattern (A3): Staggered grid. Ground=off-white, Structure=dark rail, Read=service cards
+═══════════════════════════════════════════════════════════════════════════════ */
+#services{background:var(--off-white);padding:var(--section-v) 0;position:relative;overflow:hidden}
+#services::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--charcoal-deep)}
+.services__header{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px 60px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;
+}
+.services__heading{color:var(--charcoal-deep)}
+.services__heading span{color:var(--yellow-core)}
+.services__grid{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-grid);
+}
+/* Service tile — PCL-style photo + overlay */
+.svc-tile{
+  position:relative;aspect-ratio:4/3;overflow:hidden;
+  background:var(--charcoal-deep);cursor:pointer;
+  display:block;text-decoration:none;
+}
+.svc-tile__bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:transform 0.65s var(--ease-expo);
+  background-color:var(--charcoal-mid);
+}
+.svc-tile:hover .svc-tile__bg{transform:scale(1.05)}
+/* Dark overlay — always present, deepens on hover */
+.svc-tile__overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(14,13,12,0.92) 0%,rgba(14,13,12,0.4) 60%,transparent 100%);
+  transition:background 0.4s;
+}
+.svc-tile:hover .svc-tile__overlay{
+  background:linear-gradient(to top,rgba(14,13,12,0.96) 0%,rgba(14,13,12,0.6) 60%,rgba(14,13,12,0.2) 100%);
+}
+/* Yellow accent bar at top — slides down from hidden */
+.svc-tile::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--yellow-core);z-index:3;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s var(--ease-expo);
+}
+.svc-tile:hover::before{transform:scaleX(1)}
+.svc-tile__content{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  padding:28px 24px;
+  transition:transform 0.4s var(--ease-expo);
+}
+.svc-tile:hover .svc-tile__content{transform:translateY(-6px)}
+.svc-tile__num{
+  font-size:11px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--yellow-core);margin-bottom:6px;
+}
+.svc-tile__title{
+  font-family:var(--font-display);font-size:20px;font-weight:700;
+  color:var(--white);text-transform:uppercase;letter-spacing:0.02em;line-height:1.15;
+  margin-bottom:8px;
+}
+.svc-tile__desc{
+  font-size:12px;line-height:1.6;color:rgba(255,255,255,0.6);
+  max-height:0;overflow:hidden;
+  transition:max-height 0.4s var(--ease-expo),opacity 0.3s;
+  opacity:0;
+}
+.svc-tile:hover .svc-tile__desc{max-height:60px;opacity:1}
+.svc-tile__arrow{
+  display:flex;align-items:center;gap:6px;margin-top:10px;
+  font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--yellow-core);
+  opacity:0;transform:translateY(4px);
+  transition:opacity 0.3s,transform 0.3s var(--ease-expo);
+}
+.svc-tile:hover .svc-tile__arrow{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   FEATURED PROJECTS — PCL DNA: large-format case study panels
+   Pattern (B2 + A1): Full-bleed split + cross-section bleed
+═══════════════════════════════════════════════════════════════════════════════ */
+#projects{background:var(--white);padding:var(--section-v) 0;position:relative}
+.projects__header{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px 56px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:40px;
+}
+.projects__heading{color:var(--charcoal-deep)}
+.projects__heading span{color:var(--yellow-core)}
+/* Project panel grid */
+.projects__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-grid)}
+.project-panel{
+  position:relative;aspect-ratio:16/10;overflow:hidden;
+  background:var(--charcoal-deep);
+  display:flex;align-items:flex-end;
+  text-decoration:none;
+}
+/* First panel spans 2 columns */
+.project-panel--wide{grid-column:1/-1;aspect-ratio:21/9}
+.project-panel__bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  background-color:var(--charcoal-mid);
+  transition:transform 0.65s var(--ease-expo);
+}
+.project-panel:hover .project-panel__bg{transform:scale(1.04)}
+.project-panel__scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(14,13,12,0.95) 0%,rgba(14,13,12,0.5) 45%,transparent 100%);
+}
+/* Yellow top bar on hover */
+.project-panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--yellow-core);z-index:3;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s var(--ease-expo);
+}
+.project-panel:hover::before{transform:scaleX(1)}
+.project-panel__info{position:relative;z-index:2;padding:28px;width:100%}
+.project-panel__tag{
+  display:inline-block;font-size:10px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--yellow-core);margin-bottom:8px;
+}
+.project-panel__title{
+  font-family:var(--font-display);font-size:clamp(18px,2.5vw,28px);font-weight:700;
+  color:var(--white);text-transform:uppercase;line-height:1.1;margin-bottom:8px;
+}
+.project-panel__meta{font-size:12px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:0.06em;text-transform:uppercase}
+.project-panel__cta{
+  display:flex;align-items:center;gap:8px;margin-top:14px;
+  font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--yellow-core);
+  opacity:0;transform:translateY(4px);
+  transition:opacity 0.3s,transform 0.3s;
+}
+.project-panel:hover .project-panel__cta{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   WHY GLC — PCL DNA: "why choose us" split section
+   Pattern (B2): Full-bleed media split. Zigzag from About (media now right).
+═══════════════════════════════════════════════════════════════════════════════ */
+#why{background:var(--charcoal-deep);padding:var(--section-v) 0;position:relative;overflow:hidden}
+#why::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(255,255,255,0.012) 79px,rgba(255,255,255,0.012) 80px),
+    repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(255,255,255,0.012) 79px,rgba(255,255,255,0.012) 80px);
+}
+.why__inner{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  position:relative;z-index:1;
+}
+.why__copy{}
+.why__heading{color:var(--white);margin:20px 0 24px}
+.why__heading em{font-style:normal;color:var(--yellow-core)}
+.why__reasons{display:flex;flex-direction:column;gap:2px;margin:28px 0 36px}
+.why__reason{
+  display:flex;align-items:flex-start;gap:16px;padding:18px 20px;
+  background:rgba(255,255,255,0.025);border-left:3px solid transparent;
+  transition:background 0.2s,border-color 0.2s;
+}
+.why__reason:hover{background:var(--yellow-tint);border-color:var(--yellow-core)}
+.why__reason-num{
+  font-family:var(--font-display);font-size:13px;font-weight:700;
+  color:var(--yellow-core);flex-shrink:0;margin-top:1px;
+}
+.why__reason-title{font-size:13px;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:3px}
+.why__reason-text{font-size:12px;line-height:1.55;color:rgba(255,255,255,0.48)}
+/* Photo side */
+.why__media{position:relative}
+.why__photo-shell{
+  width:100%;aspect-ratio:3/4;overflow:hidden;
+  clip-path:polygon(8% 0,100% 0,100% 100%,0 100%,0 8%);
+  position:relative;
+}
+.why__photo-placeholder{
+  width:100%;height:100%;
+  background:linear-gradient(155deg,#122030 0%,#061018 100%);
+  display:flex;align-items:flex-end;padding:28px;
+}
+.why__photo-placeholder::after{content:'SITE GRADING — SIMCOE COUNTY';font-size:10px;font-weight:700;letter-spacing:0.15em;color:rgba(255,255,255,0.25);text-transform:uppercase}
+/* Blueprint partial border (catalog A6) */
+.why__photo-border{
+  position:absolute;top:-8px;left:-8px;right:8px;bottom:8px;
+  border-top:2px solid var(--yellow-core);border-left:2px solid var(--yellow-core);
+  pointer-events:none;z-index:2;
+}
+/* Float chip (catalog A4) */
+.why__chip{position:absolute;right:-20px;bottom:-20px;background:var(--yellow-core);padding:18px 22px;z-index:3}
+.why__chip-text{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--charcoal-deep);text-transform:uppercase;letter-spacing:0.05em}
+.why__chip-sub{font-size:10px;font-weight:700;color:rgba(30,28,26,0.55);letter-spacing:0.12em;text-transform:uppercase;margin-top:2px}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   PROCESS STEPS — PCL DNA: storytelling / process section
+   Pattern (B8): Vertical stepper. Ground=off-white, Structure=connector rail, Read=step wells
+═══════════════════════════════════════════════════════════════════════════════ */
+#process{background:var(--off-white);padding:var(--section-v) 0;position:relative;overflow:hidden}
+#process::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--charcoal-deep)}
+.process__inner{max-width:var(--container-max);margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.process__header{text-align:center;margin-bottom:64px}
+.process__heading{color:var(--charcoal-deep)}
+.process__heading span{color:var(--yellow-core)}
+.process__steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;position:relative;
+}
+.process__rail{
+  position:absolute;top:27px;left:12.5%;right:12.5%;height:2px;
+  background:var(--charcoal-deep);z-index:0;
+}
+.process__rail-fill{
+  position:absolute;top:0;left:0;width:35%;height:100%;
+  background:var(--yellow-core);
+}
+.process__step{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:0 16px;position:relative;z-index:1;
+}
+.process__step-dot{
+  width:56px;height:56px;background:var(--charcoal-deep);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:28px;
+  transition:background 0.3s,transform 0.3s var(--ease-expo);
+}
+.process__step:hover .process__step-dot{background:var(--yellow-core);transform:translateY(-4px)}
+.process__step-num{
+  font-family:var(--font-display);font-size:18px;font-weight:700;
+  color:var(--white);transition:color 0.3s;
+}
+.process__step:hover .process__step-num{color:var(--charcoal-deep)}
+.process__step-well{
+  background:var(--white);border-top:3px solid transparent;
+  padding:22px 18px;width:100%;
+  box-shadow:var(--shadow-sm);
+  transition:border-color 0.3s,transform 0.3s var(--ease-expo),box-shadow 0.3s;
+}
+.process__step:hover .process__step-well{border-color:var(--yellow-core);transform:translateY(-2px);box-shadow:var(--shadow-card)}
+.process__step-title{
+  font-family:var(--font-display);font-size:15px;font-weight:700;
+  color:var(--charcoal-deep);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;
+}
+.process__step-desc{font-size:12px;line-height:1.6;color:var(--text-500)}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   COVERAGE — PCL DNA: office/coverage map section
+   Pattern (A4): Off-grid floating accent. Ground=charcoal, Structure=radial glow, Read=area cards
+═══════════════════════════════════════════════════════════════════════════════ */
+#coverage{background:var(--charcoal);padding:80px 0;position:relative;overflow:hidden}
+#coverage::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 80% at 25% 50%,rgba(242,183,5,0.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.coverage__inner{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+  display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:center;
+  position:relative;z-index:1;
+}
+.coverage__copy{}
+.coverage__heading{color:var(--white);margin:16px 0 20px}
+.coverage__heading em{font-style:normal;color:var(--yellow-core)}
+.coverage__body{font-size:14px;line-height:1.75;color:rgba(255,255,255,0.52)}
+.coverage__areas{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.coverage__area{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.05);
+  padding:20px 22px;display:flex;align-items:center;gap:14px;
+  transition:background 0.2s,border-color 0.2s,transform 0.3s var(--ease-expo);
+}
+.coverage__area:hover{background:var(--yellow-tint);border-color:rgba(242,183,5,0.25);transform:translateY(-2px)}
+.coverage__area-dot{width:8px;height:8px;background:var(--yellow-core);border-radius:50%;flex-shrink:0}
+.coverage__area-name{font-size:14px;font-weight:700;color:var(--white);letter-spacing:0.04em;text-transform:uppercase}
+.coverage__area-sub{font-size:11px;font-weight:500;color:rgba(255,255,255,0.38);margin-top:1px}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TESTIMONIALS — PCL DNA: "News & Insights" editorial card grid
+   Pattern (A3): Staggered cards. Ground=off-white, Structure=top rail, Read=elevated cards
+═══════════════════════════════════════════════════════════════════════════════ */
+#testimonials{background:var(--off-white);padding:var(--section-v) 0;position:relative;overflow:hidden}
+#testimonials::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--charcoal-deep)}
+.testimonials__inner{max-width:var(--container-max);margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.testimonials__header{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;
+  margin-bottom:56px;
+}
+.testimonials__heading{color:var(--charcoal-deep)}
+.testimonials__heading span{color:var(--yellow-core)}
+.testimonials__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-grid)}
+.testimonial-card{
+  background:var(--white);padding:32px 28px;
+  border-top:3px solid transparent;
+  box-shadow:var(--shadow-sm);
+  transition:border-color 0.3s,transform 0.3s var(--ease-expo),box-shadow 0.3s;
+}
+.testimonial-card:hover{border-color:var(--yellow-core);transform:translateY(-6px);box-shadow:var(--shadow-elevate)}
+.testimonial-card__mark{
+  font-family:var(--font-display);font-size:64px;line-height:0.8;
+  color:var(--yellow-core);opacity:0.28;margin-bottom:14px;display:block;
+}
+.testimonial-card__text{font-size:14px;line-height:1.75;color:var(--text-500);font-style:italic;margin-bottom:24px}
+.testimonial-card__rule{width:28px;height:2px;background:var(--yellow-core);margin-bottom:14px}
+.testimonial-card__name{font-size:14px;font-weight:800;color:var(--charcoal-deep);text-transform:uppercase;letter-spacing:0.04em}
+.testimonial-card__role{font-size:11px;font-weight:600;color:var(--text-400);letter-spacing:0.1em;text-transform:uppercase;margin-top:3px}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   DUAL CTA BAND — PCL DNA: "Build a Project / Build a Career"
+   Pattern (B4): Pull-quote / statement band. Split into two action panels.
+═══════════════════════════════════════════════════════════════════════════════ */
+#cta{position:relative;overflow:hidden}
+.cta__panels{display:grid;grid-template-columns:1fr 1fr}
+/* Left panel — primary (yellow) */
+.cta__panel{
+  padding:80px 60px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.cta__panel--primary{background:var(--yellow-core)}
+.cta__panel--primary::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(30,28,26,0.04) 20px,rgba(30,28,26,0.04) 21px);
+}
+.cta__panel--primary::after{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--charcoal-deep)}
+.cta__panel--dark{background:var(--charcoal-deep)}
+.cta__panel--dark::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 80% at 80% 50%,rgba(242,183,5,0.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+.cta__panel-eyebrow--primary{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(30,28,26,0.5);margin-bottom:12px}
+.cta__panel-eyebrow--primary::before{content:'';width:22px;height:2px;background:var(--charcoal-deep)}
+.cta__panel-heading--primary{font-family:var(--font-display);font-size:clamp(30px,3vw,46px);font-weight:700;color:var(--charcoal-deep);text-transform:uppercase;line-height:1.05;margin-bottom:12px}
+.cta__panel-sub--primary{font-size:15px;font-weight:600;color:rgba(30,28,26,0.6);margin-bottom:32px;line-height:1.6}
+.cta__panel-phone{font-family:var(--font-display);font-size:clamp(24px,2.5vw,36px);font-weight:700;color:var(--charcoal-deep);letter-spacing:-0.01em;margin-bottom:8px;display:block}
+.cta__panel-phone-label{font-size:10px;font-weight:800;color:rgba(30,28,26,0.45);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:4px}
+.cta__panel-heading--dark{font-family:var(--font-display);font-size:clamp(30px,3vw,46px);font-weight:700;color:var(--white);text-transform:uppercase;line-height:1.05;margin:16px 0 12px}
+.cta__panel-heading--dark em{font-style:normal;color:var(--yellow-core)}
+.cta__panel-sub--dark{font-size:15px;font-weight:500;color:rgba(255,255,255,0.55);margin-bottom:32px;line-height:1.6}
+.cta__panel-addr{font-size:12px;font-weight:600;color:rgba(255,255,255,0.35);letter-spacing:0.08em;text-transform:uppercase;margin-top:20px;line-height:1.8}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   FOOTER — PCL DNA: 4-column dark footer
+═══════════════════════════════════════════════════════════════════════════════ */
+#footer{background:var(--charcoal-deep);padding:80px 0 0;border-top:4px solid var(--charcoal)}
+.footer__main{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px 64px;
+  display:grid;grid-template-columns:280px 1fr 1fr 1fr;gap:60px;
+}
+.footer__brand{}
+.footer__logo-row{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.footer__logo-name{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:0.05em}
+.footer__logo-sub{font-family:var(--font-body);font-size:9px;font-weight:700;color:var(--yellow-core);text-transform:uppercase;letter-spacing:0.2em}
+.footer__tagline{
+  font-family:var(--font-accent);font-style:italic;font-weight:500;
+  font-size:14px;color:rgba(255,255,255,0.4);line-height:1.55;margin-bottom:24px;
+}
+.footer__contact{display:flex;flex-direction:column;gap:8px}
+.footer__contact-row{display:flex;align-items:flex-start;gap:10px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);line-height:1.5}
+.footer__contact-row svg{color:var(--yellow-core);flex-shrink:0;margin-top:2px}
+.footer__contact-row a{color:inherit;transition:color 0.2s}
+.footer__contact-row a:hover{color:var(--yellow-core)}
+.footer__col-title{
+  font-family:var(--font-display);font-size:13px;font-weight:700;
+  color:var(--white);text-transform:uppercase;letter-spacing:0.1em;
+  padding-bottom:12px;margin-bottom:20px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  position:relative;
+}
+.footer__col-title::after{content:'';position:absolute;bottom:-1px;left:0;width:22px;height:2px;background:var(--yellow-core)}
+.footer__links{display:flex;flex-direction:column;gap:1px}
+.footer__links a{
+  font-size:13px;font-weight:600;color:rgba(255,255,255,0.45);
+  padding:7px 0;display:flex;align-items:center;gap:8px;
+  transition:color 0.2s;
+}
+.footer__links a::before{content:'';width:0;height:2px;background:var(--yellow-core);transition:width 0.2s var(--ease-expo);flex-shrink:0}
+.footer__links a:hover{color:var(--white)}
+.footer__links a:hover::before{width:14px}
+/* Footer bar */
+.footer__bar{background:rgba(0,0,0,0.28);border-top:1px solid rgba(255,255,255,0.05)}
+.footer__bar-inner{
+  max-width:var(--container-max);margin:0 auto;padding:18px 40px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.footer__copy{font-size:12px;font-weight:600;color:rgba(255,255,255,0.28);letter-spacing:0.04em}
+.footer__copy span{color:var(--yellow-core)}
+.footer__legal{display:flex;gap:24px}
+.footer__legal a{font-size:12px;font-weight:600;color:rgba(255,255,255,0.28);transition:color 0.2s}
+.footer__legal a:hover{color:var(--yellow-core)}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   FOOTER — Logo Swiper (brand showcase strip)
+═══════════════════════════════════════════════════════════════════════════════ */
+.footer__swiper-strip{
+  background:var(--charcoal);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:56px 0 40px;
+  position:relative;
+  overflow:hidden;
+}
+.footer__swiper-strip::before{
+  content:'';position:absolute;left:0;right:0;top:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(242,183,5,0.45),transparent);
+  pointer-events:none;
+}
+.footer__swiper-inner{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+}
+.footer-logo-swiper{
+  width:100%;
+  height:clamp(240px,36vw,400px);
+  margin:0 auto;
+  padding:0 48px;
+  box-sizing:border-box;
+  position:relative;
+  --swiper-theme-color:var(--yellow-core);
+  --swiper-navigation-size:22px;
+}
+.footer-logo-swiper .swiper-slide{
+  display:flex;align-items:center;justify-content:center;
+  background:transparent;
+  box-sizing:border-box;
+}
+.footer-logo-swiper .swiper-slide img{
+  max-width:min(94%,560px);
+  max-height:min(70vh,340px);
+  width:auto;height:auto;object-fit:contain;
+  filter:drop-shadow(0 16px 40px rgba(0,0,0,0.45));
+}
+.footer-logo-swiper .swiper-pagination{bottom:8px!important}
+.footer-logo-swiper .swiper-pagination-bullet{
+  width:10px;height:10px;background:rgba(255,255,255,0.35);opacity:1;
+  border-radius:50%;
+}
+.footer-logo-swiper .swiper-pagination-bullet-active{background:var(--yellow-core)}
+.footer-logo-swiper .swiper-button-next,
+.footer-logo-swiper .swiper-button-prev{
+  color:var(--yellow-core);
+  width:44px;height:44px;margin-top:-22px;
+}
+.footer-logo-swiper .swiper-button-next:after,
+.footer-logo-swiper .swiper-button-prev:after{font-size:22px;font-weight:700}
+.footer-logo-swiper .swiper-scrollbar{
+  background:rgba(255,255,255,0.08);
+  border-radius:0;
+}
+.footer-logo-swiper .swiper-scrollbar-drag{background:var(--yellow-core);border-radius:0}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════════════════════ */
+@media(max-width:1024px){
+  .hero__content-inner{grid-template-columns:1fr}
+  .hero__stats-panel{display:none}
+  .hero__service-bar-grid{grid-template-columns:repeat(3,1fr)}
+  .about__inner,.why__inner{grid-template-columns:1fr;gap:48px}
+  .about__media{order:-1}
+  .services__header,.testimonials__header{grid-template-columns:1fr}
+  .services__grid{grid-template-columns:repeat(2,1fr)}
+  .stats__inner{grid-template-columns:repeat(2,1fr)}
+  .testimonials__grid{grid-template-columns:repeat(2,1fr)}
+  .projects__grid{grid-template-columns:1fr}
+  .project-panel--wide{grid-column:auto}
+  .coverage__inner{grid-template-columns:1fr;gap:40px}
+  .coverage__areas{grid-template-columns:repeat(2,1fr)}
+  .footer__main{grid-template-columns:1fr 1fr;gap:40px}
+  .footer__brand{grid-column:1/-1}
+}
+@media(max-width:768px){
+  :root{--section-v:64px}
+  .container,.about__inner,.why__inner,.process__inner,.testimonials__inner,.projects__header{padding-left:20px;padding-right:20px}
+  .gl-header__utility,.gl-header__nav{display:none}
+  .gl-header__mobile{display:flex}
+  .hero__service-bar-grid{grid-template-columns:repeat(2,1fr)}
+  .hero__content-inner{padding:0 20px}
+  .services__grid,.testimonials__grid{grid-template-columns:1fr}
+  .services__header{padding:0 20px 40px}
+  .stats__inner{grid-template-columns:repeat(2,1fr)}
+  .process__steps{grid-template-columns:repeat(2,1fr);gap:40px}
+  .process__rail{display:none}
+  .coverage__areas{grid-template-columns:1fr}
+  .cta__panels{grid-template-columns:1fr}
+  .cta__panel{padding:56px 32px}
+  .footer__main{grid-template-columns:1fr;gap:32px;padding:0 20px 48px}
+  .footer__bar-inner{flex-direction:column;text-align:center;gap:12px}
+  .footer__swiper-inner{padding-left:20px;padding-right:20px}
+  .footer-logo-swiper{height:clamp(200px,52vw,320px);padding:0 28px}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   ┌─────────────────────────────────────────────────────────────────────────
+   │  INNER PAGE STYLES
+   │  Cursor: These styles apply to ALL inner pages (about, service pages, etc.)
+   │  Include site.css link in all inner pages to inherit all above.
+   │  These additional classes are for inner-page specific patterns.
+   └─────────────────────────────────────────────────────────────────────────
+═══════════════════════════════════════════════════════════════════════════════ */
+
+/* PAGE HERO (inner pages) — narrower than homepage hero */
+.page-hero{
+  padding-top:var(--header-total-h);
+  background:var(--charcoal-deep);
+  position:relative;overflow:hidden;
+  min-height:400px;display:flex;align-items:center;
+}
+.page-hero__bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  opacity:0.2;
+}
+.page-hero__scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(14,13,12,0.95) 0%,rgba(14,13,12,0.7) 100%);
+}
+.page-hero__inner{
+  max-width:var(--container-max);margin:0 auto;padding:64px 40px;
+  position:relative;z-index:2;
+}
+.page-hero__breadcrumb{
+  display:flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);margin-bottom:20px;
+}
+.page-hero__breadcrumb a{color:inherit;transition:color 0.2s}
+.page-hero__breadcrumb a:hover{color:var(--yellow-core)}
+.page-hero__breadcrumb span{color:var(--yellow-core)}
+.page-hero__title{color:var(--white);margin-bottom:16px}
+.page-hero__title em{font-style:normal;color:var(--yellow-core)}
+.page-hero__sub{font-size:16px;font-weight:500;color:rgba(255,255,255,0.6);max-width:580px;line-height:1.65}
+
+/* STICKY SCOPE STRIP (B6) — inner service pages */
+.gl-scope-strip{
+  position:sticky;top:var(--header-total-h);z-index:calc(var(--z-header) - 10);
+  background:rgba(30,28,26,0.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.gl-scope-strip__inner{
+  max-width:var(--container-max);margin:0 auto;padding:0 40px;
+  display:flex;align-items:center;gap:4px;overflow-x:auto;
+}
+.gl-scope-strip__link{
+  font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);padding:14px 16px;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;
+  border-bottom:2px solid transparent;
+  transition:color 0.2s,border-color 0.2s;
+}
+.gl-scope-strip__link:hover{color:var(--white);border-color:rgba(242,183,5,0.4)}
+.gl-scope-strip__link.is-active{color:var(--yellow-core);border-color:var(--yellow-core)}
+
+/* HUB STAGE CARD (B9) — flagship service section */
+.gl-hub{background:var(--charcoal-deep);position:relative;overflow:hidden}
+.gl-hub__shell{display:grid;grid-template-columns:1fr 1fr}
+.gl-hub__panel{
+  padding:80px 60px;
+  background:var(--charcoal-deep);
+  position:relative;z-index:1;
+}
+.gl-hub__panel::after{content:'';position:absolute;right:0;top:40px;bottom:40px;width:1px;background:rgba(255,255,255,0.06)}
+.gl-hub__media{position:relative;overflow:hidden;min-height:480px}
+.gl-hub__media-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-color:var(--charcoal-mid)}
+.gl-hub__media-scrim{position:absolute;inset:0;background:linear-gradient(90deg,var(--charcoal-deep) 0%,transparent 40%)}
+.gl-hub__bridge{
+  background:var(--yellow-core);padding:24px 60px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.gl-hub__bridge-stat{text-align:center}
+.gl-hub__bridge-num{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--charcoal-deep);line-height:1;letter-spacing:-0.02em}
+.gl-hub__bridge-label{font-size:10px;font-weight:800;color:rgba(30,28,26,0.6);letter-spacing:0.14em;text-transform:uppercase;margin-top:3px}
+.gl-hub__deck{background:var(--white);padding:48px 60px;position:relative}
+.gl-hub__deck::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none'/%3E%3Cpath d='M0 0h1v40H0zM0 0h40v1H0z' stroke='%23E0DEDA' stroke-width='0.5'/%3E%3C/svg%3E") repeat;opacity:0.4;pointer-events:none}
+.gl-hub__spec-row{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px 0;border-bottom:1px solid var(--gray-200);
+  transition:background 0.2s;position:relative;z-index:1;
+}
+.gl-hub__spec-row:last-child{border-bottom:none}
+.gl-hub__spec-title{font-size:14px;font-weight:800;color:var(--charcoal-deep);text-transform:uppercase;letter-spacing:0.04em}
+.gl-hub__spec-value{font-size:13px;font-weight:600;color:var(--text-500)}
+.gl-hub__spec-arrow{color:var(--yellow-core);opacity:0;transition:opacity 0.2s}
+.gl-hub__spec-row:hover .gl-hub__spec-arrow{opacity:1}
+
+/* ACCORDION (B7) */
+.gl-accordion{}
+.gl-accordion__item{border-bottom:1px solid var(--gray-200)}
+.gl-accordion__trigger{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:20px 0;text-align:left;cursor:pointer;
+  font-size:15px;font-weight:700;color:var(--charcoal-deep);
+  transition:color 0.2s;
+}
+.gl-accordion__trigger:hover{color:var(--yellow-core)}
+.gl-accordion__chevron{
+  width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none;
+  flex-shrink:0;transition:transform 0.3s var(--ease-expo);
+}
+.gl-accordion__item.open .gl-accordion__chevron{transform:rotate(180deg)}
+.gl-accordion__body{
+  overflow:hidden;max-height:0;
+  transition:max-height 0.4s var(--ease-expo);
+}
+.gl-accordion__item.open .gl-accordion__body{max-height:400px}
+.gl-accordion__content{padding:0 0 20px;font-size:14px;line-height:1.75;color:var(--text-500)}
+
+/* PROSE DEPTH (gl-prose-depth) — body copy elevated */
+.gl-prose-depth{
+  background:var(--white);
+  border-left:3px solid var(--yellow-core);
+  padding:28px 32px;
+  box-shadow:var(--shadow-card);
+  position:relative;
+}
+.gl-prose-depth::before{content:'';position:absolute;top:0;right:0;bottom:0;width:1px;background:var(--gray-200)}
+</style>
+
+<!-- JSON-LD LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Ground Level Contracting",
+  "description": "Commercial excavation, foundations, drainage, and civil infrastructure for Barrie, Simcoe County, Muskoka, and Sudbury.",
+  "url": "https://groundlevelcontracting.com",
+  "telephone": "+17056194902",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "PO BOX 193 STN Main",
+    "addressLocality": "Barrie",
+    "addressRegion": "ON",
+    "postalCode": "L4M 4T2",
+    "addressCountry": "CA"
+  },
+  "areaServed": ["Barrie","Simcoe County","Muskoka","Sudbury"],
+  "slogan": "From Concept to Creation"
+}
+</script>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════════════
+     PRELOADER — PCL DNA: opening animation
+══════════════════════════════════════════════ -->
+<div id="gl-preloader" role="status" aria-label="Loading Ground Level Contracting">
+  <svg class="gl-preloader__mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="6" height="26" fill="#F2B705"/>
+    <rect x="4" y="26" width="16" height="6" fill="#F2B705"/>
+    <path d="M30 8 C38 8 38 32 30 32" stroke="#F2B705" stroke-width="5" fill="none" stroke-linecap="square"/>
+  </svg>
+  <div class="gl-preloader__bar"><div class="gl-preloader__bar-fill"></div></div>
+  <div class="gl-preloader__label">Ground Level Contracting</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     HEADER — PCL DNA: sticky mega-menu
+══════════════════════════════════════════════ -->
+<!-- NAV — copy this block verbatim to every inner page -->
+<header id="gl-header" role="banner">
+
+  <!-- Utility Bar -->
+  <div class="gl-header__utility">
+    <div class="gl-header__utility-inner">
+      <div class="gl-util-group">
+        <span class="gl-util-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Barrie, ON &bull; Simcoe County &bull; Muskoka &bull; Sudbury
+        </span>
+        <span class="gl-util-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12.85 19.79 19.79 0 0 1 1.21 4.25 2 2 0 0 1 3.18 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+17056194902">705-619-4902</a>
+        </span>
+      </div>
+      <span class="gl-util-dispatch">Commercial Project Dispatch — Available Now</span>
+    </div>
+  </div>
+
+  <!-- Gold Strip -->
+  <div class="gl-header__strip"></div>
+
+  <!-- Desktop Nav -->
+  <nav class="gl-header__nav" aria-label="Primary">
+    <div class="gl-header__nav-inner">
+      <!-- Logo -->
+      <a href="/" class="gl-logo" aria-label="Ground Level Contracting — Home">
+        <svg class="gl-logo__mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="6" height="26" fill="#F2B705"/>
+          <rect x="4" y="26" width="16" height="6" fill="#F2B705"/>
+          <path d="M30 8 C38 8 38 32 30 32" stroke="#F2B705" stroke-width="5" fill="none" stroke-linecap="square"/>
+        </svg>
+        <div class="gl-logo__text">
+          <span class="gl-logo__name">Ground Level</span>
+          <span class="gl-logo__sub">Contracting Inc.</span>
+        </div>
+      </a>
+
+      <!-- Nav Links + Mega Menus -->
+      <nav class="gl-nav__links" aria-label="Site sections">
+
+        <!-- Services mega -->
+        <div class="gl-nav__item">
+          <button class="gl-nav__link" aria-haspopup="true" aria-expanded="false">
+            Services
+            <svg class="gl-nav__chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="gl-mega gl-mega--services" role="region" aria-label="Services menu">
+            <div class="gl-mega__inner">
+              <div class="gl-mega__sidebar">
+                <div class="gl-mega__sidebar-label">Service Lines</div>
+                <p class="gl-mega__sidebar-intro">Six core service lines for commercial and civil construction across Central and Northern Ontario.</p>
+                <a href="/services/" class="gl-btn gl-btn--primary" style="font-size:12px;padding:11px 20px">All Services <svg class="gl-btn__arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              </div>
+              <div class="gl-mega__cards">
+                <a href="/services/excavation/" class="gl-mega__card">
+                  <svg class="gl-mega__card-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 24L16 6l12 18H4z"/><rect x="11" y="16" width="10" height="8"/></svg>
+                  <div><div class="gl-mega__card-title">Excavation &amp; Site Prep</div><div class="gl-mega__card-sub">Mass grading, cut &amp; fill, topsoil</div></div>
+                </a>
+                <a href="/services/foundations/" class="gl-mega__card">
+                  <svg class="gl-mega__card-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="18" width="24" height="10"/><rect x="8" y="12" width="16" height="8"/></svg>
+                  <div><div class="gl-mega__card-title">Foundations &amp; Civil</div><div class="gl-mega__card-sub">Footings, shoring, civil infrastructure</div></div>
+                </a>
+                <a href="/services/septic/" class="gl-mega__card">
+                  <svg class="gl-mega__card-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="16" cy="16" r="8"/><path d="M16 8V4M16 28v-4M8 16H4M28 16h-4"/></svg>
+                  <div><div class="gl-mega__card-title">Septic &amp; Utilities</div><div class="gl-mega__card-sub">Septic, utility trenches, OBC compliance</div></div>
+                </a>
+                <a href="/services/drainage/" class="gl-mega__card">
+                  <svg class="gl-mega__card-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 22 Q10 14 16 18 Q22 22 28 14" stroke-linecap="square"/><rect x="4" y="24" width="24" height="5"/></svg>
+                  <div><div class="gl-mega__card-title">Drainage &amp; Hardscaping</div><div class="gl-mega__card-sub">Grading, storm pipe, armor stone</div></div>
+                </a>
+                <a href="/services/hauling/" class="gl-mega__card">
+                  <svg class="gl-mega__card-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="18" width="24" height="10"/><path d="M8 18V14l5-7h6l5 7v4"/></svg>
+                  <div><div class="gl-mega__card-title">Hauling &amp; Clearing</div><div class="gl-mega__card-sub">Material hauling, demolition, logistics</div></div>
+                </a>
+                <a href="/services/snow-removal/" class="gl-mega__card">
+                  <svg class="gl-mega__card-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12 C8 4 20 4 24 8 S28 18 24 22" stroke-linecap="square"/><path d="M8 26 L24 26" stroke-width="2.5" stroke-linecap="square"/></svg>
+                  <div><div class="gl-mega__card-title">Snow Removal</div><div class="gl-mega__card-sub">Commercial plowing, salting, contracts</div></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Company mega -->
+        <div class="gl-nav__item">
+          <button class="gl-nav__link" aria-haspopup="true" aria-expanded="false">
+            Company
+            <svg class="gl-nav__chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="gl-mega gl-mega--company" role="region" aria-label="Company menu">
+            <div class="gl-mega__inner">
+              <div>
+                <div class="gl-mega__col-title">Company</div>
+                <div class="gl-mega__col-links">
+                  <a href="/about/" class="gl-mega__col-link">About Ground Level</a>
+                  <a href="/about/#team" class="gl-mega__col-link">Our Team</a>
+                  <a href="/about/#values" class="gl-mega__col-link">Values &amp; Safety</a>
+                  <a href="/about/#equipment" class="gl-mega__col-link">Equipment Fleet</a>
+                </div>
+              </div>
+              <div>
+                <div class="gl-mega__col-title">Projects</div>
+                <div class="gl-mega__col-links">
+                  <a href="/projects/" class="gl-mega__col-link">All Projects</a>
+                  <a href="/projects/#excavation" class="gl-mega__col-link">Excavation</a>
+                  <a href="/projects/#civil" class="gl-mega__col-link">Civil Infrastructure</a>
+                  <a href="/projects/#commercial" class="gl-mega__col-link">Commercial</a>
+                </div>
+              </div>
+              <div>
+                <div class="gl-mega__col-title">Get In Touch</div>
+                <div class="gl-mega__col-links">
+                  <a href="/contact/" class="gl-mega__col-link">Contact &amp; Quote</a>
+                  <a href="/coverage/" class="gl-mega__col-link">Coverage Area</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/projects/" class="gl-nav__link">Projects</a>
+        <a href="/coverage/" class="gl-nav__link">Coverage</a>
+      </nav>
+
+      <div class="gl-header__cta">
+        <a href="tel:+17056194902" class="gl-btn gl-btn--primary">
+          Get a Quote
+          <svg class="gl-btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile bar -->
+  <div class="gl-header__mobile">
+    <a href="/" class="gl-logo">
+      <svg style="width:30px;height:30px" viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="6" height="26" fill="#F2B705"/><rect x="4" y="26" width="16" height="6" fill="#F2B705"/><path d="M30 8 C38 8 38 32 30 32" stroke="#F2B705" stroke-width="5" fill="none" stroke-linecap="square"/></svg>
+      <div class="gl-logo__text">
+        <span class="gl-logo__name" style="font-size:13px">Ground Level</span>
+        <span class="gl-logo__sub">Contracting</span>
+      </div>
+    </a>
+    <button class="gl-hamburger" id="gl-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mega backdrop -->
+  <div class="gl-header__backdrop" id="gl-backdrop"></div>
+</header>
+<!-- END NAV — copy above to inner pages -->
+
+<!-- Mobile drawer -->
+<nav class="gl-drawer" id="gl-drawer" aria-label="Mobile navigation">
+  <button class="gl-drawer__close" id="gl-drawer-close" aria-label="Close">✕</button>
+  <a href="/about/" class="gl-drawer__link">About</a>
+  <a href="/services/" class="gl-drawer__link">Services</a>
+  <a href="/projects/" class="gl-drawer__link">Projects</a>
+  <a href="/coverage/" class="gl-drawer__link">Coverage</a>
+  <a href="/contact/" class="gl-drawer__link">Contact</a>
+  <a href="tel:+17056194902" class="gl-drawer__phone">705-619-4902</a>
+</nav>
+<div class="gl-overlay" id="gl-overlay"></div>
+
+<!-- ══════════════════════════════════════════════
+     HERO — PCL DNA: full-bleed crossfade slider
+══════════════════════════════════════════════ -->
+<section id="hero" aria-label="Hero">
+  <!-- GROUND: crossfade photo slides -->
+  <div class="hero__slides" aria-hidden="true">
+    <div class="hero__slide active">
+      <div class="hero__slide-bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80&auto=format')"></div>
+      <div class="hero__scrim"></div>
+    </div>
+    <div class="hero__slide">
+      <div class="hero__slide-bg" style="background-image:url('https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=1600&q=80&auto=format')"></div>
+      <div class="hero__scrim"></div>
+    </div>
+    <div class="hero__slide">
+      <div class="hero__slide-bg" style="background-image:url('https://images.unsplash.com/photo-1581093806997-124204d9fa9d?w=1600&q=80&auto=format')"></div>
+      <div class="hero__scrim"></div>
+    </div>
+  </div>
+
+  <!-- STRUCTURE: blueprint watermark -->
+  <div class="hero__watermark" aria-hidden="true">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="460" height="460" stroke="white" stroke-width="2" fill="none"/>
+      <rect x="70" y="70" width="360" height="360" stroke="white" stroke-width="1" fill="none"/>
+      <line x1="250" y1="20" x2="250" y2="480" stroke="white" stroke-width="0.8"/>
+      <line x1="20" y1="250" x2="480" y2="250" stroke="white" stroke-width="0.8"/>
+      <circle cx="250" cy="250" r="100" stroke="white" stroke-width="1.5" fill="none"/>
+      <circle cx="250" cy="250" r="160" stroke="white" stroke-width="0.5" fill="none" stroke-dasharray="5 10"/>
+      <rect x="170" y="170" width="160" height="160" stroke="white" stroke-width="0.5" fill="none" stroke-dasharray="3 6"/>
+    </svg>
+  </div>
+
+  <!-- READ: content -->
+  <div class="hero__content">
+    <div class="hero__content-inner">
+      <div class="hero__copy">
+        <div class="gl-eyebrow hero__eyebrow gl-reveal">Commercial Excavation &amp; Civil Infrastructure</div>
+        <h1 class="hero__title gl-reveal gl-delay-1">
+          From<br><em>Concept</em><br>To Creation
+        </h1>
+        <p class="hero__lede gl-reveal gl-delay-2">
+          Ground Level Contracting prepares land for development — delivering excavation, foundations, drainage, and civil infrastructure for project managers and site supervisors across Central and Northern Ontario.
+        </p>
+        <div class="hero__cta-row gl-reveal gl-delay-3">
+          <a href="tel:+17056194902" class="gl-btn gl-btn--primary">
+            Request a Quote
+            <svg class="gl-btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#services" class="gl-btn gl-btn--ghost">Our Services</a>
+        </div>
+      </div>
+      <!-- Stat panel (desktop only) -->
+      <div class="hero__stats-panel gl-reveal gl-delay-2">
+        <div class="hero__stat-card">
+          <div class="hero__stat-num">15<span style="font-size:22px;color:rgba(242,183,5,0.55)">+</span></div>
+          <div class="hero__stat-label">Years Field Experience</div>
+        </div>
+        <div class="hero__stat-card">
+          <div class="hero__stat-num">500<span style="font-size:22px;color:rgba(242,183,5,0.55)">+</span></div>
+          <div class="hero__stat-label">Commercial Projects</div>
+        </div>
+        <div class="hero__area-card">
+          <div class="hero__area-label">Service Territory</div>
+          <div class="hero__area-tags">
+            <span class="hero__area-tag">Barrie</span>
+            <span class="hero__area-tag">Simcoe County</span>
+            <span class="hero__area-tag">Muskoka</span>
+            <span class="hero__area-tag">Sudbury</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide dots -->
+  <div class="hero__dots" role="tablist" aria-label="Slide navigation">
+    <button class="hero__dot active" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+    <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+    <button class="hero__dot" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Service bar -->
+  <div class="hero__service-bar" role="navigation" aria-label="Service quick-links">
+    <div class="hero__service-bar-grid">
+      <a href="/services/excavation/" class="hero__svc-item">
+        <svg class="hero__svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18L12 4l9 14H3z"/><rect x="8" y="12" width="8" height="6"/></svg>
+        <span class="hero__svc-name">Excavation &amp; Site Prep</span>
+      </a>
+      <a href="/services/foundations/" class="hero__svc-item">
+        <svg class="hero__svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="14" width="18" height="7"/><rect x="6" y="9" width="12" height="6"/></svg>
+        <span class="hero__svc-name">Foundations &amp; Civil</span>
+      </a>
+      <a href="/services/septic/" class="hero__svc-item">
+        <svg class="hero__svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 6V3M12 21v-3M6 12H3M21 12h-3"/></svg>
+        <span class="hero__svc-name">Septic &amp; Utilities</span>
+      </a>
+      <a href="/services/drainage/" class="hero__svc-item">
+        <svg class="hero__svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 16 Q7 10 12 13 Q17 16 21 10" stroke-linecap="square"/><rect x="3" y="18" width="18" height="4"/></svg>
+        <span class="hero__svc-name">Drainage &amp; Hardscaping</span>
+      </a>
+      <a href="/services/hauling/" class="hero__svc-item">
+        <svg class="hero__svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="14" width="18" height="7"/><path d="M6 14v-3l4-6h4l4 6v3"/></svg>
+        <span class="hero__svc-name">Hauling &amp; Clearing</span>
+      </a>
+      <a href="/services/snow-removal/" class="hero__svc-item">
+        <svg class="hero__svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9 C5 4 14 3 17 6 S20 14 17 17" stroke-linecap="square"/><path d="M6 20 L18 20" stroke-width="2.5" stroke-linecap="square"/></svg>
+        <span class="hero__svc-name">Snow Removal</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Ticker -->
+<div class="gl-marquee" aria-hidden="true">
+  <div class="gl-marquee__track">
+    <span class="gl-marquee__item">Commercial Only<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Rapid Mobilization<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Barrie &amp; Simcoe County<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Licensed &amp; Insured<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">From Concept to Creation<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Muskoka &amp; Sudbury<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Geotechnical Expertise<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">On-Schedule Delivery<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Commercial Only<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Rapid Mobilization<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Barrie &amp; Simcoe County<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Licensed &amp; Insured<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">From Concept to Creation<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Muskoka &amp; Sudbury<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">Geotechnical Expertise<span class="gl-marquee__sep"></span></span>
+    <span class="gl-marquee__item">On-Schedule Delivery<span class="gl-marquee__sep"></span></span>
+  </div>
+</div>
+
+<!-- About / Intro Split -->
+<section id="about" aria-labelledby="about-h2">
+  <div class="about__inner">
+    <div class="about__media gl-reveal gl-reveal--left">
+      <div class="about__photo-shell"><div class="about__photo-placeholder"></div></div>
+      <div class="about__float-stat"><div class="about__float-stat-num">15+</div><div class="about__float-stat-label">Yrs. Experience</div></div>
+      <div class="about__float-badge"><div class="about__float-badge-text">Licensed &amp; Insured</div></div>
+    </div>
+    <div class="about__copy">
+      <div class="gl-eyebrow gl-reveal">Who We Are</div>
+      <h2 id="about-h2" class="gl-h2 about__heading gl-reveal gl-delay-1">Built On <em>Ground Level</em><br>Trusted From Below Up</h2>
+      <div class="about__rule gl-reveal gl-delay-1"></div>
+      <p class="gl-prose gl-prose--light gl-reveal gl-delay-2">Ground Level Contracting is a commercial excavation and civil infrastructure company serving project managers, site supervisors, and general contractors across Barrie, Simcoe County, Muskoka, and Sudbury. We prepare land for development — solving geotechnical challenges efficiently so your build stays on schedule.</p>
+      <div class="about__credentials gl-reveal gl-delay-3">
+        <div class="about__cred"><div class="about__cred-title">Geotechnical Expertise</div><div class="about__cred-sub">Complex ground conditions</div></div>
+        <div class="about__cred"><div class="about__cred-title">On-Schedule Delivery</div><div class="about__cred-sub">Built for your timeline</div></div>
+        <div class="about__cred"><div class="about__cred-title">Commercial Only</div><div class="about__cred-sub">B2B specialists</div></div>
+        <div class="about__cred"><div class="about__cred-title">Single-Source</div><div class="about__cred-sub">From clearing to final grade</div></div>
+      </div>
+      <a href="/about/" class="gl-btn gl-btn--ghost gl-reveal gl-delay-4">
+        About GLC
+        <svg class="gl-btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Row -->
+<section id="stats" aria-label="Company statistics">
+  <div class="stats__rail" aria-hidden="true"></div>
+  <div class="stats__inner">
+    <div class="stat-cell gl-reveal">
+      <span class="stat-cell__num" data-counter="15"><span class="counter-val">15</span><span class="stat-cell__suffix">+</span></span>
+      <span class="stat-cell__label">Years Experience</span>
+      <span class="stat-cell__sub">Field-proven expertise</span>
+    </div>
+    <div class="stat-cell gl-reveal gl-delay-1">
+      <span class="stat-cell__num" data-counter="500"><span class="counter-val">500</span><span class="stat-cell__suffix">+</span></span>
+      <span class="stat-cell__label">Projects Completed</span>
+      <span class="stat-cell__sub">Commercial builds</span>
+    </div>
+    <div class="stat-cell gl-reveal gl-delay-2">
+      <span class="stat-cell__num" data-counter="4"><span class="counter-val">4</span><span class="stat-cell__suffix" style="font-size:40%"> Regions</span></span>
+      <span class="stat-cell__label">Service Coverage</span>
+      <span class="stat-cell__sub">Barrie to Sudbury</span>
+    </div>
+    <div class="stat-cell gl-reveal gl-delay-3">
+      <span class="stat-cell__num" data-counter="100"><span class="counter-val">100</span><span class="stat-cell__suffix">%</span></span>
+      <span class="stat-cell__label">Project Satisfaction</span>
+      <span class="stat-cell__sub">On time. Every time.</span>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section id="services" aria-labelledby="services-h2">
+  <div class="services__header">
+    <div>
+      <div class="gl-eyebrow gl-eyebrow--dark gl-reveal" style="margin-bottom:16px">What We Do</div>
+      <h2 id="services-h2" class="gl-h2 services__heading gl-reveal gl-delay-1">Six Core <span>Service Lines</span></h2>
+    </div>
+    <p class="gl-prose gl-reveal gl-delay-2">From initial site clearing to final drainage, GLC delivers end-to-end excavation and civil services for commercial builds across Central and Northern Ontario.</p>
+  </div>
+  <div class="services__grid">
+
+    <a href="/services/excavation/" class="svc-tile gl-reveal">
+      <div class="svc-tile__bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=70&auto=format')"></div>
+      <div class="svc-tile__overlay"></div>
+      <div class="svc-tile__content">
+        <div class="svc-tile__num">01</div>
+        <div class="svc-tile__title">Excavation &amp;<br>Site Preparation</div>
+        <div class="svc-tile__desc">Mass grading, cut-and-fill, topsoil stripping, and site clearing for commercial development.</div>
+        <div class="svc-tile__arrow">View Service <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+
+    <a href="/services/foundations/" class="svc-tile gl-reveal gl-delay-1">
+      <div class="svc-tile__bg" style="background-image:url('https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&q=70&auto=format')"></div>
+      <div class="svc-tile__overlay"></div>
+      <div class="svc-tile__content">
+        <div class="svc-tile__num">02</div>
+        <div class="svc-tile__title">Foundations &amp;<br>Civil Infrastructure</div>
+        <div class="svc-tile__desc">Footing trenches, frost wall excavation, shoring, and civil infrastructure installation.</div>
+        <div class="svc-tile__arrow">View Service <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+
+    <a href="/services/septic/" class="svc-tile gl-reveal gl-delay-2">
+      <div class="svc-tile__bg" style="background-image:url('https://images.unsplash.com/photo-1581093806997-124204d9fa9d?w=800&q=70&auto=format')"></div>
+      <div class="svc-tile__overlay"></div>
+      <div class="svc-tile__content">
+        <div class="svc-tile__num">03</div>
+        <div class="svc-tile__title">Septic &amp;<br>Utility Systems</div>
+        <div class="svc-tile__desc">Septic system installation, utility trench excavation, and underground service corridors.</div>
+        <div class="svc-tile__arrow">View Service <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+
+    <a href="/services/drainage/" class="svc-tile gl-reveal">
+      <div class="svc-tile__bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=70&auto=format&sat=-80')"></div>
+      <div class="svc-tile__overlay"></div>
+      <div class="svc-tile__content">
+        <div class="svc-tile__num">04</div>
+        <div class="svc-tile__title">Drainage &amp;<br>Hardscaping</div>
+        <div class="svc-tile__desc">Grading for surface drainage, storm pipe, catch basins, armor stone, interlock pavers.</div>
+        <div class="svc-tile__arrow">View Service <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+
+    <a href="/services/hauling/" class="svc-tile gl-reveal gl-delay-1">
+      <div class="svc-tile__bg" style="background-image:url('https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&q=70&auto=format&sat=-50')"></div>
+      <div class="svc-tile__overlay"></div>
+      <div class="svc-tile__content">
+        <div class="svc-tile__num">05</div>
+        <div class="svc-tile__title">Hauling, Clearing<br>&amp; Logistics</div>
+        <div class="svc-tile__desc">Material hauling, demolition debris, tree clearing, rock breaking, and full site logistics.</div>
+        <div class="svc-tile__arrow">View Service <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+
+    <a href="/services/snow-removal/" class="svc-tile gl-reveal gl-delay-2">
+      <div class="svc-tile__bg" style="background-image:url('https://images.unsplash.com/photo-1581093806997-124204d9fa9d?w=800&q=70&auto=format&sat=-60')"></div>
+      <div class="svc-tile__overlay"></div>
+      <div class="svc-tile__content">
+        <div class="svc-tile__num">06</div>
+        <div class="svc-tile__title">Snow Removal<br>Services</div>
+        <div class="svc-tile__desc">Commercial plowing, salting, and site management contracts for parking lots and roadways.</div>
+        <div class="svc-tile__arrow">View Service <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Featured Projects -->
+<section id="projects" aria-labelledby="projects-h2">
+  <div class="projects__header">
+    <div>
+      <div class="gl-eyebrow gl-eyebrow--dark gl-reveal" style="margin-bottom:14px">Featured Work</div>
+      <h2 id="projects-h2" class="gl-h2 projects__heading gl-reveal gl-delay-1">Ground Level <span>Projects</span></h2>
+    </div>
+    <a href="/projects/" class="gl-btn gl-btn--ghost-dark gl-reveal gl-delay-2">
+      All Projects
+      <svg class="gl-btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+  <div class="projects__grid">
+    <a href="/projects/barrie-commercial-excavation/" class="project-panel project-panel--wide gl-reveal">
+      <div class="project-panel__bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=75&auto=format')"></div>
+      <div class="project-panel__scrim"></div>
+      <div class="project-panel__info">
+        <span class="project-panel__tag">Excavation &amp; Site Preparation</span>
+        <div class="project-panel__title">Barrie Commercial Park — Mass Grading &amp; Site Prep</div>
+        <div class="project-panel__meta">Barrie, ON &bull; 2024 &bull; 14,000 m²</div>
+        <div class="project-panel__cta">View Project <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+    <a href="/projects/muskoka-foundation/" class="project-panel gl-reveal">
+      <div class="project-panel__bg" style="background-image:url('https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&q=75&auto=format')"></div>
+      <div class="project-panel__scrim"></div>
+      <div class="project-panel__info">
+        <span class="project-panel__tag">Foundations &amp; Civil</span>
+        <div class="project-panel__title">Muskoka Rock Cut — Foundation &amp; Shoring</div>
+        <div class="project-panel__meta">Muskoka, ON &bull; 2024</div>
+        <div class="project-panel__cta">View Project <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+    <a href="/projects/simcoe-drainage/" class="project-panel gl-reveal gl-delay-1">
+      <div class="project-panel__bg" style="background-image:url('https://images.unsplash.com/photo-1581093806997-124204d9fa9d?w=800&q=75&auto=format')"></div>
+      <div class="project-panel__scrim"></div>
+      <div class="project-panel__info">
+        <span class="project-panel__tag">Drainage &amp; Hardscaping</span>
+        <div class="project-panel__title">Simcoe County Industrial — Storm Drainage Install</div>
+        <div class="project-panel__meta">Simcoe County, ON &bull; 2023</div>
+        <div class="project-panel__cta">View Project <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Why GLC -->
+<section id="why" aria-labelledby="why-h2">
+  <div class="why__inner">
+    <div class="why__copy">
+      <div class="gl-eyebrow gl-reveal">Why Ground Level</div>
+      <h2 id="why-h2" class="gl-h2 why__heading gl-reveal gl-delay-1">The Right Crew For<br><em>Complex Ground</em></h2>
+      <p class="gl-prose gl-prose--light gl-reveal gl-delay-2">We have the human resources, expertise, experience, and financial stability to respond quickly and complete projects safely and successfully — on schedule, every time.</p>
+      <div class="why__reasons gl-reveal gl-delay-2">
+        <div class="why__reason">
+          <div class="why__reason-num">01</div>
+          <div><div class="why__reason-title">Rapid Mobilization</div><div class="why__reason-text">Equipment and crews on-site fast. Built for urgent commercial dispatch across all four regions.</div></div>
+        </div>
+        <div class="why__reason">
+          <div class="why__reason-num">02</div>
+          <div><div class="why__reason-title">Geotechnical Depth</div><div class="why__reason-text">We solve rock, clay, and high water table conditions without delaying your build schedule.</div></div>
+        </div>
+        <div class="why__reason">
+          <div class="why__reason-num">03</div>
+          <div><div class="why__reason-title">PM-First Communication</div><div class="why__reason-text">Direct lines, daily field updates, and documentation that keeps your project files clean.</div></div>
+        </div>
+        <div class="why__reason">
+          <div class="why__reason-num">04</div>
+          <div><div class="why__reason-title">Single-Source Accountability</div><div class="why__reason-text">One contractor across excavation, drainage, and clearing — fewer handoffs, tighter coordination.</div></div>
+        </div>
+      </div>
+      <a href="tel:+17056194902" class="gl-btn gl-btn--primary gl-reveal gl-delay-3">
+        705-619-4902
+        <svg class="gl-btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="why__media gl-reveal gl-reveal--right gl-delay-2">
+      <div class="why__photo-border" aria-hidden="true"></div>
+      <div class="why__photo-shell"><div class="why__photo-placeholder"></div></div>
+      <div class="why__chip"><div class="why__chip-text">Simcoe County's</div><div class="why__chip-sub">Preferred Excavator</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section id="process" aria-labelledby="process-h2">
+  <div class="process__inner">
+    <div class="process__header">
+      <div class="gl-eyebrow gl-eyebrow--dark gl-reveal" style="justify-content:center;margin-bottom:14px">How It Works</div>
+      <h2 id="process-h2" class="gl-h2 process__heading gl-reveal gl-delay-1">First Call to <span>Final Grade</span></h2>
+    </div>
+    <div class="process__steps">
+      <div class="process__rail" aria-hidden="true"><div class="process__rail-fill"></div></div>
+      <div class="process__step gl-reveal">
+        <div class="process__step-dot"><span class="process__step-num">01</span></div>
+        <div class="process__step-well">
+          <div class="process__step-title">Site Consultation</div>
+          <p class="process__step-desc">Call or email with your site address and scope. We review conditions and provide a clear assessment — no obligation.</p>
+        </div>
+      </div>
+      <div class="process__step gl-reveal gl-delay-1">
+        <div class="process__step-dot"><span class="process__step-num">02</span></div>
+        <div class="process__step-well">
+          <div class="process__step-title">Detailed Quote</div>
+          <p class="process__step-desc">Transparent, itemized pricing. No hidden costs. Scope confirmed before any equipment moves.</p>
+        </div>
+      </div>
+      <div class="process__step gl-reveal gl-delay-2">
+        <div class="process__step-dot"><span class="process__step-num">03</span></div>
+        <div class="process__step-well">
+          <div class="process__step-title">Crew Mobilization</div>
+          <p class="process__step-desc">Equipment and operators mobilized efficiently. Safety protocols and site prep completed day one.</p>
+        </div>
+      </div>
+      <div class="process__step gl-reveal gl-delay-3">
+        <div class="process__step-dot"><span class="process__step-num">04</span></div>
+        <div class="process__step-well">
+          <div class="process__step-title">Delivery &amp; Signoff</div>
+          <p class="process__step-desc">Work completed to spec, site documentation provided, signoff confirmed. Your build proceeds on schedule.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Coverage -->
+<section id="coverage" aria-labelledby="coverage-h2">
+  <div class="coverage__inner">
+    <div class="coverage__copy">
+      <div class="gl-eyebrow gl-reveal">Service Territory</div>
+      <h2 id="coverage-h2" class="gl-h2 coverage__heading gl-reveal gl-delay-1">Across <em>Central &amp; Northern</em> Ontario</h2>
+      <p class="coverage__body gl-reveal gl-delay-2">Based in Barrie, operating commercially across Simcoe County, the Muskokas, and Sudbury. We move quickly across territory — no extended mobilization delays.</p>
+    </div>
+    <div class="coverage__areas gl-reveal gl-delay-2">
+      <div class="coverage__area"><div class="coverage__area-dot"></div><div><div class="coverage__area-name">Barrie</div><div class="coverage__area-sub">Primary base &amp; dispatch</div></div></div>
+      <div class="coverage__area"><div class="coverage__area-dot"></div><div><div class="coverage__area-name">Simcoe County</div><div class="coverage__area-sub">Orillia, Bradford, Collingwood</div></div></div>
+      <div class="coverage__area"><div class="coverage__area-dot"></div><div><div class="coverage__area-name">Muskoka</div><div class="coverage__area-sub">Huntsville, Bracebridge, Gravenhurst</div></div></div>
+      <div class="coverage__area"><div class="coverage__area-dot"></div><div><div class="coverage__area-name">Greater Sudbury</div><div class="coverage__area-sub">Northern Ontario region</div></div></div>
+      <div class="coverage__area"><div class="coverage__area-dot"></div><div><div class="coverage__area-name">Innisfil / Essa</div><div class="coverage__area-sub">Rapid response zone</div></div></div>
+      <div class="coverage__area"><div class="coverage__area-dot"></div><div><div class="coverage__area-name">Parry Sound</div><div class="coverage__area-sub">Corridor &amp; cottage country</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" aria-labelledby="testimonials-h2">
+  <div class="testimonials__inner">
+    <div class="testimonials__header">
+      <div>
+        <div class="gl-eyebrow gl-eyebrow--dark gl-reveal" style="margin-bottom:14px">Client Feedback</div>
+        <h2 id="testimonials-h2" class="gl-h2 testimonials__heading gl-reveal gl-delay-1">Trusted by <span>Site Teams</span></h2>
+      </div>
+      <p class="gl-prose gl-reveal gl-delay-2">Ground Level is built for commercial relationships. Here's what project managers and site supervisors say.</p>
+    </div>
+    <div class="testimonials__grid">
+      <article class="testimonial-card gl-reveal">
+        <span class="testimonial-card__mark" aria-hidden="true">"</span>
+        <p class="testimonial-card__text">GLC mobilized faster than any contractor we'd used before. Site was prepped and ready two days ahead of our concrete pour — that kind of reliability is rare.</p>
+        <div class="testimonial-card__rule"></div>
+        <div class="testimonial-card__name">Marcus T.</div>
+        <div class="testimonial-card__role">Project Manager — Commercial Developer, Barrie</div>
+      </article>
+      <article class="testimonial-card gl-reveal gl-delay-1">
+        <span class="testimonial-card__mark" aria-hidden="true">"</span>
+        <p class="testimonial-card__text">Challenging Muskoka site with heavy rock. They diagnosed the issue, adjusted approach same day, and kept us on schedule. Exactly who you want on complex ground.</p>
+        <div class="testimonial-card__rule"></div>
+        <div class="testimonial-card__name">Diane P.</div>
+        <div class="testimonial-card__role">Site Supervisor — General Contractor, Muskoka</div>
+      </article>
+      <article class="testimonial-card gl-reveal gl-delay-2">
+        <span class="testimonial-card__mark" aria-hidden="true">"</span>
+        <p class="testimonial-card__text">Professional, communicative, thorough. The drainage install was clean, documented properly, and passed inspection first time. GLC is on all our Simcoe County projects going forward.</p>
+        <div class="testimonial-card__rule"></div>
+        <div class="testimonial-card__name">James R.</div>
+        <div class="testimonial-card__role">Construction Coordinator — Simcoe County</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Dual CTA — PCL DNA: "Build a Project / Build a Career" -->
+<section id="cta" aria-label="Call to action">
+  <div class="cta__panels">
+    <!-- Panel 1: Start a Project -->
+    <div class="cta__panel cta__panel--primary">
+      <div style="position:relative;z-index:1">
+        <div class="cta__panel-eyebrow--primary">Ready to Build?</div>
+        <h2 class="cta__panel-heading--primary">Start With a<br>Site Consultation</h2>
+        <p class="cta__panel-sub--primary">Commercial projects across Barrie, Simcoe County, Muskoka &amp; Sudbury. Affordable, reliable, satisfaction guaranteed.</p>
+        <div class="cta__panel-phone-label">Call Direct</div>
+        <a href="tel:+17056194902" class="cta__panel-phone">705-619-4902</a>
+        <div style="margin-top:20px">
+          <a href="/contact/" class="gl-btn gl-btn--ghost-dark">Get a Quote <svg class="gl-btn__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <!-- Panel 2: About + Contact -->
+    <div class="cta__panel cta__panel--dark">
+      <div style="position:relative;z-index:1">
+        <div class="gl-eyebrow gl-eyebrow--light">Get In Touch</div>
+        <h2 class="cta__panel-heading--dark">Ground Level <em>Delivers</em></h2>
+        <p class="cta__panel-sub--dark">We prepare land for development — providing solutions to geotechnical challenges with adequate human resources, expertise, and financial stability to respond quickly and complete safely.</p>
+        <a href="mailto:info@groundlevelcontracting.com" class="gl-btn gl-btn--ghost">Email Us <svg class="gl-btn__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <div class="cta__panel-addr">
+          PO BOX 193 STN Main &bull; Barrie, ON L4M 4T2<br>
+          Barrie &bull; Simcoe County &bull; Muskoka &bull; Sudbury
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<!-- FOOTER — copy this block verbatim to every inner page -->
+<footer id="footer" role="contentinfo">
+  <div class="footer__main">
+    <div class="footer__brand">
+      <div class="footer__logo-row">
+        <svg style="width:36px;height:36px;flex-shrink:0" viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="6" height="26" fill="#F2B705"/><rect x="4" y="26" width="16" height="6" fill="#F2B705"/><path d="M30 8 C38 8 38 32 30 32" stroke="#F2B705" stroke-width="5" fill="none" stroke-linecap="square"/></svg>
+        <div>
+          <div class="footer__logo-name">Ground Level Contracting</div>
+          <div class="footer__logo-sub">From Concept to Creation</div>
+        </div>
+      </div>
+      <p class="footer__tagline">"From Concept to Creation" — excavation and civil infrastructure for commercial builds across Central and Northern Ontario.</p>
+      <div class="footer__contact">
+        <div class="footer__contact-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12.85 19.79 19.79 0 0 1 1.21 4.25 2 2 0 0 1 3.18 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+17056194902">705-619-4902</a>
+        </div>
+        <div class="footer__contact-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          PO BOX 193 STN Main, Barrie, ON L4M 4T2
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-title">Services</div>
+      <nav class="footer__links" aria-label="Services footer links">
+        <a href="/services/excavation/">Excavation &amp; Site Preparation</a>
+        <a href="/services/foundations/">Foundations &amp; Civil Infrastructure</a>
+        <a href="/services/septic/">Septic &amp; Utility Systems</a>
+        <a href="/services/drainage/">Drainage &amp; Hardscaping</a>
+        <a href="/services/hauling/">Hauling, Clearing &amp; Logistics</a>
+        <a href="/services/snow-removal/">Snow Removal Services</a>
+      </nav>
+    </div>
+    <div>
+      <div class="footer__col-title">Company</div>
+      <nav class="footer__links" aria-label="Company footer links">
+        <a href="/about/">About Ground Level</a>
+        <a href="/about/#values">Values &amp; Safety</a>
+        <a href="/about/#equipment">Equipment Fleet</a>
+        <a href="/projects/">Project Portfolio</a>
+        <a href="/coverage/">Coverage Area</a>
+      </nav>
+    </div>
+    <div>
+      <div class="footer__col-title">Coverage</div>
+      <nav class="footer__links" aria-label="Coverage footer links">
+        <a href="/coverage/#barrie">Barrie, ON</a>
+        <a href="/coverage/#simcoe">Simcoe County</a>
+        <a href="/coverage/#muskoka">Muskoka Region</a>
+        <a href="/coverage/#sudbury">Greater Sudbury</a>
+        <a href="/coverage/#parry-sound">Parry Sound</a>
+        <a href="/contact/">Get a Quote</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Logo Swiper — large brand showcase -->
+  <div class="footer__swiper-strip" aria-label="Ground Level Contracting logo">
+    <div class="footer__swiper-inner">
+      <div class="swiper footer-logo-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="Public%20Images/Ground%20Level%20Logoq.png" width="520" height="320" alt="Ground Level Contracting" loading="lazy" decoding="async" /></div>
+          <div class="swiper-slide"><img src="Public%20Images/Ground%20Level%20Logoq.png" width="520" height="320" alt="" loading="lazy" decoding="async" aria-hidden="true" /></div>
+          <div class="swiper-slide"><img src="Public%20Images/Ground%20Level%20Logoq.png" width="520" height="320" alt="" loading="lazy" decoding="async" aria-hidden="true" /></div>
+          <div class="swiper-slide"><img src="Public%20Images/Ground%20Level%20Logoq.png" width="520" height="320" alt="" loading="lazy" decoding="async" aria-hidden="true" /></div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev" aria-label="Previous slide"></div>
+        <div class="swiper-button-next" aria-label="Next slide"></div>
+        <div class="swiper-scrollbar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__bar">
+    <div class="footer__bar-inner">
+      <p class="footer__copy">&copy; 2026 <span>Ground Level Contracting Inc.</span> — Barrie, Ontario. All rights reserved.</p>
+      <div class="footer__legal">
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- END FOOTER -->
+
+<!-- ══════════════════════════════════════════════════════════════════════════════
+     INNER PAGE TEMPLATES
+     Cursor: Use these template blocks when building inner pages.
+     Copy the page-hero + scope-strip + relevant sections, paste in a new file,
+     and wrap with the same NAV and FOOTER blocks from above.
+══════════════════════════════════════════════════════════════════════════════ -->
+
+<!--
+╔══════════════════════════════════════════════════════════════════════════════════
+║  TEMPLATE: SERVICE DETAIL PAGE (e.g. /services/excavation/index.html)
+║  Pattern sequence: page-hero → scope-strip → hub-stage (B9) → split(why/scope) → 
+║  process accordion (B7) → related services → cta-band → footer
+╚══════════════════════════════════════════════════════════════════════════════════
+<body>
+  [PASTE NAV BLOCK]
+
+  <!-- Page Hero (narrower) -->
+  <section class="page-hero">
+    <div class="page-hero__bg" style="background-image:url('...')"></div>
+    <div class="page-hero__scrim"></div>
+    <div class="page-hero__inner">
+      <div class="page-hero__breadcrumb">
+        <a href="/">Home</a> &rsaquo; <a href="/services/">Services</a> &rsaquo; <span>Excavation &amp; Site Preparation</span>
+      </div>
+      <h1 class="gl-h1 page-hero__title">Excavation &amp;<br><em>Site Preparation</em></h1>
+      <p class="page-hero__sub">Mass grading, cut-and-fill operations, and site clearing for commercial development projects across Barrie, Simcoe County, and beyond.</p>
+    </div>
+  </section>
+
+  <!-- Sticky Scope Strip (B6) -->
+  <div class="gl-scope-strip">
+    <div class="gl-scope-strip__inner">
+      <a href="#overview" class="gl-scope-strip__link is-active">Overview</a>
+      <a href="#scope" class="gl-scope-strip__link">Scope of Work</a>
+      <a href="#process" class="gl-scope-strip__link">Our Process</a>
+      <a href="#faq" class="gl-scope-strip__link">FAQ</a>
+      <a href="#contact" class="gl-scope-strip__link">Get a Quote</a>
+    </div>
+  </div>
+
+  <!-- Hub Stage (B9) — flagship depth pattern -->
+  <section id="overview" class="gl-hub">
+    <div class="gl-hub__shell">
+      <div class="gl-hub__panel">
+        <div class="gl-eyebrow" style="margin-bottom:16px">Excavation &amp; Site Preparation</div>
+        <h2 class="gl-h2" style="color:var(--white);margin-bottom:20px">Preparing Ground<br>For What's Next</h2>
+        <p class="gl-prose gl-prose--light">...</p>
+      </div>
+      <div class="gl-hub__media">
+        <div class="gl-hub__media-bg" style="background-image:url('...')"></div>
+        <div class="gl-hub__media-scrim"></div>
+      </div>
+    </div>
+    <!-- Bridge (stat row) -->
+    <div class="gl-hub__bridge">
+      <div class="gl-hub__bridge-stat"><div class="gl-hub__bridge-num">500+</div><div class="gl-hub__bridge-label">Projects</div></div>
+      <div class="gl-hub__bridge-stat"><div class="gl-hub__bridge-num">15+</div><div class="gl-hub__bridge-label">Years</div></div>
+      <div class="gl-hub__bridge-stat"><div class="gl-hub__bridge-num">4</div><div class="gl-hub__bridge-label">Regions</div></div>
+    </div>
+    <!-- Spec deck -->
+    <div class="gl-hub__deck">
+      <div class="gl-hub__spec-row">
+        <div class="gl-hub__spec-title">Mass Grading</div>
+        <div class="gl-hub__spec-value">Large-scale earthwork operations</div>
+        <svg class="gl-hub__spec-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+      <div class="gl-hub__spec-row">
+        <div class="gl-hub__spec-title">Cut &amp; Fill Operations</div>
+        <div class="gl-hub__spec-value">Balanced earthwork, no import/export waste</div>
+        <svg class="gl-hub__spec-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA band (reuse from homepage) -->
+  [PASTE CTA + FOOTER]
+</body>
+
+╔══════════════════════════════════════════════════════════════════════════════════
+║  TEMPLATE: ABOUT PAGE (/about/index.html)
+║  Pattern sequence: page-hero → about-split(full) → team grid → credentials → 
+║  equipment section → cta → footer
+╚══════════════════════════════════════════════════════════════════════════════════
+
+╔══════════════════════════════════════════════════════════════════════════════════
+║  TEMPLATE: CONTACT PAGE (/contact/index.html)  
+║  Pattern sequence: page-hero → contact-split (form left / info right) →
+║  coverage map → footer
+╚══════════════════════════════════════════════════════════════════════════════════
+
+╔══════════════════════════════════════════════════════════════════════════════════
+║  TEMPLATE: PROJECTS PAGE (/projects/index.html)
+║  Pattern sequence: page-hero → filter strip → masonry grid (C3) → 
+║  project panels → cta → footer
+╚══════════════════════════════════════════════════════════════════════════════════
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// ════════════════════════════════════════════════════════════
+//  GLC MASTER JS
+//  Cursor: Copy this entire script block to all inner pages.
+//  Do not split into separate files unless building site.js.
+// ════════════════════════════════════════════════════════════
+
+// ── PRELOADER ───────────────────────────────────────────────
+const preloader = document.getElementById('gl-preloader');
+if(preloader){
+  window.addEventListener('load', () => {
+    setTimeout(() => preloader.classList.add('hidden'), 1500);
+  });
+}
+
+// ── SCROLL-DRIVEN NAV STATE ──────────────────────────────────
+const header = document.getElementById('gl-header');
+function updateNav(){ if(header) header.classList.toggle('scrolled', window.scrollY > 40); }
+window.addEventListener('scroll', updateNav, {passive:true});
+updateNav();
+
+// ── MEGA MENU + BACKDROP ─────────────────────────────────────
+const backdrop = document.getElementById('gl-backdrop');
+const navItems = document.querySelectorAll('.gl-nav__item');
+navItems.forEach(item => {
+  const trigger = item.querySelector('.gl-nav__link');
+  const mega = item.querySelector('.gl-mega');
+  if(!mega || !trigger) return;
+  item.addEventListener('mouseenter', () => { backdrop && backdrop.classList.add('active'); });
+  item.addEventListener('mouseleave', () => { backdrop && backdrop.classList.remove('active'); });
+  trigger.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); item.classList.toggle('open'); }
+    if(e.key === 'Escape') item.classList.remove('open');
+  });
+});
+backdrop && backdrop.addEventListener('click', () => backdrop.classList.remove('active'));
+document.addEventListener('keydown', e => { if(e.key==='Escape') backdrop && backdrop.classList.remove('active'); });
+
+// ── MOBILE DRAWER ────────────────────────────────────────────
+const hamburger = document.getElementById('gl-hamburger');
+const drawer    = document.getElementById('gl-drawer');
+const overlay   = document.getElementById('gl-overlay');
+const closeBtn  = document.getElementById('gl-drawer-close');
+function openDrawer(){
+  drawer && drawer.classList.add('open');
+  overlay && overlay.classList.add('open');
+  hamburger && hamburger.classList.add('open');
+  hamburger && hamburger.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  drawer && drawer.classList.remove('open');
+  overlay && overlay.classList.remove('open');
+  hamburger && hamburger.classList.remove('open');
+  hamburger && hamburger.setAttribute('aria-expanded','false');
+  document.body.style.overflow='';
+}
+hamburger && hamburger.addEventListener('click', () => drawer && drawer.classList.contains('open') ? closeDrawer() : openDrawer());
+closeBtn  && closeBtn.addEventListener('click', closeDrawer);
+overlay   && overlay.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeDrawer(); });
+drawer && drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+
+// ── HERO SLIDER ──────────────────────────────────────────────
+const slides = document.querySelectorAll('.hero__slide');
+const dots   = document.querySelectorAll('.hero__dot');
+let current = 0, slideTimer;
+function goToSlide(n){
+  slides[current] && slides[current].classList.remove('active');
+  dots[current]   && dots[current].classList.remove('active');
+  current = (n + slides.length) % slides.length;
+  slides[current] && slides[current].classList.add('active');
+  dots[current]   && dots[current].classList.add('active');
+}
+function startSlider(){
+  clearInterval(slideTimer);
+  slideTimer = setInterval(() => goToSlide(current + 1), 5500);
+}
+dots.forEach((dot, i) => dot.addEventListener('click', () => { goToSlide(i); startSlider(); }));
+if(slides.length > 1) startSlider();
+
+// ── SCROLL REVEAL (IntersectionObserver) ─────────────────────
+const revealEls = document.querySelectorAll('.gl-reveal');
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('is-visible'); revealIO.unobserve(entry.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+revealEls.forEach(el => revealIO.observe(el));
+
+// ── STAT COUNTERS ────────────────────────────────────────────
+const counterCells = document.querySelectorAll('[data-counter]');
+const counterIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(!entry.isIntersecting) return;
+    const el   = entry.target;
+    const end  = parseInt(el.getAttribute('data-counter'), 10);
+    const span = el.querySelector('.counter-val');
+    if(!span) return;
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      span.textContent = Math.floor(eased * end);
+      if(p < 1) requestAnimationFrame(tick);
+      else span.textContent = end;
+    }
+    requestAnimationFrame(tick);
+    counterIO.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counterCells.forEach(el => counterIO.observe(el));
+
+// ── ACCORDION (B7) ───────────────────────────────────────────
+document.querySelectorAll('.gl-accordion__trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.gl-accordion__item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.gl-accordion__item.open').forEach(i => i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+});
+
+// ── SCOPE STRIP SCROLL SPY ───────────────────────────────────
+const scopeLinks = document.querySelectorAll('.gl-scope-strip__link');
+if(scopeLinks.length){
+  const scopeIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      const id = entry.target.id;
+      scopeLinks.forEach(l => {
+        l.classList.toggle('is-active', l.getAttribute('href') === `#${id}`);
+      });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  scopeLinks.forEach(link => {
+    const id = link.getAttribute('href').replace('#','');
+    const target = document.getElementById(id);
+    if(target) scopeIO.observe(target);
+  });
+}
+
+// ── SMOOTH ANCHOR SCROLL ─────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if(target){
+      e.preventDefault();
+      const hh = header ? header.offsetHeight : 108;
+      const top = target.getBoundingClientRect().top + window.scrollY - hh - 8;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ── FOOTER LOGO SWIPER (Swiper 11) ───────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+  const el = document.querySelector('.footer-logo-swiper');
+  if (!el || typeof Swiper === 'undefined') return;
+  new Swiper('.footer-logo-swiper', {
+    direction: 'horizontal',
+    loop: true,
+    speed: 800,
+    autoplay: {
+      delay: 4200,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: el.querySelector('.swiper-pagination'),
+      clickable: true,
+    },
+    navigation: {
+      nextEl: el.querySelector('.swiper-button-next'),
+      prevEl: el.querySelector('.swiper-button-prev'),
+    },
+    scrollbar: {
+      el: el.querySelector('.swiper-scrollbar'),
+      draggable: true,
+    },
+  });
+});
+</script>
+</body>
+</html>

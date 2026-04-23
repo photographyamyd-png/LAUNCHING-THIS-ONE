@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Featured Accordion — 20 Structural Layout Variants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@1,8..60,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/glc-base.css" />
+  <link rel="stylesheet" href="assets/glc-mega-nav.css" />
+  <link rel="stylesheet" href="assets/glc-accordion.css" />
+  <style>
+    body { margin: 0; background: var(--gray-100); color: var(--text-900); }
+    .fac-preview-intro { max-width: var(--container-max); margin: 0 auto; padding: 48px 40px 28px; }
+    .fac-preview-intro h1 { font-family: var(--font-display); font-size: clamp(26px, 4vw, 42px); text-transform: uppercase; line-height: 1.05; margin-bottom: 10px; }
+    .fac-preview-intro p { color: var(--text-600); max-width: 760px; line-height: 1.6; font-size: 15px; }
+
+    .fac-variant { margin-bottom: 28px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); overflow: hidden; background: var(--white); }
+    .fac-variant-label { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 12px 18px; background: linear-gradient(90deg, rgba(248,190,18,0.12), transparent); border-bottom: 1px solid var(--gray-200); font-family: var(--font-display); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .fac-variant-label span { font-family: var(--font-body); font-size: 10px; font-weight: 700; color: var(--text-600); text-transform: none; letter-spacing: 0.03em; line-height: 1.4; max-width: 72%; text-align: right; }
+
+    .fac-block { position: relative; padding: var(--section-v) 0; font-family: var(--font-body); overflow: hidden; }
+    .fac-block .fac-wrap { max-width: var(--container-max); margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
+
+    /* Shared copy block */
+    .fac-eyebrow { margin-bottom: 14px; }
+    .fac-h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); font-weight: 700; text-transform: uppercase; line-height: 1.05; color: var(--charcoal-deep); }
+    .fac-h2 span { color: var(--yellow-core); }
+    .fac-intro { margin-top: 18px; font-size: 15px; line-height: 1.7; color: var(--text-600); max-width: 38rem; }
+    .fac-cta { margin-top: 22px; }
+    .fac-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── 01 Classic: copy | strips ── */
+    .fac-l01 .fac-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+    @media (min-width: 900px) { .fac-l01 .fac-grid { grid-template-columns: 1fr 1fr; } }
+    .fac-l01 .fac-copy { text-align: center; }
+    @media (min-width: 900px) { .fac-l01 .fac-copy { text-align: left; } .fac-l01 .fac-eyebrow { justify-content: flex-start; } }
+    .fac-hstrip { display: flex; flex-direction: row; gap: 10px; overflow-x: auto; padding: 8px 0; justify-content: center; }
+    @media (min-width: 900px) { .fac-hstrip { justify-content: flex-start; } }
+    .fac-hstrip-item { position: relative; height: 400px; width: 56px; flex-shrink: 0; overflow: hidden; cursor: pointer; border: 1px solid var(--gray-200); transition: width 0.65s var(--ease-expo); }
+    .fac-hstrip-item.is-on { width: min(360px, 70vw); }
+    .fac-hstrip-item .fac-scrim { position: absolute; inset: 0; background: rgba(30,28,26,0.42); pointer-events: none; }
+    .fac-hstrip-t { position: absolute; bottom: 88px; left: 50%; transform: translateX(-50%) rotate(90deg); white-space: nowrap; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); transition: all 0.3s var(--ease-expo); }
+    .fac-hstrip-item.is-on .fac-hstrip-t { bottom: 20px; transform: translateX(-50%) rotate(0); color: var(--yellow-core); max-width: 90%; text-align: center; white-space: normal; }
+
+    /* ── 02 Mirror: strips | copy ── */
+    .fac-l02 .fac-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+    @media (min-width: 900px) {
+      .fac-l02 .fac-grid { grid-template-columns: 1fr 1fr; }
+      .fac-l02 .fac-col-strip { order: 1; }
+      .fac-l02 .fac-col-copy { order: 2; text-align: right; }
+      .fac-l02 .fac-col-copy .fac-eyebrow { justify-content: flex-end; }
+      .fac-l02 .fac-col-copy .fac-intro { margin-left: auto; }
+      .fac-l02 .fac-col-copy .fac-cta { display: flex; justify-content: flex-end; }
+      .fac-hstrip.fac-l02-strip { justify-content: flex-end; }
+    }
+    .fac-l02 .fac-col-copy { text-align: center; }
+    @media (max-width: 899px) { .fac-l02 .fac-col-strip { order: 2; } .fac-l02 .fac-col-copy { order: 1; } }
+
+    /* ── 03 Gallery top, copy below ── */
+    .fac-l03 .fac-stack { display: flex; flex-direction: column; gap: 36px; align-items: center; }
+    .fac-l03 .fac-hstrip { width: 100%; justify-content: center; }
+    .fac-l03 .fac-copy { text-align: center; max-width: 40rem; }
+    .fac-l03 .fac-eyebrow { justify-content: center; }
+
+    /* ── 04 Tab stage — tabs + single large image (distinct from strip width tween) ── */
+    .fac-l04 .fac-l04-tabs { display: flex; flex-direction: column; gap: 28px; align-items: center; width: 100%; }
+    .fac-l04 .fac-tablist { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 52rem; }
+    .fac-l04 .fac-tab { padding: 12px 18px; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--gray-200); background: var(--white); cursor: pointer; font-family: var(--font-body); color: var(--charcoal-deep); transition: border-color 0.2s, background 0.2s; }
+    .fac-l04 .fac-tab.is-on { border-color: var(--yellow-core); background: var(--yellow-tint); box-shadow: 0 2px 12px rgba(248, 190, 18, 0.25); }
+    .fac-l04 .fac-tab:focus-visible { outline: 2px solid var(--yellow-core); outline-offset: 2px; }
+    .fac-l04 .fac-tab-stage { width: 100%; max-width: 800px; aspect-ratio: 16/9; border: 1px solid var(--gray-200); overflow: hidden; background: var(--charcoal-deep); }
+    .fac-l04 .fac-tab-stage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .fac-l04 .fac-copy { text-align: center; max-width: 48rem; margin: 0 auto; order: -1; }
+    .fac-l04 .fac-eyebrow { justify-content: center; }
+
+    /* ── 05 Vertical expanding strips ── */
+    .fac-l05 .fac-vstack { display: flex; flex-direction: column; gap: 6px; max-width: 720px; margin: 0 auto; }
+    .fac-l05 .fac-vitem { position: relative; display: grid; grid-template-columns: 120px 1fr; min-height: 72px; border: 1px solid var(--gray-200); overflow: hidden; cursor: pointer; transition: min-height 0.55s var(--ease-expo); }
+    .fac-l05 .fac-vitem.is-on { min-height: 220px; }
+    .fac-l05 .fac-vitem-num { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--yellow-core); display: flex; align-items: center; justify-content: center; background: var(--charcoal-deep); color: var(--white); }
+    .fac-l05 .fac-vitem-img { position: relative; min-height: 72px; }
+    .fac-l05 .fac-vitem-img img { position: absolute; inset: 0; }
+    .fac-l05 .fac-vitem-t { position: absolute; bottom: 12px; left: 12px; right: 12px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); text-shadow: 0 1px 8px rgba(0,0,0,0.8); }
+    .fac-l05 .fac-copy { margin-bottom: 28px; text-align: center; }
+    @media (min-width: 700px) { .fac-l05 .fac-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; } .fac-l05 .fac-copy { text-align: left; margin-bottom: 0; } .fac-l05 .fac-eyebrow { justify-content: flex-start; } }
+
+    /* ── 06 Zigzag rows ── */
+    .fac-l06 .fac-zz { display: flex; flex-direction: column; gap: 0; }
+    .fac-l06 .fac-zz-row { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--gray-200); align-items: center; }
+    @media (min-width: 800px) {
+      .fac-l06 .fac-zz-row { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .fac-l06 .fac-zz-row.reverse { direction: rtl; }
+      .fac-l06 .fac-zz-row.reverse > * { direction: ltr; }
+    }
+    .fac-l06 .fac-zz-img { aspect-ratio: 16/10; border: 1px solid var(--gray-200); overflow: hidden; }
+    .fac-l06 .fac-zz-copy h3 { font-family: var(--font-display); font-size: 20px; text-transform: uppercase; margin-bottom: 8px; color: var(--charcoal-deep); }
+    .fac-l06 .fac-zz-copy p { font-size: 14px; color: var(--text-600); line-height: 1.55; margin-bottom: 12px; }
+    .fac-l06 .fac-lead { text-align: center; margin-bottom: 8px; max-width: 40rem; margin-left: auto; margin-right: auto; }
+    .fac-l06 .fac-lead .fac-eyebrow { justify-content: center; }
+
+    /* ── 07 Hero + filmstrip ── */
+    .fac-l07 .fac-hero { position: relative; aspect-ratio: 16/9; max-height: 420px; border: 1px solid var(--gray-200); overflow: hidden; margin-bottom: 16px; }
+    .fac-l07 .fac-film { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0; justify-content: center; flex-wrap: wrap; }
+    .fac-l07 .fac-film button { width: 72px; height: 72px; padding: 0; border: 2px solid transparent; cursor: pointer; overflow: hidden; flex-shrink: 0; background: none; }
+    .fac-l07 .fac-film button.is-on { border-color: var(--yellow-core); }
+    .fac-l07 .fac-film img { width: 100%; height: 100%; object-fit: cover; }
+    .fac-l07 .fac-copy { margin-bottom: 20px; text-align: center; }
+    .fac-l07 .fac-eyebrow { justify-content: center; }
+
+    /* ── 08 Bento grid ── */
+    .fac-l08 .fac-bento { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; grid-template-rows: repeat(3, minmax(100px, auto)); }
+    @media (min-width: 700px) { .fac-l08 .fac-bento { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 140px); } }
+    .fac-l08 .fac-bcell { position: relative; overflow: hidden; border: 1px solid var(--gray-200); cursor: pointer; min-height: 100px; }
+    .fac-l08 .fac-bcell.is-on { outline: 3px solid var(--yellow-core); z-index: 1; }
+    .fac-l08 .fac-bcell-1 { grid-column: 1 / -1; min-height: 160px; }
+    @media (min-width: 700px) { .fac-l08 .fac-bcell-1 { grid-column: 1 / 3; grid-row: 1 / 3; min-height: auto; } }
+    .fac-l08 .fac-bt { position: absolute; bottom: 8px; left: 8px; right: 8px; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); text-shadow: 0 1px 6px #000; }
+    .fac-l08 .fac-copy { margin-bottom: 20px; }
+
+    /* ── 09 Step connector rail — numbered steps + line + preview (distinct from overlap strips) ── */
+    .fac-l09 .fac-steps-wrap { width: 100%; max-width: 900px; margin: 0 auto; }
+    .fac-l09 .fac-steps-row { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 0; margin-bottom: 24px; }
+    .fac-l09 .fac-step-unit { display: flex; align-items: center; flex: 0 0 auto; }
+    .fac-l09 .fac-step-btn { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 10px; min-width: 72px; border: none; background: none; cursor: pointer; font-family: var(--font-body); color: var(--text-600); transition: color 0.2s; }
+    .fac-l09 .fac-step-btn.is-on { color: var(--charcoal-deep); }
+    .fac-l09 .fac-step-btn.is-on .fac-step-num { background: var(--yellow-core); color: var(--charcoal-deep); border-color: var(--yellow-core); }
+    .fac-l09 .fac-step-num { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gray-200); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; font-weight: 700; background: var(--white); transition: background 0.2s, border-color 0.2s; }
+    .fac-l09 .fac-step-label { font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; max-width: 72px; line-height: 1.2; }
+    .fac-l09 .fac-step-join { width: 24px; height: 2px; background: var(--gray-200); align-self: center; margin-top: -28px; flex-shrink: 0; }
+    @media (max-width: 699px) { .fac-l09 .fac-step-join { display: none; } }
+    .fac-l09 .fac-step-preview { position: relative; width: 100%; aspect-ratio: 16/9; max-height: 380px; border: 1px solid var(--gray-200); overflow: hidden; }
+    .fac-l09 .fac-step-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .fac-l09 .fac-copy { text-align: center; margin-bottom: 20px; }
+    .fac-l09 .fac-eyebrow { justify-content: center; }
+
+    /* ── 10 Circle row ── */
+    .fac-l10 .fac-circles { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; padding: 16px 0 32px; }
+    .fac-l10 .fac-cir { position: relative; width: 72px; height: 72px; border-radius: 50%; overflow: hidden; cursor: pointer; border: 3px solid var(--gray-200); transition: all 0.45s var(--ease-expo); flex-shrink: 0; }
+    .fac-l10 .fac-cir.is-on { width: 200px; height: 200px; border-radius: 12px; border-color: var(--yellow-core); }
+    .fac-l10 .fac-cir-t { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-size: 9px; font-weight: 800; color: var(--white); text-align: center; width: 100%; text-shadow: 0 1px 4px #000; }
+    .fac-l10 .fac-copy { text-align: center; }
+
+    /* ── 11 Diagonal split panel ── */
+    .fac-l11 .fac-diag { display: grid; grid-template-columns: 1fr; min-height: 480px; }
+    @media (min-width: 800px) {
+      .fac-l11 .fac-diag { grid-template-columns: 1fr 1fr; min-height: 420px; }
+      .fac-l11 .fac-diag-copy { clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%); padding-right: 8%; }
+      .fac-l11 .fac-diag-strip { clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%); margin-left: -8%; }
+    }
+    .fac-l11 .fac-diag-copy { background: var(--charcoal-deep); color: var(--white); padding: 40px 32px; display: flex; flex-direction: column; justify-content: center; }
+    .fac-l11 .fac-diag-copy .fac-h2 { color: var(--white); }
+    .fac-l11 .fac-diag-copy .fac-h2 span { color: var(--yellow-core); }
+    .fac-l11 .fac-diag-copy .fac-intro { color: rgba(255,255,255,0.65); }
+    .fac-l11 .fac-diag-copy .fac-eyebrow { color: var(--yellow-core); }
+    .fac-l11 .fac-diag-copy .fac-eyebrow::before { background: var(--yellow-core); }
+    .fac-l11 .fac-diag-strip { background: var(--off-white); display: flex; align-items: center; padding: 20px; }
+
+    /* ── 12 Number rail + content ── */
+    .fac-l12 .fac-rail { display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; }
+    .fac-l12 .fac-rail-nums { display: flex; flex-direction: column; gap: 8px; font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--yellow-core); padding-top: 8px; }
+    .fac-l12 .fac-rail-main .fac-copy { margin-bottom: 20px; }
+
+    /* ── 13 Full-bleed band + overlapping card ── */
+    .fac-l13 .fac-band { width: 100vw; margin-left: calc(50% - 50vw); height: 200px; position: relative; overflow: hidden; border-top: 4px solid var(--yellow-core); border-bottom: 4px solid var(--charcoal-deep); }
+    .fac-l13 .fac-card { max-width: 520px; margin: -80px auto 0; position: relative; z-index: 2; background: var(--white); padding: 28px 32px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-elevate); text-align: center; }
+    .fac-l13 .fac-hstrip { justify-content: center; padding-top: 24px; }
+
+    /* ── 14 Magazine: text left | image stack right ── */
+    .fac-l14 .fac-mag { display: grid; grid-template-columns: 1fr; gap: 28px; }
+    @media (min-width: 850px) { .fac-l14 .fac-mag { grid-template-columns: 1fr 280px; } }
+    .fac-l14 .fac-mag-imgs { display: flex; flex-direction: column; gap: 8px; }
+    .fac-l14 .fac-mag-imgs .fac-sq { aspect-ratio: 1; border: 1px solid var(--gray-200); overflow: hidden; cursor: pointer; transition: transform 0.25s; }
+    .fac-l14 .fac-mag-imgs .fac-sq.is-on { outline: 3px solid var(--yellow-core); }
+    .fac-l14 .fac-mag-imgs .fac-sq:hover { transform: scale(1.02); }
+
+    /* ── 15 Equal 5-col grid (no width expansion) ── */
+    .fac-l15 .fac-eqgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    @media (min-width: 700px) { .fac-l15 .fac-eqgrid { grid-template-columns: repeat(5, 1fr); } }
+    .fac-l15 .fac-eqcell { aspect-ratio: 3/4; position: relative; border: 2px solid transparent; cursor: pointer; overflow: hidden; }
+    .fac-l15 .fac-eqcell.is-on { border-color: var(--yellow-core); }
+    .fac-l15 .fac-eqcell .fac-scrim { position: absolute; inset: 0; background: rgba(18,17,16,0.35); }
+    .fac-l15 .fac-eqt { position: absolute; bottom: 8px; left: 4px; right: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; color: var(--white); text-align: center; line-height: 1.2; }
+    .fac-l15 .fac-copy { margin-bottom: 20px; text-align: center; }
+    @media (min-width: 700px) { .fac-l15 .fac-copy { text-align: left; } .fac-l15 .fac-eyebrow { justify-content: flex-start; } }
+
+    /* ── 16 Half bleed image | half text + chips ── */
+    .fac-l16 .fac-split50 { display: grid; grid-template-columns: 1fr; min-height: 400px; }
+    @media (min-width: 800px) { .fac-l16 .fac-split50 { grid-template-columns: 1fr 1fr; } }
+    .fac-l16 .fac-split-img { min-height: 240px; position: relative; }
+    .fac-l16 .fac-split-img img { position: absolute; inset: 0; }
+    .fac-l16 .fac-split-text { padding: 32px 28px; display: flex; flex-direction: column; justify-content: center; background: var(--off-white); border-left: 4px solid var(--yellow-core); }
+    .fac-l16 .fac-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .fac-l16 .fac-chip { padding: 8px 12px; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--gray-200); background: var(--white); cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+    .fac-l16 .fac-chip.is-on { border-color: var(--yellow-core); background: var(--yellow-tint); }
+
+    /* ── 17 L-shape grid ── */
+    .fac-l17 .fac-lshape { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; }
+    @media (min-width: 750px) {
+      .fac-l17 .fac-lshape { grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: 1fr 1fr; min-height: 380px; }
+      .fac-l17 .fac-l-big { grid-row: 1 / 3; grid-column: 1 / 2; min-height: 360px; }
+      .fac-l17 .fac-l-sq1 { grid-column: 2; grid-row: 1; }
+      .fac-l17 .fac-l-sq2 { grid-column: 3; grid-row: 1; }
+      .fac-l17 .fac-l-sq3 { grid-column: 2; grid-row: 2; }
+      .fac-l17 .fac-l-sq4 { grid-column: 3; grid-row: 2; }
+    }
+    .fac-l17 .fac-lcell { position: relative; border: 1px solid var(--gray-200); overflow: hidden; min-height: 120px; cursor: pointer; }
+    .fac-l17 .fac-lcell.is-on { outline: 3px solid var(--yellow-core); }
+    .fac-l17 .fac-lt { position: absolute; bottom: 8px; left: 8px; right: 8px; font-size: 10px; font-weight: 800; color: var(--white); text-transform: uppercase; text-shadow: 0 1px 4px #000; }
+    .fac-l17 .fac-copy { margin-bottom: 20px; }
+
+    /* ── 18 Cross: center copy, corners ── */
+    .fac-l18 .fac-cross { position: relative; min-height: 420px; padding: 24px; }
+    .fac-l18 .fac-cross-mid { position: relative; z-index: 2; max-width: 380px; margin: 0 auto; text-align: center; padding: 32px 20px; background: rgba(255,255,255,0.94); border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); }
+    .fac-l18 .fac-cross-img { position: absolute; width: 38%; max-width: 200px; aspect-ratio: 1; border: 1px solid var(--gray-200); overflow: hidden; cursor: pointer; }
+    .fac-l18 .fac-cross-img.is-on { outline: 3px solid var(--yellow-core); z-index: 3; }
+    .fac-l18 .fac-cross-img:nth-of-type(1) { top: 8px; left: 8px; }
+    .fac-l18 .fac-cross-img:nth-of-type(2) { top: 8px; right: 8px; }
+    .fac-l18 .fac-cross-img:nth-of-type(3) { bottom: 8px; left: 8px; }
+    .fac-l18 .fac-cross-img:nth-of-type(4) { bottom: 8px; right: 8px; }
+    .fac-l18 .fac-cross-img:nth-of-type(5) { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; max-width: none; opacity: 0; pointer-events: none; }
+
+    /* Simplified: 4 corners + show 5th in film row below */
+    .fac-l18 .fac-cross-film { display: flex; justify-content: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+    .fac-l18 .fac-cross-film button { width: 56px; height: 56px; border: 2px solid var(--gray-200); padding: 0; cursor: pointer; overflow: hidden; background: none; }
+    .fac-l18 .fac-cross-film button.is-on { border-color: var(--yellow-core); }
+
+    /* Fix 18: only 4 corner images - 5th in filmstrip */
+    .fac-l18 .fac-cross .fac-spacer { display: none; }
+
+    /* ── 19 Masonry columns ── */
+    .fac-l19 .fac-masonry { columns: 2; column-gap: 10px; }
+    @media (min-width: 700px) { .fac-l19 .fac-masonry { columns: 3; } }
+    .fac-l19 .fac-mitem { break-inside: avoid; margin-bottom: 10px; position: relative; border: 1px solid var(--gray-200); overflow: hidden; cursor: pointer; }
+    .fac-l19 .fac-mitem:nth-child(odd) { height: 140px; }
+    .fac-l19 .fac-mitem:nth-child(even) { height: 100px; }
+    .fac-l19 .fac-mitem.is-on { box-shadow: 0 0 0 3px var(--yellow-core); }
+    .fac-l19 .fac-mt { position: absolute; bottom: 6px; left: 6px; right: 6px; font-size: 9px; font-weight: 800; color: var(--white); text-transform: uppercase; }
+    .fac-l19 .fac-copy { margin-bottom: 20px; }
+
+    /* ── 20 Vertical label + horizontal strip bottom ── */
+    .fac-l20 .fac-vlabel { writing-mode: vertical-rl; text-orientation: mixed; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow-core); padding: 12px 8px; border-left: 3px solid var(--charcoal-deep); background: var(--off-white); }
+    .fac-l20 .fac-row { display: flex; flex-direction: column; gap: 20px; }
+    @media (min-width: 800px) {
+      .fac-l20 .fac-row { flex-direction: row; align-items: stretch; gap: 28px; }
+      .fac-l20 .fac-main { flex: 1; }
+    }
+    .fac-l20 .fac-bottom-strip { width: 100%; }
+    @media (min-width: 800px) { .fac-l20 .fac-bottom-strip { flex: 1; min-width: 0; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fac-hstrip-item, .fac-vitem, .fac-cir, .fac-bcell { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="fac-preview-intro">
+    <div class="eyebrow eyebrow--dark" style="margin-bottom:10px;">GLC — Featured Accordion</div>
+    <h1>20 Structural Layout Variants</h1>
+    <p>
+      <strong>20 distinct pattern families</strong> — same content model, different geometry and interaction (tabs, steps, zigzag river, bento, masonry, hub, diagonal panels, etc.).
+      Slugs match <code>featured-accordion-pattern-registry.json</code> and <code>AccordionSectionProps.layoutVariant</code> in the Next app.
+    </p>
+    <p style="font-size:13px;margin-top:12px;">
+      <strong>Reuse:</strong> pick a slug → copy that variant’s HTML/CSS from this file into <code>glc-site/src/components/sections/featured-accordion/layouts/</code> → set <code>layoutVariant</code> in page JSON → switch in <code>featured-accordion.tsx</code>. See registry <code>reuseWorkflow</code> for the full checklist.
+    </p>
+    <p style="font-size:13px;margin-top:10px;padding:12px 14px;background:var(--off-white);border-left:4px solid var(--yellow-core);max-width:52rem;">
+      <strong>Preview in browser:</strong> run <code style="font-size:12px;">npx serve . -p 3456</code> from the project root, then open
+      <a href="http://localhost:3456/featured-accordion-variants-preview.html" style="color:var(--charcoal-deep);font-weight:800;">http://localhost:3456/featured-accordion-variants-preview.html</a>
+      (see <code>CLAUDE.md</code> → Local static previews).
+    </p>
+  </header>
+  <main id="fac-root"></main>
+  <script>
+    (function () {
+      const IMG = "images/hero-armour-stone-retaining-walls.png";
+      const POS = ["22% 42%", "55% 38%", "40% 55%", "68% 45%", "48% 32%"];
+
+      const copy = {
+        eyebrow: "What We Do",
+        line1: "Six Core",
+        line2: "Service Lines",
+        intro:
+          "From initial site clearing to final drainage, Ground Level Contracting delivers end-to-end excavation and civil infrastructure services for commercial builds across Barrie, Midland, Orillia, and Simcoe County.",
+        cta: { label: "Request a Quote", href: "tel:+17056194902" },
+      };
+
+      const items = [
+        { id: 1, title: "Excavation & Site Prep", short: "Excavation" },
+        { id: 2, title: "Foundations & Civil", short: "Foundations" },
+        { id: 3, title: "Septic & Utilities", short: "Septic" },
+        { id: 4, title: "Drainage & Hardscaping", short: "Drainage" },
+        { id: 5, title: "Hauling & Clearing", short: "Hauling" },
+      ];
+
+      function img(i) {
+        return `<img class="fac-img" src="${IMG}" alt="" style="object-position:${POS[i % POS.length]}" loading="lazy" />`;
+      }
+
+      function copyBlock(centerAlign) {
+        const al = centerAlign ? "center" : "left";
+        const ej = centerAlign ? "center" : "flex-start";
+        return `
+        <div class="fac-copy" style="text-align:${al}">
+          <div class="fac-eyebrow eyebrow eyebrow--dark" style="margin-bottom:14px;justify-content:${ej}">${copy.eyebrow}</div>
+          <h2 class="fac-h2 services__heading">${copy.line1}<br/><span>${copy.line2}</span></h2>
+          <p class="fac-intro services__intro">${copy.intro}</p>
+          <div class="fac-cta"><a href="${copy.cta.href}" class="btn-primary">${copy.cta.label}
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+        </div>`;
+      }
+
+      function hStrip(className) {
+        return `
+        <div class="fac-hstrip ${className || ""}" data-hstrip>
+          ${items
+            .map(
+              (it, i) => `
+            <div class="fac-hstrip-item${i === 0 ? " is-on" : ""}" data-i="${i}" role="button" tabindex="0">
+              ${img(i)}
+              <div class="fac-scrim" aria-hidden="true"></div>
+              <span class="fac-hstrip-t">${it.title}</span>
+            </div>`
+            )
+            .join("")}
+        </div>`;
+      }
+
+      const layouts = [
+        {
+          n: 1,
+          slug: "split-copy-left-strip-right",
+          category: "two-column",
+          dna: "Text column | hover-expanding vertical strips (production default shape)",
+          name: "Classic split — copy left | horizontal strips right",
+          body() {
+            return `<div class="fac-block fac-l01"><div class="fac-wrap"><div class="fac-grid">${copyBlock(false)}<div class="fac-col-strip">${hStrip()}</div></div></div></div>`;
+          },
+        },
+        {
+          n: 2,
+          slug: "split-strip-left-copy-right",
+          category: "two-column-mirrored",
+          dna: "Strips lead; copy right-aligned — mirror of 01",
+          name: "Mirrored — strips left | copy right",
+          body() {
+            return `<div class="fac-block fac-l02"><div class="fac-wrap"><div class="fac-grid"><div class="fac-col-strip">${hStrip("fac-l02-strip")}</div><div class="fac-col-copy">${copyBlock(false)}</div></div></div></div>`;
+          },
+        },
+        {
+          n: 3,
+          slug: "stack-strip-top-copy-bottom",
+          category: "stack-vertical",
+          dna: "Full-width strip band first, then copy — inverted reading order vs 01",
+          name: "Gallery band on top — full-width strips, then copy",
+          body() {
+            return `<div class="fac-block fac-l03"><div class="fac-wrap fac-stack">${hStrip()}${copyBlock(true)}</div></div>`;
+          },
+        },
+        {
+          n: 4,
+          slug: "tab-stage-copy-above",
+          category: "tab-stage",
+          dna: "Explicit tabs + one stage image — no strip width animation",
+          name: "Tab stage — copy, tab row, single large image",
+          body() {
+            return `<div class="fac-block fac-l04"><div class="fac-wrap fac-l04-tabs" data-tab-root>
+            ${copyBlock(true)}
+            <div class="fac-tablist" role="tablist" aria-label="Service lines" data-tablist>${items
+              .map(
+                (it, i) =>
+                  `<button type="button" class="fac-tab${i === 0 ? " is-on" : ""}" role="tab" aria-selected="${i === 0 ? "true" : "false"}" data-i="${i}">${it.short}</button>`
+              )
+              .join("")}</div>
+            <div class="fac-tab-stage"><img data-tab-img src="${IMG}" alt="" style="object-position:${POS[0]}" loading="lazy" /></div>
+            </div></div>`;
+          },
+        },
+        {
+          n: 5,
+          slug: "split-copy-left-vertical-expanders",
+          category: "two-column-vertical-list",
+          dna: "Rows grow in height on click — orthogonal to horizontal strip tween",
+          name: "Vertical expanders — row height grows (not strip width)",
+          body() {
+            return `<div class="fac-block fac-l05"><div class="fac-wrap"><div class="fac-split">${copyBlock(false)}
+            <div class="fac-vstack" data-vstack>${items
+              .map(
+                (it, i) => `
+              <div class="fac-vitem${i === 0 ? " is-on" : ""}" data-i="${i}">
+                <div class="fac-vitem-num">${String(i + 1).padStart(2, "0")}</div>
+                <div class="fac-vitem-img">${img(i)}<div class="fac-scrim"></div><span class="fac-vitem-t">${it.title}</span></div>
+              </div>`
+              )
+              .join("")}</div></div></div></div>`;
+          },
+        },
+        {
+          n: 6,
+          slug: "river-zigzag-rows",
+          category: "stacked-rows",
+          dna: "Intro then full-width alternating image|copy rows (flip via grid)",
+          name: "Zigzag — 5 rows, image | text alternating flip",
+          body() {
+            const lead = `<div class="fac-lead">${copyBlock(true)}</div>`;
+            const rows = items
+              .map(
+                (it, i) => `
+              <div class="fac-zz-row${i % 2 === 1 ? " reverse" : ""}">
+                <div class="fac-zz-img">${img(i)}</div>
+                <div class="fac-zz-copy"><h3>${it.title}</h3><p>${copy.intro.slice(0, 120)}…</p><a href="#" class="btn-ghost-dark" style="font-size:11px;">Details</a></div>
+              </div>`
+              )
+              .join("");
+            return `<div class="fac-block fac-l06"><div class="fac-wrap">${lead}<div class="fac-zz">${rows}</div></div></div>`;
+          },
+        },
+        {
+          n: 7,
+          slug: "stage-hero-filmstrip",
+          category: "hero-thumbnails",
+          dna: "Dominant stage + thumb rail — click changes hero",
+          name: "Hero stage + filmstrip — large main swaps from thumbs",
+          body() {
+            return `<div class="fac-block fac-l07"><div class="fac-wrap">${copyBlock(true)}
+            <div class="fac-hero" data-hero><img data-hero-img src="${IMG}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:${POS[0]}" /></div>
+            <div class="fac-film" data-film>${items
+              .map(
+                (it, i) =>
+                  `<button type="button" class="${i === 0 ? "is-on" : ""}" data-i="${i}" aria-label="${it.title}">${img(i)}</button>`
+              )
+              .join("")}</div></div></div>`;
+          },
+        },
+        {
+          n: 8,
+          slug: "grid-bento-asymmetric",
+          category: "css-grid-modular",
+          dna: "Irregular bento spans — outline selection, not width tween",
+          name: "Bento — asymmetric grid; cell 1 spans large",
+          body() {
+            return `<div class="fac-block fac-l08"><div class="fac-wrap">${copyBlock(false)}
+            <div class="fac-bento" data-bento>${items
+              .map(
+                (it, i) => `
+              <div class="fac-bcell fac-bcell-${i + 1}${i === 0 ? " is-on" : ""}" data-i="${i}">${img(i)}<div class="fac-scrim"></div><span class="fac-bt">${it.short}</span></div>`
+              )
+              .join("")}</div></div></div>`;
+          },
+        },
+        {
+          n: 9,
+          slug: "step-connector-rail",
+          category: "process-rail",
+          dna: "Linear step UI + connectors — preview below, not fanned strips",
+          name: "Step rail — numbered steps + connector + preview image",
+          body() {
+            const row = items
+              .map((it, i) => {
+                const btn = `<div class="fac-step-unit"><button type="button" class="fac-step-btn${i === 0 ? " is-on" : ""}" data-i="${i}" data-step-btn><span class="fac-step-num">${String(i + 1).padStart(2, "0")}</span><span class="fac-step-label">${it.short}</span></button></div>`;
+                const join = i < items.length - 1 ? `<div class="fac-step-join" aria-hidden="true"></div>` : "";
+                return btn + join;
+              })
+              .join("");
+            return `<div class="fac-block fac-l09"><div class="fac-wrap">${copyBlock(true)}
+            <div class="fac-steps-wrap" data-steps-root>
+              <div class="fac-steps-row" data-steps-row>${row}</div>
+              <div class="fac-step-preview"><img data-step-img src="${IMG}" alt="" style="object-position:${POS[0]}" loading="lazy" /></div>
+            </div></div></div>`;
+          },
+        },
+        {
+          n: 10,
+          slug: "morph-circle-row",
+          category: "orbital-morph",
+          dna: "Circles morph to rounded squares — geometry change, not strip",
+          name: "Circular thumbs — expand to rounded square",
+          body() {
+            return `<div class="fac-block fac-l10"><div class="fac-wrap">${copyBlock(true)}
+            <div class="fac-circles" data-circles>${items
+              .map(
+                (it, i) => `
+              <div class="fac-cir${i === 0 ? " is-on" : ""}" data-i="${i}">${img(i)}<span class="fac-cir-t">${it.short}</span></div>`
+              )
+              .join("")}</div></div></div>`;
+          },
+        },
+        {
+          n: 11,
+          slug: "panel-diagonal-split",
+          category: "angled-panels",
+          dna: "Clip-path diagonal between dark copy and strip rail",
+          name: "Diagonal split — charcoal copy | clipped image rail",
+          body() {
+            return `<div class="fac-block fac-l11"><div class="fac-diag">
+              <div class="fac-diag-copy"><div class="fac-eyebrow eyebrow" style="margin-bottom:14px;">${copy.eyebrow}</div>
+                <h2 class="fac-h2">${copy.line1}<br/><span>${copy.line2}</span></h2>
+                <p class="fac-intro">${copy.intro}</p>
+                <a href="${copy.cta.href}" class="btn-primary">${copy.cta.label}<svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              </div>
+              <div class="fac-diag-strip">${hStrip().replace('class="fac-hstrip"', 'class="fac-hstrip"')}</div>
+            </div></div>`;
+          },
+        },
+        {
+          n: 12,
+          slug: "rail-index-numbers",
+          category: "sidebar-index",
+          dna: "TOC-style number column beside main copy + strips",
+          name: "Index rail — vertical 01–05 beside copy + strips",
+          body() {
+            const nums = items.map((_, i) => `<span>${String(i + 1).padStart(2, "0")}</span>`).join("");
+            return `<div class="fac-block fac-l12"><div class="fac-wrap"><div class="fac-rail"><div class="fac-rail-nums">${nums}</div><div class="fac-rail-main">${copyBlock(false)}${hStrip()}</div></div></div></div>`;
+          },
+        },
+        {
+          n: 13,
+          slug: "bleed-band-float-card",
+          category: "full-bleed-overlay",
+          dna: "Edge-to-edge band; card overlaps; strips anchor bottom",
+          name: "Full-bleed band + card overlaps upward",
+          body() {
+            return `<div class="fac-block fac-l13"><div class="fac-band">${img(0)}</div><div class="fac-wrap"><div class="fac-card">${copyBlock(true)}</div>${hStrip()}</div></div>`;
+          },
+        },
+        {
+          n: 14,
+          slug: "editorial-magazine-stack",
+          category: "magazine-split",
+          dna: "Running copy + vertical stack of squares — not horizontal strip",
+          name: "Magazine — long copy left | stacked squares right",
+          body() {
+            return `<div class="fac-block fac-l14"><div class="fac-wrap"><div class="fac-mag">${copyBlock(false)}
+              <div class="fac-mag-imgs" data-mag>${items
+                .map(
+                  (it, i) => `<div class="fac-sq${i === 0 ? " is-on" : ""}" data-i="${i}">${img(i)}</div>`
+                )
+                .join("")}</div></div></div></div>`;
+          },
+        },
+        {
+          n: 15,
+          slug: "grid-equal-five",
+          category: "equal-grid",
+          dna: "Five equal columns; border selection only",
+          name: "Equal 5-column grid — selection ring, no width tween",
+          body() {
+            return `<div class="fac-block fac-l15"><div class="fac-wrap">${copyBlock(false)}
+            <div class="fac-eqgrid" data-eqgrid>${items
+              .map(
+                (it, i) => `
+              <div class="fac-eqcell${i === 0 ? " is-on" : ""}" data-i="${i}">${img(i)}<div class="fac-scrim"></div><span class="fac-eqt">${it.short}</span></div>`
+              )
+              .join("")}</div></div></div>`;
+          },
+        },
+        {
+          n: 16,
+          slug: "split-photo-chips",
+          category: "asymmetric-split-chips",
+          dna: "Fixed half photo; chips swap crop — different affordance than strips",
+          name: "50/50 — half-bleed photo | text + selectable chips",
+          body() {
+            return `<div class="fac-block fac-l16"><div class="fac-wrap"><div class="fac-split50">
+              <div class="fac-split-img">${img(0)}</div>
+              <div class="fac-split-text"><div class="fac-eyebrow eyebrow eyebrow--dark">${copy.eyebrow}</div>
+                <h2 class="fac-h2">${copy.line1}<br/><span>${copy.line2}</span></h2>
+                <p class="fac-intro">${copy.intro}</p>
+                <div class="fac-chips" data-chips>${items
+                  .map((it, i) => `<button type="button" class="fac-chip${i === 0 ? " is-on" : ""}" data-i="${i}">${it.short}</button>`)
+                  .join("")}</div>
+                <div style="margin-top:16px"><a href="${copy.cta.href}" class="btn-primary">${copy.cta.label}<svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+              </div>
+            </div></div></div>`;
+          },
+        },
+        {
+          n: 17,
+          slug: "grid-l-tetris",
+          category: "tetris-grid",
+          dna: "One dominant L-cell + four satellites in explicit grid areas",
+          name: "L-grid — one tall tile + four small tiles",
+          body() {
+            return `<div class="fac-block fac-l17"><div class="fac-wrap">${copyBlock(false)}
+            <div class="fac-lshape" data-lshape>${items
+              .map(
+                (it, i) => `
+              <div class="fac-lcell fac-l-${i === 0 ? "big" : "sq" + i}${i === 0 ? " is-on" : ""}" data-i="${i}">${img(i)}<span class="fac-lt">${it.short}</span></div>`
+              )
+              .join("")}</div></div></div>`;
+          },
+        },
+        {
+          n: 18,
+          slug: "hub-cross-corners",
+          category: "hub-radial",
+          dna: "Center hub + corner satellites + auxiliary film row",
+          name: "Cross — centered card; four corners + fifth thumb row",
+          body() {
+            const corners = items.slice(0, 4);
+            const film = items[4];
+            return `<div class="fac-block fac-l18"><div class="fac-wrap"><div class="fac-cross">
+              ${corners
+                .map(
+                  (it, i) => `
+                <div class="fac-cross-img${i === 0 ? " is-on" : ""}" data-i="${i}" style="cursor:pointer">${img(i)}</div>`
+                )
+                .join("")}
+              <div class="fac-cross-mid">${copyBlock(true)}</div>
+              <div class="fac-cross-film"><button type="button" class="is-on" data-i="4" aria-label="${film.title}">${img(4)}</button></div>
+            </div></div></div>`;
+          },
+        },
+        {
+          n: 19,
+          slug: "flow-masonry",
+          category: "masonry-flow",
+          dna: "Column flow with varied heights — breaks rigid strip rhythm",
+          name: "Masonry columns — varied heights",
+          body() {
+            return `<div class="fac-block fac-l19"><div class="fac-wrap">${copyBlock(false)}
+            <div class="fac-masonry" data-masonry>${items
+              .map(
+                (it, i) => `
+              <div class="fac-mitem${i === 0 ? " is-on" : ""}" data-i="${i}">${img(i)}<div class="fac-scrim"></div><span class="fac-mt">${it.short}</span></div>`
+              )
+              .join("")}</div></div></div>`;
+          },
+        },
+        {
+          n: 20,
+          slug: "masthead-vertical-strip",
+          category: "masthead-sidebar",
+          dna: "Vertical-rl spine label + copy + horizontal strip footer",
+          name: "Vertical side label + copy stack + strip under",
+          body() {
+            return `<div class="fac-block fac-l20"><div class="fac-wrap"><div class="fac-row">
+              <div class="fac-vlabel">Ground Level</div>
+              <div class="fac-main">${copyBlock(false)}</div>
+              <div class="fac-bottom-strip">${hStrip()}</div>
+            </div></div></div>`;
+          },
+        },
+      ];
+
+      const root = document.getElementById("fac-root");
+      root.innerHTML = layouts
+        .map(
+          (L) => `
+        <section class="fac-variant" data-n="${L.n}" data-pattern-slug="${L.slug}" data-pattern-category="${L.category}">
+          <div class="fac-variant-label"><strong>${String(L.n).padStart(2, "0")} · ${L.category}</strong><span><span style="display:block;font-size:10px;font-weight:800;color:var(--yellow-core);margin-bottom:4px;">${L.slug}</span>${L.name} — ${L.dna}</span></div>
+          ${L.body()}
+        </section>`
+        )
+        .join("");
+
+      /* Tab stage (variant 04) */
+      root.querySelectorAll("[data-tablist]").forEach((list) => {
+        const rootEl = list.closest("[data-tab-root]");
+        const img = rootEl && rootEl.querySelector("[data-tab-img]");
+        if (!img) return;
+        list.querySelectorAll(".fac-tab").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            list.querySelectorAll(".fac-tab").forEach((b) => {
+              b.classList.remove("is-on");
+              b.setAttribute("aria-selected", "false");
+            });
+            btn.classList.add("is-on");
+            btn.setAttribute("aria-selected", "true");
+            const i = +btn.getAttribute("data-i");
+            img.style.objectPosition = POS[i % POS.length];
+          });
+        });
+      });
+
+      /* Step rail (variant 09) */
+      root.querySelectorAll("[data-steps-root]").forEach((wrap) => {
+        const img = wrap.querySelector("[data-step-img]");
+        if (!img) return;
+        wrap.querySelectorAll(".fac-step-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            wrap.querySelectorAll(".fac-step-btn").forEach((b) => b.classList.remove("is-on"));
+            btn.classList.add("is-on");
+            const i = +btn.getAttribute("data-i");
+            img.style.objectPosition = POS[i % POS.length];
+          });
+        });
+      });
+
+      /* Horizontal strip hover */
+      root.querySelectorAll("[data-hstrip]").forEach((track) => {
+        const items = track.querySelectorAll(".fac-hstrip-item");
+        items.forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            items.forEach((x) => x.classList.remove("is-on"));
+            el.classList.add("is-on");
+          });
+          el.addEventListener("focus", () => {
+            items.forEach((x) => x.classList.remove("is-on"));
+            el.classList.add("is-on");
+          });
+        });
+      });
+
+      /* Vertical stack */
+      root.querySelectorAll("[data-vstack] .fac-vitem").forEach((el) => {
+        el.addEventListener("click", () => {
+          el.parentElement.querySelectorAll(".fac-vitem").forEach((x) => x.classList.remove("is-on"));
+          el.classList.add("is-on");
+        });
+      });
+
+      /* Hero + film */
+      root.querySelectorAll("[data-film]").forEach((film) => {
+        const heroImg = film.closest(".fac-l07").querySelector("[data-hero-img]");
+        film.querySelectorAll("button").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            film.querySelectorAll("button").forEach((b) => b.classList.remove("is-on"));
+            btn.classList.add("is-on");
+            const i = +btn.getAttribute("data-i");
+            heroImg.style.objectPosition = POS[i % POS.length];
+          });
+        });
+      });
+
+      /* Bento */
+      root.querySelectorAll("[data-bento] .fac-bcell").forEach((el) => {
+        el.addEventListener("click", () => {
+          el.parentElement.querySelectorAll(".fac-bcell").forEach((x) => x.classList.remove("is-on"));
+          el.classList.add("is-on");
+        });
+      });
+
+      /* Circles */
+      root.querySelectorAll("[data-circles] .fac-cir").forEach((el) => {
+        el.addEventListener("click", () => {
+          el.parentElement.querySelectorAll(".fac-cir").forEach((x) => x.classList.remove("is-on"));
+          el.classList.add("is-on");
+        });
+      });
+
+      /* Eq grid */
+      root.querySelectorAll("[data-eqgrid] .fac-eqcell").forEach((el) => {
+        el.addEventListener("click", () => {
+          el.parentElement.querySelectorAll(".fac-eqcell").forEach((x) => x.classList.remove("is-on"));
+          el.classList.add("is-on");
+        });
+      });
+
+      /* Mag squares */
+      root.querySelectorAll("[data-mag] .fac-sq").forEach((el) => {
+        el.addEventListener("click", () => {
+          el.parentElement.querySelectorAll(".fac-sq").forEach((x) => x.classList.remove("is-on"));
+          el.classList.add("is-on");
+        });
+      });
+
+      /* L-shape */
+      root.querySelectorAll("[data-lshape] .fac-lcell").forEach((el) => {
+        el.addEventListener("click", () => {
+          el.parentElement.querySelectorAll(".fac-lcell").forEach((x) => x.classList.remove("is-on"));
+          el.classList.add("is-on");
+        });
+      });
+
+      /* Masonry */
+      root.querySelectorAll("[data-masonry] .fac-mitem").forEach((el) => {
+        el.addEventListener("click", () => {
+          el.parentElement.querySelectorAll(".fac-mitem").forEach((x) => x.classList.remove("is-on"));
+          el.classList.add("is-on");
+        });
+      });
+
+      /* Cross corners */
+      root.querySelectorAll(".fac-l18 .fac-cross-img").forEach((el) => {
+        el.addEventListener("click", () => {
+          el.parentElement.querySelectorAll(".fac-cross-img").forEach((x) => x.classList.remove("is-on"));
+          el.classList.add("is-on");
+        });
+      });
+
+      /* Chips + swap hero in split 16 - optional: update split image */
+      root.querySelectorAll("[data-chips] .fac-chip").forEach((btn) => {
+        const split = btn.closest(".fac-split50");
+        const imgEl = split.querySelector(".fac-split-img img");
+        btn.addEventListener("click", () => {
+          btn.parentElement.querySelectorAll(".fac-chip").forEach((b) => b.classList.remove("is-on"));
+          btn.classList.add("is-on");
+          const i = +btn.getAttribute("data-i");
+          if (imgEl) imgEl.style.objectPosition = POS[i % POS.length];
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

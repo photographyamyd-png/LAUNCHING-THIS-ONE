@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "name": "Ground Level Contracting Design System",
+    "version": "1.1.0",
+    "authority": "Project rules resolve in this order: (1) .cursorrules, (2) GLC_MASTER_SYSTEM.html, (3) this file and assets/glc-base.css, (4) CLAUDE.md.",
+    "source_of_truth": {
+      "rules": ".cursorrules",
+      "master_reference_html": "GLC_MASTER_SYSTEM.html",
+      "entry_html": "GLC_Homepage.html",
+      "resolved_page": "index.html",
+      "css_tokens": "assets/glc-base.css"
+    }
+  },
+  "imports": {
+    "fonts": [
+      "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@1,8..60,500&display=swap"
+    ],
+    "stylesheets": [
+      "assets/glc-base.css",
+      "assets/glc-mega-nav.css",
+      "assets/glc-accordion.css"
+    ]
+  },
+  "tokens": {
+    "colors": {
+      "charcoal": "#202020,
+      "charcoal_deep": "#1E1C1A",
+      "charcoal_mid": "#3A3632",
+      "white": "#FFFFFF",
+      "off_white": "#F2F2F2",
+      "soft_smoke": "#F2F2F2",
+      "yellow_core": "#F2B705",
+      "gold": "#D9A004",
+      "yellow_tint": "rgba(242,183,5,0.08)",
+      "yellow_tint_md": "rgba(242,183,5,0.14)",
+      "yellow_tint_strong": "rgba(242,183,5,0.15)",
+      "yellow_tint_lg": "rgba(242,183,5,0.22)",
+      "text_900": "#0E0D0C",
+      "text_700": "#3A3632",
+      "text_500": "#6B6560",
+      "text_600": "#6B6560",
+      "text_400": "#9C9690",
+      "gray_200": "#E0DEDA",
+      "gray_100": "#F7F6F4"
+    },
+    "typography": {
+      "font_display": "'Oswald', sans-serif",
+      "font_body": "'Plus Jakarta Sans', sans-serif",
+      "font_accent": "'Source Serif 4', serif",
+      "base_font_size_px": 16,
+      "base_line_height": 1.6
+    },
+    "layout": {
+      "container_max_px": 1200,
+      "section_vertical_default_px": 96,
+      "section_vertical_mobile_px": 64,
+      "gap_grid_px": 2,
+      "header_height_px": 100,
+      "radius_default_px": 0
+    },
+    "effects": {
+      "ease_expo": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "shadow_card": "0 4px 24px rgba(0,0,0,0.12)",
+      "shadow_elevate": "0 8px 40px rgba(0,0,0,0.20)",
+      "shadow_editorial": "0 1px 0 rgba(0,0,0,0.10)",
+      "shadow_accent_glow": "0 0 0 3px rgba(242,183,5,0.28)"
+    }
+  },
+  "component_sources": {
+    "primary_folder": "glc-site/src/components",
+    "sections": "glc-site/src/components/sections",
+    "layout": "glc-site/src/components/layout",
+    "ui": "glc-site/src/components/ui"
+  },
+  "html_class_systems": {
+    "global": [
+      "container",
+      "eyebrow",
+      "btn-primary",
+      "btn-ghost",
+      "btn-ghost-dark"
+    ],
+    "navigation": [
+      "pmnav-*",
+      "gl-header__*"
+    ],
+    "utility": [
+      "gl-util-*"
+    ]
+  },
+  "enforcement_rules": [
+    "On conflict, follow .cursorrules and GLC_MASTER_SYSTEM.html before this JSON.",
+    "Always import global fonts and stylesheet stack used by homepage.",
+    "Always use design tokens; do not hardcode off-system colors or spacing.",
+    "Always build new sections using existing reusable components first.",
+    "Do not ship plain raw HTML sections without approved classes/components.",
+    "Preserve homepage visual hierarchy, spacing rhythm, and typography scale."
+  ],
+  "new_page_requirements": {
+    "required_body_classes": [
+      "page-home"
+    ],
+    "required_layout_patterns": [
+      "shared header/nav component",
+      "section container rhythm",
+      "shared CTA/button styling",
+      "shared footer treatment"
+    ],
+    "validation_steps": [
+      "Check imports match homepage stack.",
+      "Check classes/components are reused from existing system.",
+      "Check tokens match .cursorrules Part 2 and this JSON.",
+      "Check resulting page matches homepage styling parity."
+    ]
+  }
+}

@@ -1,0 +1,2579 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLC Services Section Variants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/glc-base.css">
+  <link rel="stylesheet" href="assets/glc-mega-nav.css">
+  <link rel="stylesheet" href="assets/glc-accordion.css">
+  <style>
+    /* Page chrome only — section internals rely on glc-base #services patterns */
+    body {
+      background: var(--gray-100);
+      color: var(--text-900);
+    }
+
+    .variants-shell {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 44px 0 96px;
+      display: grid;
+      gap: 48px;
+    }
+
+    .variants-intro-wrap {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .variants-intro {
+      background: var(--charcoal-deep);
+      color: var(--white);
+      padding: 32px;
+      border-left: 4px solid var(--yellow-core);
+      box-shadow: var(--shadow-elevate);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .variants-intro::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(255,255,255,0.08);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .variants-intro h1 {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 5vw, 54px);
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variants-intro .variants-intro__lede {
+      color: rgba(255,255,255,0.8);
+      max-width: 720px;
+      font-size: 15px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variants-intro .variants-intro__note {
+      margin-top: 18px;
+      font-family: var(--font-accent);
+      font-size: 16px;
+      font-style: italic;
+      color: rgba(255,255,255,0.72);
+      max-width: 640px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant-block {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .variant-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--gray-200);
+      background: linear-gradient(90deg, rgba(248,190,18,0.1), rgba(248,190,18,0));
+    }
+
+    .variant-head strong {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 20px;
+    }
+
+    .variant-head span {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--text-600);
+    }
+
+    /*
+      Mirrors homepage #services: band, off-white field, blueprint watermark.
+      Scoped so real #services styles still apply to class="services-offwhite-section"
+      from our markup (duplicates #services rules without id collision).
+    */
+    .services-offwhite-section {
+      background: var(--off-white);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .services-offwhite-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--charcoal-deep);
+    }
+
+    .services-offwhite-section .services-watermark {
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(520px, 62vw);
+      height: auto;
+      opacity: 0.045;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .services-offwhite-section .services-section-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Option B — balanced split: full-bleed imagery | same service cards (2×3) */
+    .variant-b .services-balanced-split {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.42fr) minmax(0, 1fr);
+      gap: 2px;
+      align-items: stretch;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      box-sizing: border-box;
+    }
+
+    .variant-b .services-editorial {
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+      background: var(--charcoal-deep);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .variant-b .services-editorial__photo {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(18,17,16,0.45) 0%, rgba(18,17,16,0.92) 100%),
+        url("images/hero-armour-stone-retaining-walls.png") center/cover no-repeat;
+    }
+
+    .variant-b .services-editorial__body {
+      position: relative;
+      z-index: 1;
+      padding: 28px 26px 32px;
+    }
+
+    .variant-b .services-editorial__body .eyebrow {
+      margin-bottom: 14px;
+    }
+
+    .variant-b .services-editorial__serif {
+      font-family: var(--font-accent);
+      font-size: clamp(17px, 1.9vw, 21px);
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      max-width: 28ch;
+    }
+
+    .variant-b .services-editorial__meta {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .variant-b .services-balanced-split .services__grid-wrap {
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+    }
+
+    .variant-b .services-balanced-split .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Option C — sticky editorial rail + charcoal summary rows (card language) */
+    .variant-c .services-accordion-split {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.38fr) minmax(0, 1fr);
+      gap: 36px;
+      align-items: start;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      box-sizing: border-box;
+    }
+
+    .variant-c .services-accordion-rail {
+      position: sticky;
+      top: calc(var(--gl-header-height, 100px) + 16px);
+      border-top: 4px solid var(--yellow-core);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .variant-c .services-accordion-rail__visual {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background:
+        linear-gradient(135deg, rgba(18,17,16,0.65) 0%, rgba(18,17,16,0.2) 50%, rgba(248,190,18,0.12) 100%),
+        url("images/hero-armour-stone-retaining-walls.png") center/cover no-repeat;
+    }
+
+    /* Decorative bar only — no type sitting on the photo */
+    .variant-c .services-accordion-rail__visual::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 56px;
+      height: 3px;
+      background: var(--yellow-core);
+      opacity: 0.9;
+    }
+
+    .variant-c .services-accordion-rail__body {
+      padding: 22px 22px 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .variant-c .services-accordion-rail__body h3 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.4vw, 28px);
+      text-transform: uppercase;
+      line-height: 1.05;
+      color: var(--charcoal-deep);
+    }
+
+    .variant-c .services-accordion-rail__body p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-600);
+    }
+
+    .editorial-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .editorial-tags span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-600);
+      border: 1px solid var(--gray-200);
+      padding: 6px 10px;
+      background: var(--gray-100);
+    }
+
+    .variant-c details.services-acc-item {
+      margin-bottom: 2px;
+      border: none;
+      background: transparent;
+    }
+
+    .variant-c details.services-acc-item[open] summary {
+      box-shadow: inset 0 0 0 1px var(--yellow-core);
+    }
+
+    .variant-c details.services-acc-item summary {
+      list-style: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 20px 22px;
+      background: var(--charcoal-deep);
+      color: var(--white);
+      transition: background 0.25s var(--ease-expo);
+    }
+
+    .variant-c details.services-acc-item summary:hover {
+      background: #252220;
+    }
+
+    .variant-c details.services-acc-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .variant-c .services-acc-item .acc-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.18);
+      line-height: 1;
+    }
+
+    .variant-c .services-acc-item .acc-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .variant-c .services-acc-item .acc-hint {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--yellow-core);
+    }
+
+    .variant-c .services-acc-item .acc-panel {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-top: none;
+      padding: 20px 22px 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .variant-c .services-acc-item .acc-panel p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-600);
+    }
+
+    .variant-c .services-acc-item .acc-panel .acc-serif {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-900);
+    }
+
+    @media (max-width: 1024px) {
+      .variant-b .services-balanced-split,
+      .variant-c .services-accordion-split {
+        grid-template-columns: 1fr;
+        padding: 0 24px;
+      }
+
+      .variant-c .services-accordion-rail {
+        position: relative;
+        top: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .variants-shell {
+        padding: 28px 0 72px;
+        gap: 32px;
+      }
+
+      .variants-intro-wrap {
+        padding: 0 20px;
+      }
+
+      .variant-b .services-balanced-split .services__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Option D: Why-DNA flagship (charcoal mesh, 50/50, reason rows, clipped media + chip) ── */
+    .variant-d .services-why-flagship {
+      background: var(--charcoal-deep);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .variant-d .services-why-flagship::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          90deg, transparent, transparent 79px,
+          rgba(255,255,255,0.015) 79px, rgba(255,255,255,0.015) 80px
+        ),
+        repeating-linear-gradient(
+          0deg, transparent, transparent 79px,
+          rgba(255,255,255,0.015) 79px, rgba(255,255,255,0.015) 80px
+        );
+      pointer-events: none;
+    }
+
+    .variant-d .services-why-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant-d .services-why-heading {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 3.5vw, 52px);
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .variant-d .services-why-heading em {
+      font-style: normal;
+      color: var(--yellow-core);
+    }
+
+    .variant-d .services-why-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 32px;
+    }
+
+    .variant-d .services-why-reasons {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 32px;
+    }
+
+    .variant-d a.services-why-reason {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.03);
+      border-left: 3px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .variant-d a.services-why-reason:hover {
+      background: var(--yellow-tint);
+      border-color: var(--yellow-core);
+    }
+
+    .variant-d .services-why-reason-num {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--yellow-core);
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .variant-d .services-why-reason-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .variant-d .services-why-reason-text {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .variant-d .services-why-media {
+      position: relative;
+    }
+
+    .variant-d .services-why-shell {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      position: relative;
+      clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%, 0 8%);
+    }
+
+    .variant-d .services-why-photo {
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(155deg, rgba(26,45,58,0.5) 0%, rgba(13,30,42,0.75) 100%),
+        url("images/hero-armour-stone-retaining-walls.png") center/cover no-repeat;
+    }
+
+    .variant-d .services-why-border {
+      position: absolute;
+      inset: -8px;
+      border-top: 2px solid var(--yellow-core);
+      border-left: 2px solid var(--yellow-core);
+      border-right: none;
+      border-bottom: none;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .variant-d .services-why-chip {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      background: var(--yellow-core);
+      padding: 20px 24px;
+      z-index: 3;
+    }
+
+    .variant-d .services-why-chip strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--charcoal-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .variant-d .services-why-chip span {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(30,28,26,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ── Option E: vertical timeline (off-white, rail + nodes — not a grid or accordion) ── */
+    .variant-e .services-timeline-field {
+      background: var(--off-white);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .variant-e .services-timeline-field::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--charcoal-deep);
+    }
+
+    .variant-e .services-timeline-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant-e .services-timeline-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .variant-e .services-timeline-header .eyebrow {
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .variant-e .services-timeline-heading {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 3vw, 48px);
+      font-weight: 700;
+      color: var(--charcoal-deep);
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+
+    .variant-e .services-timeline-heading span {
+      color: var(--yellow-core);
+    }
+
+    .variant-e .services-timeline-track {
+      position: relative;
+      padding-left: 28px;
+      border-left: 2px solid var(--charcoal-deep);
+    }
+
+    .variant-e .services-timeline-track::before {
+      content: "";
+      position: absolute;
+      left: -2px;
+      top: 0;
+      width: 2px;
+      height: 36%;
+      background: var(--yellow-core);
+    }
+
+    .variant-e .services-timeline-item {
+      position: relative;
+      padding-bottom: 28px;
+      padding-left: 8px;
+    }
+
+    .variant-e .services-timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .variant-e .services-timeline-node {
+      position: absolute;
+      left: -36px;
+      top: 6px;
+      width: 18px;
+      height: 18px;
+      background: var(--yellow-core);
+      border: 3px solid var(--charcoal-deep);
+      box-shadow: 0 0 0 2px var(--off-white);
+    }
+
+    .variant-e .services-timeline-well {
+      background: var(--white);
+      border-top: 3px solid var(--yellow-core);
+      padding: 22px 24px 24px;
+      box-shadow: var(--shadow-card);
+      display: grid;
+      gap: 10px;
+    }
+
+    .variant-e .services-timeline-well-head {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px 18px;
+      align-items: baseline;
+    }
+
+    .variant-e .services-timeline-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: rgba(30,28,26,0.12);
+      line-height: 1;
+    }
+
+    .variant-e .services-timeline-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--charcoal-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .variant-e .services-timeline-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-600);
+    }
+
+    .variant-e .services-timeline-well a {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal-deep);
+      width: max-content;
+    }
+
+    .variant-e .services-timeline-well a:hover {
+      color: var(--yellow-core);
+    }
+
+    /* ── Option F: tabbed single surface (interaction + one hero read panel) ── */
+    .variant-f .services-tabs-field {
+      background: var(--off-white);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .variant-f .services-tabs-field::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--charcoal-deep);
+    }
+
+    .variant-f .services-tabs-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant-f .services-tabs-header {
+      margin-bottom: 28px;
+    }
+
+    .variant-f .services-tabs-tablist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 28px;
+      padding: 4px;
+      background: rgba(30,28,26,0.06);
+      border: 1px solid var(--gray-200);
+    }
+
+    .variant-f .services-tabs-tablist button {
+      flex: 1 1 auto;
+      min-width: 72px;
+      padding: 12px 10px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-600);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .variant-f .services-tabs-tablist button:hover {
+      color: var(--charcoal-deep);
+      background: rgba(255,255,255,0.7);
+    }
+
+    .variant-f .services-tabs-tablist button[aria-selected="true"] {
+      background: var(--charcoal-deep);
+      color: var(--yellow-core);
+    }
+
+    .variant-f .services-tabs-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.55fr);
+      gap: 28px;
+      align-items: stretch;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-card);
+      padding: 32px;
+    }
+
+    .variant-f .services-tabs-read .service-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+      color: var(--yellow-core);
+    }
+
+    .variant-f .services-tabs-read h3 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.8vw, 34px);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: var(--charcoal-deep);
+      margin-bottom: 16px;
+    }
+
+    .variant-f .services-tabs-read p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-600);
+      margin-bottom: 16px;
+    }
+
+    .variant-f .services-tabs-pull {
+      font-family: var(--font-accent);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text-900);
+      line-height: 1.45;
+      margin-bottom: 24px;
+      padding-left: 16px;
+      border-left: 3px solid var(--yellow-core);
+    }
+
+    /* Photo only — no type on the image (readability) */
+    .variant-f .services-tabs-visual {
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      background: var(--charcoal-mid);
+    }
+
+    .variant-f .services-tabs-visual-photo {
+      flex: 1;
+      min-height: 160px;
+      background:
+        linear-gradient(180deg, rgba(18,17,16,0.25) 0%, rgba(18,17,16,0.65) 100%),
+        url("images/hero-armour-stone-retaining-walls.png") center/cover no-repeat;
+    }
+
+    .variant-f .services-tabs-visual-caption {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--charcoal-deep);
+      border-top: 3px solid var(--yellow-core);
+    }
+
+    .variant-f .services-tabs-visual-num {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--yellow-core);
+      letter-spacing: 0.06em;
+      line-height: 1;
+    }
+
+    .variant-f .services-tabs-visual-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-align: right;
+    }
+
+    @media (max-width: 1024px) {
+      .variant-d .services-why-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .variant-f .services-tabs-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .variant-d .services-why-inner,
+      .variant-e .services-timeline-inner,
+      .variant-f .services-tabs-inner {
+        padding: 0 20px;
+      }
+
+      .variant-g .variant-g-inner,
+      .variant-h .variant-h-inner,
+      .variant-i .variant-i-light-inner,
+      .variant-i .variant-i-dark-inner {
+        padding: 0 20px;
+      }
+    }
+
+    /* ── Option G: Light theme / 3-image mosaic + light mini-cards ── */
+    .variant-g .variant-g-light {
+      background: var(--gray-100);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .variant-g .variant-g-light::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--charcoal-deep);
+    }
+
+    .variant-g .variant-g-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant-g .variant-g-inner > .services__header {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .variant-g .variant-g-mosaic {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      min-height: clamp(280px, 36vw, 420px);
+      margin-bottom: 40px;
+    }
+
+    .variant-g .variant-g-mosaic__hero {
+      grid-row: 1 / -1;
+      background-size: cover;
+      background-color: var(--charcoal-mid);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-editorial);
+    }
+
+    .variant-g .variant-g-mosaic__a,
+    .variant-g .variant-g-mosaic__b {
+      background-size: cover;
+      background-color: var(--charcoal-mid);
+      border: 1px solid var(--gray-200);
+      min-height: 120px;
+    }
+
+    .variant-g .variant-g-mosaic__a {
+      border-top: 3px solid var(--yellow-core);
+    }
+
+    .variant-g .variant-g-mosaic__b {
+      border-left: 3px solid var(--yellow-core);
+    }
+
+    .variant-g .variant-g-serif {
+      font-family: var(--font-accent);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text-600);
+      line-height: 1.5;
+      margin-bottom: 28px;
+      max-width: 52ch;
+    }
+
+    .variant-g .variant-g-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .variant-g .variant-g-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .variant-g .variant-g-mini:hover {
+      border-color: var(--yellow-core);
+      box-shadow: var(--shadow-card);
+    }
+
+    .variant-g .variant-g-mini .service-card__icon {
+      width: 36px;
+      height: 36px;
+      color: var(--yellow-core);
+    }
+
+    .variant-g .variant-g-mini-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.15;
+      color: var(--charcoal-deep);
+    }
+
+    .variant-g .variant-g-mini-desc {
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text-600);
+      flex: 1;
+    }
+
+    .variant-g .variant-g-mini-cta {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal-deep);
+    }
+
+    /* ── Option H: Dark theme / 4-image collage + light inset panel ── */
+    .variant-h .variant-h-dark {
+      background: var(--charcoal-deep);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .variant-h .variant-h-dark::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          90deg, transparent, transparent 79px,
+          rgba(255,255,255,0.012) 79px, rgba(255,255,255,0.012) 80px
+        );
+      pointer-events: none;
+    }
+
+    .variant-h .variant-h-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant-h .variant-h-collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      min-height: 0;
+      align-self: stretch;
+    }
+
+    .variant-h .variant-h-cell {
+      background-size: cover;
+      background-color: #2a2826;
+      min-height: 0;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 0 0 1px rgba(248,190,18,0.2);
+    }
+
+    .variant-h .variant-h-cell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(18,17,16,0.65) 100%);
+      pointer-events: none;
+    }
+
+    .variant-h .variant-h-panel {
+      background: var(--off-white);
+      border-top: 4px solid var(--yellow-core);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-elevate);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-self: stretch;
+      min-height: 0;
+    }
+
+    .variant-h .variant-h-panel .services__heading {
+      margin-bottom: 8px;
+    }
+
+    .variant-h .variant-h-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 20px;
+      flex: 1;
+    }
+
+    .variant-h a.variant-h-row {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      background: var(--white);
+      border-left: 3px solid transparent;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .variant-h a.variant-h-row:hover {
+      background: var(--yellow-tint);
+      border-color: var(--yellow-core);
+    }
+
+    .variant-h .variant-h-row-num {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--yellow-core);
+    }
+
+    .variant-h .variant-h-row-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--charcoal-deep);
+    }
+
+    .variant-h .variant-h-row-arrow {
+      color: var(--text-400);
+      font-size: 18px;
+    }
+
+    /* ── Option I: Dual band / light stripe + dark stripe, 2 images each ── */
+    .variant-i .variant-i-stack {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .variant-i .variant-i-light {
+      background: var(--white);
+      padding: var(--section-v) 0;
+      border-bottom: 1px solid var(--gray-200);
+      border-top: 4px solid var(--yellow-core);
+    }
+
+    .variant-i .variant-i-light-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto minmax(280px, 1fr);
+      gap: 28px 40px;
+      align-items: stretch;
+    }
+
+    .variant-i .variant-i-light-hero {
+      grid-column: 1 / -1;
+    }
+
+    .variant-i .variant-i-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      min-height: 260px;
+      height: 100%;
+      align-self: stretch;
+    }
+
+    .variant-i .variant-i-shot {
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-color: var(--gray-200);
+      border: 1px solid var(--gray-200);
+    }
+
+    .variant-i .variant-i-shot--accent {
+      border-top: 3px solid var(--charcoal-deep);
+    }
+
+    .variant-i .variant-i-shot--soft {
+      border-bottom: 3px solid var(--yellow-core);
+    }
+
+    .variant-i .variant-i-mini-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .variant-i .variant-i-rail {
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-top: 4px solid var(--charcoal-deep);
+      box-shadow: var(--shadow-card);
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-self: stretch;
+      min-height: 260px;
+    }
+
+    .variant-i .variant-i-rail-heading {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--charcoal-deep);
+      line-height: 1.15;
+    }
+
+    .variant-i .variant-i-rail-serif {
+      font-family: var(--font-accent);
+      font-size: 15px;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-600);
+      margin-top: -8px;
+    }
+
+    .variant-i a.variant-i-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .variant-i a.variant-i-pill:hover {
+      border-color: var(--yellow-core);
+      background: var(--yellow-tint);
+    }
+
+    .variant-i .variant-i-pill-num {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--yellow-core);
+    }
+
+    .variant-i .variant-i-pill-text {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--charcoal-deep);
+    }
+
+    .variant-i .variant-i-dark-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+
+    .variant-i .variant-i-dark-title span {
+      color: var(--yellow-core);
+    }
+
+    .variant-i .variant-i-dark-lede {
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.58);
+      margin-bottom: 8px;
+      max-width: 48ch;
+    }
+
+    .variant-i .variant-i-dark {
+      background: var(--charcoal-deep);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .variant-i .variant-i-dark::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.5;
+      background:
+        repeating-linear-gradient(
+          0deg, transparent, transparent 79px,
+          rgba(255,255,255,0.012) 79px, rgba(255,255,255,0.012) 80px
+        );
+      pointer-events: none;
+    }
+
+    .variant-i .variant-i-dark-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto minmax(260px, 1fr);
+      gap: 28px 40px;
+      align-items: stretch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant-i .variant-i-dark-hero {
+      grid-column: 1 / -1;
+    }
+
+    .variant-i .variant-i-dark-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+      align-self: stretch;
+    }
+
+    .variant-i .variant-i-dark-board {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-left: 4px solid var(--yellow-core);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-self: stretch;
+      min-height: 260px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+
+    .variant-i .variant-i-dark-board-lede {
+      font-family: var(--font-accent);
+      font-size: 15px;
+      font-style: italic;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.45;
+      margin-bottom: 8px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .variant-i .variant-i-dark .variant-i-duo {
+      margin-top: 0;
+      flex: 1;
+      min-height: 200px;
+      height: auto;
+    }
+
+    .variant-i .variant-i-dark .variant-i-shot {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .variant-i .variant-i-dark .variant-i-shot--accent {
+      border-top-color: var(--yellow-core);
+    }
+
+    .variant-i .variant-i-dark .variant-i-shot--soft {
+      border-bottom-color: var(--yellow-core);
+      border-top: none;
+    }
+
+    .variant-i .variant-i-dark-reasons {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 0;
+      flex: 1;
+    }
+
+    .variant-i .variant-i-dark a.variant-i-reason {
+      display: flex;
+      gap: 14px;
+      padding: 18px 16px;
+      background: rgba(255,255,255,0.06);
+      border-left: 3px solid transparent;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .variant-i .variant-i-dark a.variant-i-reason:hover {
+      background: var(--yellow-tint);
+      border-color: var(--yellow-core);
+    }
+
+    .variant-i .variant-i-dark .variant-i-reason-num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--yellow-core);
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+
+    .variant-i .variant-i-dark .variant-i-reason-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 1024px) {
+      .variant-g .variant-g-mosaic {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        min-height: 0;
+      }
+
+      .variant-g .variant-g-mosaic__hero {
+        grid-row: auto;
+        min-height: 220px;
+      }
+
+      .variant-g .variant-g-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .variant-h .variant-h-inner {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+
+      .variant-h .variant-h-collage {
+        min-height: 280px;
+      }
+
+      .variant-h .variant-h-cell {
+        min-height: 120px;
+      }
+
+      .variant-i .variant-i-light-inner,
+      .variant-i .variant-i-dark-inner {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+
+      .variant-i .variant-i-rail,
+      .variant-i .variant-i-dark-board {
+        min-height: 0;
+      }
+
+      .variant-k .variant-k-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .variant-k .variant-k-sticky {
+        position: relative;
+        top: auto;
+        max-height: none;
+      }
+
+      .variant-k .variant-k-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .variant-k .variant-k-grid > * {
+        flex: 0 0 min(88vw, 340px);
+        scroll-snap-align: start;
+      }
+    }
+
+    /* ── Option J: Bento grid + dark field + glassmorphism + lift hover + neon-accent CTAs ── */
+    .variant-j .variant-j-field {
+      background: linear-gradient(165deg, #0d0c0b 0%, var(--charcoal-deep) 45%, #151311 100%);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .variant-j .variant-j-field::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(248,190,18,0.07) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .variant-j .variant-j-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant-j .variant-j-inner .services__header .eyebrow {
+      color: var(--yellow-core);
+    }
+
+    .variant-j .variant-j-inner .services__header .eyebrow::before {
+      background: var(--yellow-core);
+    }
+
+    .variant-j .variant-j-inner .services__heading {
+      color: var(--white);
+    }
+
+    .variant-j .variant-j-inner .services__intro {
+      color: rgba(255,255,255,0.62);
+    }
+
+    .variant-j .variant-j-bento {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(130px, auto));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .variant-j .variant-j-bento-cell {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+      transition:
+        transform 0.35s var(--ease-expo),
+        box-shadow 0.35s,
+        border-color 0.25s,
+        background 0.25s;
+    }
+
+    .variant-j .variant-j-bento-cell:hover {
+      transform: translateY(-6px);
+      border-color: rgba(248,190,18,0.55);
+      box-shadow:
+        0 16px 48px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(248,190,18,0.25),
+        0 0 28px rgba(248,190,18,0.12);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .variant-j .variant-j-bento-cell:focus-visible {
+      outline: 2px solid var(--yellow-core);
+      outline-offset: 3px;
+    }
+
+    .variant-j .variant-j-bento-cell--1 {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+      min-height: 280px;
+    }
+
+    .variant-j .variant-j-bento-cell--2 {
+      grid-column: 3 / 5;
+      grid-row: 1 / 2;
+    }
+
+    .variant-j .variant-j-bento-cell--3 {
+      grid-column: 3 / 5;
+      grid-row: 2 / 3;
+    }
+
+    .variant-j .variant-j-bento-cell--4 {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
+
+    .variant-j .variant-j-bento-cell--5 {
+      grid-column: 2 / 4;
+      grid-row: 3 / 4;
+    }
+
+    .variant-j .variant-j-bento-cell--6 {
+      grid-column: 4 / 5;
+      grid-row: 3 / 4;
+    }
+
+    .variant-j .variant-j-bento-num {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .variant-j .variant-j-bento-cell--1 .variant-j-bento-num {
+      font-size: 56px;
+    }
+
+    .variant-j .variant-j-bento-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .variant-j .variant-j-bento-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: auto;
+    }
+
+    .variant-j .variant-j-bento-cta {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border: 2px solid var(--yellow-core);
+      color: var(--yellow-core);
+      box-shadow: 0 0 20px rgba(248,190,18,0.15);
+      width: max-content;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+
+    .variant-j .variant-j-bento-cell:hover .variant-j-bento-cta {
+      background: var(--yellow-core);
+      color: var(--charcoal-deep);
+      box-shadow: 0 0 32px rgba(248,190,18,0.35);
+    }
+
+    @media (max-width: 900px) {
+      .variant-j .variant-j-bento {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+      }
+
+      .variant-j .variant-j-bento-cell--1 {
+        grid-column: 1 / -1;
+        grid-row: auto;
+        min-height: 200px;
+      }
+
+      .variant-j .variant-j-bento-cell--2,
+      .variant-j .variant-j-bento-cell--3,
+      .variant-j .variant-j-bento-cell--4,
+      .variant-j .variant-j-bento-cell--5,
+      .variant-j .variant-j-bento-cell--6 {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+
+    /* ── Option K: Split-screen sticky visual + 3-col grid desktop / horizontal scroll mobile ── */
+    .variant-k .variant-k-field {
+      background: var(--off-white);
+      padding: var(--section-v) 0;
+      border-top: 4px solid var(--charcoal-deep);
+    }
+
+    .variant-k .variant-k-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: minmax(260px, 0.38fr) minmax(0, 1fr);
+      gap: 36px;
+      align-items: start;
+    }
+
+    .variant-k .variant-k-sticky {
+      position: sticky;
+      top: calc(var(--gl-header-height, 100px) + 16px);
+      align-self: start;
+    }
+
+    .variant-k .variant-k-photo {
+      aspect-ratio: 4 / 5;
+      background:
+        linear-gradient(180deg, rgba(18,17,16,0.2) 0%, rgba(18,17,16,0.55) 100%),
+        url("images/hero-armour-stone-retaining-walls.png") center/cover no-repeat;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-card);
+    }
+
+    .variant-k .variant-k-caption {
+      margin-top: 14px;
+      font-family: var(--font-accent);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-600);
+      line-height: 1.45;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-left: 3px solid var(--yellow-core);
+    }
+
+    .variant-k .variant-k-scroll {
+      min-width: 0;
+    }
+
+    .variant-k .variant-k-scroll > .services__header {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .variant-k .variant-k-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2px;
+    }
+
+    .variant-k .variant-k-grid .service-card {
+      min-height: 260px;
+    }
+
+    /* ── Option L: Z-pattern rows + reveal on scroll + single-open FAQ ── */
+    .variant-l .variant-l-field {
+      background: var(--white);
+      padding: var(--section-v) 0;
+    }
+
+    .variant-l .variant-l-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .variant-l .variant-l-z {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 40px;
+    }
+
+    .variant-l .variant-l-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .variant-l .variant-l-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .variant-l .variant-l-row--reverse .variant-l-media {
+      order: 2;
+    }
+
+    .variant-l .variant-l-row--reverse .variant-l-copy {
+      order: 1;
+    }
+
+    .variant-l .variant-l-media {
+      aspect-ratio: 16 / 10;
+      background-color: var(--gray-200);
+      background-size: cover;
+      background-position: center;
+      border: 1px solid var(--gray-200);
+    }
+
+    .variant-l .variant-l-copy {
+      padding: 8px 0;
+    }
+
+    .variant-l .variant-l-copy-num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: rgba(30,28,26,0.12);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .variant-l .variant-l-copy h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--charcoal-deep);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .variant-l .variant-l-copy p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-600);
+      margin-bottom: 16px;
+    }
+
+    .variant-l .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s var(--ease-expo), transform 0.65s var(--ease-expo);
+    }
+
+    .variant-l .reveal-on-scroll.reveal-on-scroll--text {
+      transform: translateX(36px);
+    }
+
+    .variant-l .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .variant-l .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    .variant-l .variant-l-faq {
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 4px solid var(--charcoal-deep);
+    }
+
+    .variant-l .variant-l-faq h3 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: var(--charcoal-deep);
+    }
+
+    .variant-l .variant-l-faq details {
+      border: 1px solid var(--gray-200);
+      margin-bottom: 8px;
+      background: var(--gray-100);
+      overflow: hidden;
+    }
+
+    .variant-l .variant-l-faq summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--charcoal-deep);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .variant-l .variant-l-faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .variant-l .variant-l-faq summary::after {
+      content: "+";
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--yellow-core);
+      flex-shrink: 0;
+    }
+
+    .variant-l .variant-l-faq details[open] summary::after {
+      content: "−";
+    }
+
+    .variant-l .variant-l-faq .variant-l-faq-body {
+      padding: 0 18px 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-600);
+      border-top: 1px solid var(--gray-200);
+      animation: variant-l-faq-open 0.35s var(--ease-expo);
+    }
+
+    @keyframes variant-l-faq-open {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .variant-l .variant-l-row {
+        grid-template-columns: 1fr;
+      }
+
+      .variant-l .variant-l-row--reverse .variant-l-media,
+      .variant-l .variant-l-row--reverse .variant-l-copy {
+        order: unset;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .variant-h .variant-h-inner {
+        min-height: 480px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="variants-shell">
+    <div class="variants-intro-wrap">
+      <header class="variants-intro">
+        <div class="eyebrow">Services Section Preview</div>
+        <h1>Twelve Layout Variations</h1>
+        <p class="variants-intro__lede">A–I: earlier explorations. <strong style="color:var(--yellow-core);font-weight:800;">J</strong> = bento + glass + lift + dark neon CTAs · <strong style="color:var(--yellow-core);font-weight:800;">K</strong> = sticky split + 3-col desktop / scroll carousel mobile · <strong style="color:var(--yellow-core);font-weight:800;">L</strong> = Z-pattern + reveal on scroll + single-open FAQ.</p>
+        <p class="variants-intro__note">Same hero photography is cropped per tile for preview; swap paths when you have a fuller media set. Typography: Oswald / Plus Jakarta / Source Serif via <code style="font-size:12px;background:rgba(255,255,255,0.08);padding:2px 6px;">glc-base.css</code>.</p>
+        <p class="variants-intro__note" style="margin-top:14px;padding:12px 14px;background:rgba(0,0,0,0.25);border-left:4px solid var(--yellow-core);font-style:normal;">Preview in browser (not the editor): run <code style="font-size:12px;background:rgba(255,255,255,0.1);padding:2px 6px;">npx serve . -p 3456</code> from the project root, then open <a href="http://localhost:3456/services-variants-preview.html" style="color:var(--yellow-core);font-weight:800;">http://localhost:3456/services-variants-preview.html</a> — see <code style="font-size:12px;background:rgba(255,255,255,0.08);padding:2px 6px;">CLAUDE.md</code> → Local static previews.</p>
+      </header>
+    </div>
+
+    <section class="variant-block variant-a">
+      <div class="variant-head">
+        <strong>Option A</strong>
+        <span>Baseline / 3×2 grid (homepage)</span>
+      </div>
+      <div id="variant-a"></div>
+    </section>
+
+    <section class="variant-block variant-b">
+      <div class="variant-head">
+        <strong>Option B</strong>
+        <span>Balanced split / editorial + 2×6 card grid</span>
+      </div>
+      <div id="variant-b"></div>
+    </section>
+
+    <section class="variant-block variant-c">
+      <div class="variant-head">
+        <strong>Option C</strong>
+        <span>Sticky rail + layered accordion (card-dark summaries)</span>
+      </div>
+      <div id="variant-c"></div>
+    </section>
+
+    <section class="variant-block variant-d">
+      <div class="variant-head">
+        <strong>Option D</strong>
+        <span>Why-DNA flagship / mesh field + reason-link column + clipped photo + chip</span>
+      </div>
+      <div id="variant-d"></div>
+    </section>
+
+    <section class="variant-block variant-e">
+      <div class="variant-head">
+        <strong>Option E</strong>
+        <span>Vertical timeline / rail + gold nodes + elevated wells (not grid)</span>
+      </div>
+      <div id="variant-e"></div>
+    </section>
+
+    <section class="variant-block variant-f">
+      <div class="variant-head">
+        <strong>Option F</strong>
+        <span>Tabbed surface / one active service panel + split read + visual</span>
+      </div>
+      <div id="variant-f"></div>
+    </section>
+
+    <section class="variant-block variant-g">
+      <div class="variant-head">
+        <strong>Option G</strong>
+        <span>Light theme / 3-image mosaic + light mini-cards</span>
+      </div>
+      <div id="variant-g"></div>
+    </section>
+
+    <section class="variant-block variant-h">
+      <div class="variant-head">
+        <strong>Option H</strong>
+        <span>Dark theme / 4-image collage + light inset service list</span>
+      </div>
+      <div id="variant-h"></div>
+    </section>
+
+    <section class="variant-block variant-i">
+      <div class="variant-head">
+        <strong>Option I</strong>
+        <span>Dual band / light (2 images + lines 01–03) + dark (2 images + lines 04–06)</span>
+      </div>
+      <div id="variant-i"></div>
+    </section>
+
+    <section class="variant-block variant-j">
+      <div class="variant-head">
+        <strong>Option J</strong>
+        <span>Bento grid / glassmorphism / dark high-contrast / lift + neon-outline CTAs</span>
+      </div>
+      <div id="variant-j"></div>
+    </section>
+
+    <section class="variant-block variant-k">
+      <div class="variant-head">
+        <strong>Option K</strong>
+        <span>Split + sticky image rail / desktop 3-col grid · mobile horizontal scroll</span>
+      </div>
+      <div id="variant-k"></div>
+    </section>
+
+    <section class="variant-block variant-l">
+      <div class="variant-head">
+        <strong>Option L</strong>
+        <span>Z-pattern rows / reveal on scroll / single-open FAQ accordion</span>
+      </div>
+      <div id="variant-l"></div>
+    </section>
+  </main>
+
+  <script>
+    const services = [
+      {
+        num: "01",
+        titleHtml: "Excavation &<br>Site Preparation",
+        desc: "Mass grading, cut-and-fill operations, topsoil stripping, and site clearing for commercial development projects of all scales.",
+        href: "services/excavation-site-prep.html",
+        icon: `<svg class="service-card__icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 30L20 8l15 22H5z"/><rect x="14" y="20" width="12" height="10"/></svg>`
+      },
+      {
+        num: "02",
+        titleHtml: "Foundations &<br>Civil Infrastructure",
+        desc: "Footing trenches, frost wall excavation, shoring, and civil infrastructure installation for commercial and industrial construction.",
+        href: "services/foundations-civil.html",
+        icon: `<svg class="service-card__icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="6" y="22" width="28" height="12"/><rect x="10" y="14" width="20" height="10"/><line x1="18" y1="6" x2="18" y2="14"/><line x1="22" y1="6" x2="22" y2="14"/></svg>`
+      },
+      {
+        num: "03",
+        titleHtml: "Septic &<br>Utility Systems",
+        desc: "Septic system installation, utility trench excavation, and underground service corridors compliant with Ontario Building Code.",
+        href: "services/septic-utilities.html",
+        icon: `<svg class="service-card__icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="20" cy="20" r="10"/><path d="M20 10V4M20 36v-6M10 20H4M36 20h-6"/></svg>`
+      },
+      {
+        num: "04",
+        titleHtml: "Drainage &<br>Hardscaping",
+        desc: "Grading for surface drainage, storm pipe installation, catch basins, armor stone, interlock pavers, and retaining structures.",
+        href: "services/drainage-hardscaping.html",
+        icon: `<svg class="service-card__icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 28 Q12 18 20 22 Q28 26 36 16" stroke-linecap="square"/><path d="M4 34 Q12 24 20 28 Q28 32 36 22" stroke-dasharray="3 3"/><rect x="4" y="30" width="32" height="6"/></svg>`
+      },
+      {
+        num: "05",
+        titleHtml: "Hauling, Site Clearing<br>&amp; Logistics",
+        desc: "Material hauling, demolition debris removal, tree clearing, rock breaking, and full site logistics management.",
+        href: "services/hauling-clearing.html",
+        icon: `<svg class="service-card__icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="22" width="32" height="12"/><path d="M10 22V18l6-8h8l6 8v4"/><rect x="14" y="26" width="12" height="8"/></svg>`
+      },
+      {
+        num: "06",
+        titleHtml: "Snow Removal<br>Services",
+        desc: "Commercial snow plowing, salting, and site management contracts for parking lots, roadways, and commercial properties across the region.",
+        href: "services/snow-removal.html",
+        icon: `<svg class="service-card__icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 16 C8 8 16 4 24 6 S36 14 36 20" stroke-linecap="square"/><path d="M10 30 L30 30" stroke-width="3" stroke-linecap="square"/><path d="M6 24 L34 24" stroke-dasharray="4 4"/></svg>`
+      }
+    ];
+
+    const watermarkSvg = `
+      <svg class="services-watermark" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="20" y="20" width="360" height="360" stroke="currentColor" stroke-width="2" fill="none"/>
+        <rect x="60" y="60" width="280" height="280" stroke="currentColor" stroke-width="1" fill="none"/>
+        <line x1="200" y1="20" x2="200" y2="380" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="200" x2="380" y2="200" stroke="currentColor" stroke-width="1"/>
+        <circle cx="200" cy="200" r="80" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <circle cx="200" cy="200" r="120" stroke="currentColor" stroke-width="0.5" fill="none" stroke-dasharray="4 8"/>
+      </svg>
+    `;
+
+    function sectionShell(innerHtml) {
+      return `
+        <div class="services-offwhite-section">
+          ${watermarkSvg}
+          <div class="services-section-inner">
+            ${innerHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    const headerMarkup = `
+      <div class="services__header">
+        <div>
+          <div class="eyebrow eyebrow--dark" style="margin-bottom:16px;">What We Do</div>
+          <h2 class="services__heading">Six Core<br><span>Service Lines</span></h2>
+        </div>
+        <p class="services__intro">From initial site clearing to final drainage, Ground Level Contracting delivers end-to-end excavation and civil infrastructure services for commercial builds across Barrie, Midland, Orillia, and Simcoe County.</p>
+      </div>
+    `;
+
+    function serviceCardMarkup(service) {
+      return `
+        <a class="service-card" role="listitem" href="${service.href}">
+          <div class="service-card__num" aria-hidden="true">${service.num}</div>
+          ${service.icon}
+          <h3 class="service-card__title">${service.titleHtml}</h3>
+          <p class="service-card__desc">${service.desc}</p>
+          <span class="service-card__link">
+            Learn More
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+      `;
+    }
+
+    function titlePlain(service) {
+      return service.titleHtml
+        .replace(/<br\s*\/?>/gi, " ")
+        .replace(/&amp;/g, "&")
+        .trim();
+    }
+
+    function shortDesc(text, max) {
+      if (text.length <= max) return text;
+      const cut = text.slice(0, max);
+      const sp = cut.lastIndexOf(" ");
+      return (sp > 48 ? cut.slice(0, sp) : cut) + "…";
+    }
+
+    document.querySelector("#variant-a").innerHTML = sectionShell(`
+      ${headerMarkup}
+      <div class="services__grid-wrap">
+        <div class="services__grid" role="list">
+          ${services.map((item) => serviceCardMarkup(item)).join("")}
+        </div>
+      </div>
+    `);
+
+    document.querySelector("#variant-b").innerHTML = sectionShell(`
+      ${headerMarkup}
+      <div class="services-balanced-split">
+        <div class="services-editorial">
+          <div class="services-editorial__photo" aria-hidden="true"></div>
+          <div class="services-editorial__body">
+            <div class="eyebrow">Field-Tested Delivery</div>
+            <p class="services-editorial__serif">One accountable crew line from clearing through civil closeout—structured for PMs who cannot afford drift.</p>
+            <div class="services-editorial__meta">Barrie · Midland · Orillia · Simcoe County</div>
+          </div>
+        </div>
+        <div class="services__grid-wrap">
+          <div class="services__grid" role="list">
+            ${services.map((item) => serviceCardMarkup(item)).join("")}
+          </div>
+        </div>
+      </div>
+    `);
+
+    document.querySelector("#variant-c").innerHTML = sectionShell(`
+      ${headerMarkup}
+      <div class="services-accordion-split">
+        <aside class="services-accordion-rail" aria-label="Section context">
+          <div class="services-accordion-rail__visual" aria-hidden="true"></div>
+          <div class="services-accordion-rail__body">
+            <div class="eyebrow eyebrow--dark">Browse by Line</div>
+            <h3>Six Disciplines,<br><span style="color:var(--yellow-core);">One Mobilization</span></h3>
+            <p>Progressive disclosure keeps density manageable on long pages while preserving full SEO text in-panel.</p>
+            <div class="editorial-tags">
+              <span>Commercial</span>
+              <span>Specs &amp; OBC</span>
+              <span>Dispatch-Ready</span>
+            </div>
+            <a href="tel:+17056194902" class="btn-ghost-dark" style="width:max-content;">705-619-4902</a>
+          </div>
+        </aside>
+        <div class="services-acc-stack">
+          ${services.map((item, idx) => `
+            <details class="services-acc-item" ${idx === 0 ? "open" : ""}>
+              <summary>
+                <span class="acc-num">${item.num}</span>
+                <span class="acc-title">${item.titleHtml.replace(/<br\s*\/?>/gi, " ")}</span>
+                <span class="acc-hint">${idx === 0 ? "Open" : "Expand"}</span>
+              </summary>
+              <div class="acc-panel">
+                <p>${item.desc}</p>
+                <p class="acc-serif">“We keep the site legible: staging, scope, and sign-off—no mystery tails on commercial work.”</p>
+                <a class="btn-ghost-dark" href="${item.href}" style="width:max-content;">Service detail</a>
+              </div>
+            </details>
+          `).join("")}
+        </div>
+      </div>
+    `);
+
+    document.querySelector("#variant-d").innerHTML = `
+      <div class="services-why-flagship" aria-labelledby="services-heading-d">
+        <div class="services-why-inner">
+          <div class="services-why-copy">
+            <div class="eyebrow" style="margin-bottom:20px;">What We Do</div>
+            <h2 id="services-heading-d" class="services-why-heading">Six Core <em>Service Lines</em></h2>
+            <p class="services-why-body">From initial site clearing to final drainage, Ground Level Contracting delivers end-to-end excavation and civil infrastructure for commercial builds across Barrie, Midland, Orillia, and Simcoe County.</p>
+            <div class="services-why-reasons">
+              ${services.map((s) => `
+                <a class="services-why-reason" href="${s.href}">
+                  <span class="services-why-reason-num">${s.num}</span>
+                  <div>
+                    <div class="services-why-reason-title">${titlePlain(s)}</div>
+                    <div class="services-why-reason-text">${shortDesc(s.desc, 118)}</div>
+                  </div>
+                </a>
+              `).join("")}
+            </div>
+            <a href="tel:+17056194902" class="btn-primary">
+              705-619-4902
+              <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+          <div class="services-why-media">
+            <div class="services-why-border" aria-hidden="true"></div>
+            <div class="services-why-shell">
+              <div class="services-why-photo" role="img" aria-label="Commercial site and civil work"></div>
+            </div>
+            <div class="services-why-chip">
+              <strong>Simcoe County</strong>
+              <span>Commercial scope</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.querySelector("#variant-e").innerHTML = `
+      <div class="services-timeline-field">
+        <div class="services-timeline-inner">
+          <header class="services-timeline-header">
+            <div class="eyebrow eyebrow--dark">What We Do</div>
+            <h2 class="services-timeline-heading">Six Core<br><span>Service Lines</span></h2>
+          </header>
+          <div class="services-timeline-track" role="list">
+            ${services.map((s) => `
+              <article class="services-timeline-item" role="listitem">
+                <span class="services-timeline-node" aria-hidden="true"></span>
+                <div class="services-timeline-well">
+                  <div class="services-timeline-well-head">
+                    <span class="services-timeline-num">${s.num}</span>
+                    <h3 class="services-timeline-title">${titlePlain(s)}</h3>
+                  </div>
+                  <p class="services-timeline-desc">${s.desc}</p>
+                  <a href="${s.href}">View service →</a>
+                </div>
+              </article>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+
+    (function initVariantF() {
+      const mount = document.querySelector("#variant-f");
+      const arrowSvg = `<svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+
+      function panelHtml(idx) {
+        const s = services[idx];
+        return `
+          <div class="services-tabs-read">
+            ${s.icon}
+            <h3>${titlePlain(s)}</h3>
+            <p>${s.desc}</p>
+            <p class="services-tabs-pull">Spec-driven crews, clear handoffs, and documentation that stays audit-ready—built for PM-led commercial sites.</p>
+            <a class="btn-primary" href="${s.href}">
+              Learn More
+              ${arrowSvg}
+            </a>
+          </div>
+          <div class="services-tabs-visual">
+            <div class="services-tabs-visual-photo" role="img" aria-label="Site photography"></div>
+            <div class="services-tabs-visual-caption">
+              <span class="services-tabs-visual-num">${s.num}</span>
+              <span class="services-tabs-visual-label">Active line</span>
+            </div>
+          </div>
+        `;
+      }
+
+      mount.innerHTML = `
+        <div class="services-tabs-field">
+          <div class="services-tabs-inner">
+            <header class="services-tabs-header">
+              <div class="eyebrow eyebrow--dark" style="margin-bottom:16px;">What We Do</div>
+              <h2 class="services__heading">Six Core<br><span>Service Lines</span></h2>
+              <p class="services__intro" style="margin-top:16px;">Select a line to preview copy and CTA—one focused read surface instead of a full grid.</p>
+            </header>
+            <div class="services-tabs-tablist" role="tablist" aria-label="Service lines"></div>
+            <div id="services-tab-panel" class="services-tabs-panel" role="tabpanel" aria-live="polite"></div>
+          </div>
+        </div>
+      `;
+
+      const tablist = mount.querySelector('[role="tablist"]');
+      const panel = mount.querySelector("#services-tab-panel");
+
+      services.forEach((s, i) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("role", "tab");
+        btn.id = "svc-tab-" + i;
+        btn.setAttribute("aria-controls", "services-tab-panel");
+        btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
+        btn.textContent = s.num;
+        btn.setAttribute("aria-label", titlePlain(s));
+        btn.addEventListener("click", () => {
+          tablist.querySelectorAll('[role="tab"]').forEach((t) => t.setAttribute("aria-selected", "false"));
+          btn.setAttribute("aria-selected", "true");
+          panel.innerHTML = panelHtml(i);
+        });
+        tablist.appendChild(btn);
+      });
+
+      panel.innerHTML = panelHtml(0);
+    })();
+
+    const previewHeroImg = "images/hero-armour-stone-retaining-walls.png";
+    const previewImgCrop = [
+      "22% 55%", "76% 42%", "48% 78%",
+      "30% 38%", "62% 58%", "84% 44%",
+      "40% 62%", "55% 35%"
+    ];
+
+    function imgStyle(index) {
+      const pos = previewImgCrop[index % previewImgCrop.length];
+      return `background-image:url(${previewHeroImg});background-position:${pos};`;
+    }
+
+    document.querySelector("#variant-g").innerHTML = `
+      <div class="variant-g-light">
+        <div class="variant-g-inner">
+          ${headerMarkup}
+          <p class="variant-g-serif">A bright field with photographic rhythm and scannable modules—mosaic tiles use different crops of the same hero asset until your library grows.</p>
+          <div class="variant-g-mosaic">
+            <div class="variant-g-mosaic__hero" role="img" aria-label="Primary site photography" style="${imgStyle(0)}"></div>
+            <div class="variant-g-mosaic__a" role="img" aria-label="Secondary site detail" style="${imgStyle(1)}"></div>
+            <div class="variant-g-mosaic__b" role="img" aria-label="Tertiary site detail" style="${imgStyle(2)}"></div>
+          </div>
+          <div class="variant-g-grid" role="list">
+            ${services.map((s) => `
+              <a class="variant-g-mini" role="listitem" href="${s.href}">
+                ${s.icon}
+                <div class="variant-g-mini-title">${titlePlain(s)}</div>
+                <p class="variant-g-mini-desc">${shortDesc(s.desc, 92)}</p>
+                <span class="variant-g-mini-cta">Learn more →</span>
+              </a>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.querySelector("#variant-h").innerHTML = `
+      <div class="variant-h-dark">
+        <div class="variant-h-inner">
+          <div class="variant-h-collage" aria-hidden="true">
+            <div class="variant-h-cell" style="${imgStyle(3)}"></div>
+            <div class="variant-h-cell" style="${imgStyle(4)}"></div>
+            <div class="variant-h-cell" style="${imgStyle(5)}"></div>
+            <div class="variant-h-cell" style="${imgStyle(6)}"></div>
+          </div>
+          <div class="variant-h-panel">
+            <div class="eyebrow eyebrow--dark" style="margin-bottom:14px;">What We Do</div>
+            <h2 class="services__heading">Six Core<br><span>Service Lines</span></h2>
+            <p class="services__intro">From initial site clearing to final drainage, Ground Level Contracting delivers end-to-end excavation and civil infrastructure services for commercial builds across Barrie, Midland, Orillia, and Simcoe County.</p>
+            <div class="variant-h-rows" role="list">
+              ${services.map((s) => `
+                <a class="variant-h-row" role="listitem" href="${s.href}">
+                  <span class="variant-h-row-num">${s.num}</span>
+                  <span class="variant-h-row-title">${titlePlain(s)}</span>
+                  <span class="variant-h-row-arrow">→</span>
+                </a>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    (function initVariantI() {
+      const first = services.slice(0, 3);
+      const second = services.slice(3, 6);
+      document.querySelector("#variant-i").innerHTML = `
+        <div class="variant-i-stack">
+          <div class="variant-i-light">
+            <div class="variant-i-light-inner">
+              <div class="variant-i-light-hero">
+                <div class="eyebrow eyebrow--dark" style="margin-bottom:16px;">What We Do</div>
+                <h2 class="services__heading">Six Core<br><span>Service Lines</span></h2>
+                <p class="services__intro">From initial site clearing to final drainage, Ground Level Contracting delivers end-to-end excavation and civil infrastructure for commercial builds.</p>
+              </div>
+              <div class="variant-i-duo">
+                <div class="variant-i-shot variant-i-shot--accent" role="img" aria-label="Site image A" style="${imgStyle(0)}"></div>
+                <div class="variant-i-shot variant-i-shot--soft" role="img" aria-label="Site image B" style="${imgStyle(2)}"></div>
+              </div>
+              <div class="variant-i-rail">
+                <div class="variant-i-rail-heading">Lines 01–03</div>
+                <p class="variant-i-rail-serif">Open with grading, structure, and utilities first—before vertical work compresses the site.</p>
+                <div class="variant-i-mini-grid" role="list">
+                  ${first.map((s) => `
+                    <a class="variant-i-pill" role="listitem" href="${s.href}">
+                      <span class="variant-i-pill-num">${s.num}</span>
+                      <span class="variant-i-pill-text">${titlePlain(s)}</span>
+                    </a>
+                  `).join("")}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-i-dark">
+            <div class="variant-i-dark-inner">
+              <div class="variant-i-dark-hero">
+                <div class="eyebrow" style="margin-bottom:14px;">Continued scope</div>
+                <h2 class="variant-i-dark-title">Depth In <span>Civil</span> Execution</h2>
+                <p class="variant-i-dark-lede">Drainage, logistics, and winter response—same crew standards on the back half of the line card.</p>
+              </div>
+              <div class="variant-i-dark-visual">
+                <div class="variant-i-duo">
+                  <div class="variant-i-shot variant-i-shot--accent" role="img" aria-label="Site image C" style="${imgStyle(4)}"></div>
+                  <div class="variant-i-shot variant-i-shot--soft" role="img" aria-label="Site image D" style="${imgStyle(7)}"></div>
+                </div>
+              </div>
+              <div class="variant-i-dark-board">
+                <p class="variant-i-dark-board-lede">Surface water, haul corridors, and contracted snow—kept visible so PMs see the full envelope.</p>
+                <div class="variant-i-dark-reasons" role="list">
+                  ${second.map((s) => `
+                    <a class="variant-i-reason" role="listitem" href="${s.href}">
+                      <span class="variant-i-reason-num">${s.num}</span>
+                      <div>
+                        <div class="variant-i-reason-title">${titlePlain(s)}</div>
+                        <div style="margin-top:5px;font-size:12px;line-height:1.55;color:rgba(255,255,255,0.5);">${shortDesc(s.desc, 104)}</div>
+                      </div>
+                    </a>
+                  `).join("")}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    })();
+
+    document.querySelector("#variant-j").innerHTML = `
+      <div class="variant-j-field">
+        <div class="variant-j-inner">
+          <div class="services__header">
+            <div>
+              <div class="eyebrow" style="margin-bottom:16px;">What We Do</div>
+              <h2 class="services__heading">Six Core<br><span>Service Lines</span></h2>
+            </div>
+            <p class="services__intro">From initial site clearing to final drainage, Ground Level Contracting delivers end-to-end excavation and civil infrastructure services for commercial builds across Barrie, Midland, Orillia, and Simcoe County.</p>
+          </div>
+          <div class="variant-j-bento" role="list">
+            ${services.map((s, i) => `
+              <a class="variant-j-bento-cell variant-j-bento-cell--${i + 1}" role="listitem" href="${s.href}">
+                <span class="variant-j-bento-num" aria-hidden="true">${s.num}</span>
+                <div class="variant-j-bento-title">${titlePlain(s)}</div>
+                <p class="variant-j-bento-desc">${shortDesc(s.desc, 130)}</p>
+                <span class="variant-j-bento-cta">Learn more</span>
+              </a>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.querySelector("#variant-k").innerHTML = `
+      <div class="variant-k-field">
+        <div class="variant-k-inner">
+          <aside class="variant-k-sticky" aria-label="Visual anchor">
+            <div class="variant-k-photo" role="img" aria-label="Commercial site and civil work"></div>
+            <p class="variant-k-caption">Sticky reference—on wide screens this column stays in view while you scan the grid; on small screens it stacks above a horizontal carousel of service cards.</p>
+          </aside>
+          <div class="variant-k-scroll">
+            ${headerMarkup}
+            <div class="variant-k-grid" role="list">
+              ${services.map((item) => serviceCardMarkup(item)).join("")}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.querySelector("#variant-l").innerHTML = `
+      <div class="variant-l-field">
+        <div class="variant-l-inner">
+          ${headerMarkup}
+          <div class="variant-l-z">
+            ${services.map((s, i) => `
+              <div class="variant-l-row ${i % 2 === 1 ? "variant-l-row--reverse" : ""}">
+                <div class="variant-l-media reveal-on-scroll" style="${imgStyle(i)}" role="img" aria-label=""></div>
+                <div class="variant-l-copy reveal-on-scroll reveal-on-scroll--text">
+                  <div class="variant-l-copy-num" aria-hidden="true">${s.num}</div>
+                  <h3>${titlePlain(s)}</h3>
+                  <p>${s.desc}</p>
+                  <a class="btn-ghost-dark" href="${s.href}">Service detail</a>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+          <div class="variant-l-faq">
+            <h3>Quick answers</h3>
+            <details>
+              <summary>Are you insured for commercial sites across Simcoe County?</summary>
+              <div class="variant-l-faq-body">Yes—we maintain current liability coverage and can provide certificates for your project file during onboarding.</div>
+            </details>
+            <details>
+              <summary>Can one crew handle excavation and drainage on the same timeline?</summary>
+              <div class="variant-l-faq-body">That is the intended model—fewer handoffs, coordinated staging, and a single point of accountability for civil scope.</div>
+            </details>
+            <details>
+              <summary>How fast can you mobilize for urgent commercial work?</summary>
+              <div class="variant-l-faq-body">Dispatch depends on scope and equipment availability; call with your site address and we will confirm realistic mobilization windows.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    `;
+
+    (function initVariantL() {
+      const root = document.getElementById("variant-l");
+      if (!root) return;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((en) => {
+              if (en.isIntersecting) {
+                en.target.classList.add("is-revealed");
+                io.unobserve(en.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -10% 0px" }
+        );
+        root.querySelectorAll(".reveal-on-scroll").forEach((el) => io.observe(el));
+      } else {
+        root.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("is-revealed"));
+      }
+      const faq = root.querySelector(".variant-l-faq");
+      if (faq) {
+        faq.querySelectorAll("details").forEach((d) => {
+          d.addEventListener("toggle", () => {
+            if (!d.open) return;
+            faq.querySelectorAll("details").forEach((other) => {
+              if (other !== d) other.open = false;
+            });
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

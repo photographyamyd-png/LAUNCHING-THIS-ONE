@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Featured accordion — layout pattern registry",
+  "description": "Each entry is a distinct composition pattern for the same content model (eyebrow, heading, intro, CTA, N service items with image/title). Use layoutVariant in CMS JSON to pick one; implement as separate React subcomponents or a switch in featured-accordion.tsx.",
+  "contentModel": {
+    "props": "AccordionSectionProps in glc-site/src/content/types.ts",
+    "items": "AccordionContentItem[] — id, title, imageUrl",
+    "previewHtml": "featured-accordion-variants-preview.html — static reference for markup/CSS/behavior"
+  },
+  "reuseWorkflow": [
+    "1. Pick a pattern by id/slug from patterns[] below.",
+    "2. Copy the preview block for that pattern (section.fac-variant[data-pattern-slug]) into a new file under glc-site/src/components/sections/featured-accordion/layouts/<Slug>.tsx — translate class names to Tailwind or keep a scoped CSS module.",
+    "3. Add the slug to FeaturedAccordionLayoutVariant in types.ts if not already listed.",
+    "4. In featured-accordion.tsx, branch on props.layoutVariant and render the matching layout component; default remains split-copy-left-strip-right (production default).",
+    "5. In home.json (or CMS), set accordion.props.layoutVariant to the slug.",
+    "6. Keep this registry and the preview HTML in sync when adding patterns."
+  ],
+  "patterns": [
+    {
+      "id": "p01",
+      "slug": "split-copy-left-strip-right",
+      "label": "Split column — copy left, expanding strips right",
+      "patternFamily": "two-column",
+      "structuralDNA": "Desktop: text column | horizontal pickers that expand width on hover. Mobile: stacked.",
+      "interaction": "hover-expand-horizontal",
+      "previewClass": "fac-l01",
+      "suggestedReactFile": "layouts/SplitCopyLeftStripRight.tsx"
+    },
+    {
+      "id": "p02",
+      "slug": "split-strip-left-copy-right",
+      "label": "Mirrored split — strips left, copy right-aligned",
+      "patternFamily": "two-column-mirrored",
+      "structuralDNA": "Same strip behavior as p01 but column order and text alignment flipped.",
+      "interaction": "hover-expand-horizontal",
+      "previewClass": "fac-l02",
+      "suggestedReactFile": "layouts/SplitStripLeftCopyRight.tsx"
+    },
+    {
+      "id": "p03",
+      "slug": "stack-strip-top-copy-bottom",
+      "label": "Stack — full-width strip band, then copy",
+      "patternFamily": "stack-vertical",
+      "structuralDNA": "Media/interaction row first (full width), typography block second. Reading order: see services, then read pitch.",
+      "interaction": "hover-expand-horizontal",
+      "previewClass": "fac-l03",
+      "suggestedReactFile": "layouts/StackStripTopCopyBottom.tsx"
+    },
+    {
+      "id": "p04",
+      "slug": "tab-stage-copy-above",
+      "label": "Tab stage — tab row + single large image (not strip width)",
+      "patternFamily": "tab-stage",
+      "structuralDNA": "Explicit tabs; one stage image swaps object-position or src. No accordion strip widths.",
+      "interaction": "click-tabs",
+      "previewClass": "fac-l04",
+      "suggestedReactFile": "layouts/TabStageCopyAbove.tsx"
+    },
+    {
+      "id": "p05",
+      "slug": "split-copy-left-vertical-expanders",
+      "label": "Split — copy | stacked rows that grow in height",
+      "patternFamily": "two-column-vertical-list",
+      "structuralDNA": "Right column is horizontal strips replaced by vertical list: each row expands in height, not width.",
+      "interaction": "click-expand-vertical",
+      "previewClass": "fac-l05",
+      "suggestedReactFile": "layouts/SplitCopyLeftVerticalExpanders.tsx"
+    },
+    {
+      "id": "p06",
+      "slug": "river-zigzag-rows",
+      "label": "River — alternating image/text rows",
+      "patternFamily": "stacked-rows",
+      "structuralDNA": "Intro block then full-width rows; odd/even flip image vs copy (RTL trick on desktop).",
+      "interaction": "static-rows",
+      "previewClass": "fac-l06",
+      "suggestedReactFile": "layouts/RiverZigzagRows.tsx"
+    },
+    {
+      "id": "p07",
+      "slug": "stage-hero-filmstrip",
+      "label": "Stage + filmstrip — hero image + thumb rail",
+      "patternFamily": "hero-thumbnails",
+      "structuralDNA": "One dominant aspect-ratio stage; small thumbs below change the stage.",
+      "interaction": "click-thumbnails",
+      "previewClass": "fac-l07",
+      "suggestedReactFile": "layouts/StageHeroFilmstrip.tsx"
+    },
+    {
+      "id": "p08",
+      "slug": "grid-bento-asymmetric",
+      "label": "Bento — asymmetric grid with one hero cell",
+      "patternFamily": "css-grid-modular",
+      "structuralDNA": "Irregular grid: one cell spans multiple tracks; selection outline, not width tween.",
+      "interaction": "click-cell",
+      "previewClass": "fac-l08",
+      "suggestedReactFile": "layouts/GridBentoAsymmetric.tsx"
+    },
+    {
+      "id": "p09",
+      "slug": "step-connector-rail",
+      "label": "Step rail — numbered steps + connector line + preview",
+      "patternFamily": "process-rail",
+      "structuralDNA": "Horizontal numbered steps with visual connectors; preview image below (not overlapping cards).",
+      "interaction": "click-step",
+      "previewClass": "fac-l09",
+      "suggestedReactFile": "layouts/StepConnectorRail.tsx"
+    },
+    {
+      "id": "p10",
+      "slug": "morph-circle-row",
+      "label": "Morph row — circles expand to rounded squares",
+      "patternFamily": "orbital-morph",
+      "structuralDNA": "Circular thumbs that morph geometry on selection.",
+      "interaction": "click-morph",
+      "previewClass": "fac-l10",
+      "suggestedReactFile": "layouts/MorphCircleRow.tsx"
+    },
+    {
+      "id": "p11",
+      "slug": "panel-diagonal-split",
+      "label": "Diagonal split — charcoal copy panel | media rail",
+      "patternFamily": "angled-panels",
+      "structuralDNA": "Clip-path diagonal between copy and strip; strong editorial contrast.",
+      "interaction": "hover-expand-horizontal",
+      "previewClass": "fac-l11",
+      "suggestedReactFile": "layouts/PanelDiagonalSplit.tsx"
+    },
+    {
+      "id": "p12",
+      "slug": "rail-index-numbers",
+      "label": "Index rail — vertical 01–N beside copy + strips",
+      "patternFamily": "sidebar-index",
+      "structuralDNA": "Fixed number column reads as table of contents; main area has copy then strips.",
+      "interaction": "hover-expand-horizontal",
+      "previewClass": "fac-l12",
+      "suggestedReactFile": "layouts/RailIndexNumbers.tsx"
+    },
+    {
+      "id": "p13",
+      "slug": "bleed-band-float-card",
+      "label": "Bleed band — full-bleed image + overlapping card",
+      "patternFamily": "full-bleed-overlay",
+      "structuralDNA": "Edge-to-edge band; copy sits in lifted card overlapping band; strips below.",
+      "interaction": "hover-expand-horizontal",
+      "previewClass": "fac-l13",
+      "suggestedReactFile": "layouts/BleedBandFloatCard.tsx"
+    },
+    {
+      "id": "p14",
+      "slug": "editorial-magazine-stack",
+      "label": "Editorial — long copy column | stacked squares",
+      "patternFamily": "magazine-split",
+      "structuralDNA": "Narrow image stack beside running copy; square tiles, not horizontal strip.",
+      "interaction": "click-tile",
+      "previewClass": "fac-l14",
+      "suggestedReactFile": "layouts/EditorialMagazineStack.tsx"
+    },
+    {
+      "id": "p15",
+      "slug": "grid-equal-five",
+      "label": "Equal five — uniform columns, border selection",
+      "patternFamily": "equal-grid",
+      "structuralDNA": "Five equal columns; no width animation — ring/border only.",
+      "interaction": "click-cell",
+      "previewClass": "fac-l15",
+      "suggestedReactFile": "layouts/GridEqualFive.tsx"
+    },
+    {
+      "id": "p16",
+      "slug": "split-photo-chips",
+      "label": "50/50 — half-bleed photo | copy + chip selectors",
+      "patternFamily": "asymmetric-split-chips",
+      "structuralDNA": "Photo locks half viewport; text side uses compact chips to swap hero crop.",
+      "interaction": "click-chips",
+      "previewClass": "fac-l16",
+      "suggestedReactFile": "layouts/SplitPhotoChips.tsx"
+    },
+    {
+      "id": "p17",
+      "slug": "grid-l-tetris",
+      "label": "L-grid — one tall tile + four satellites",
+      "patternFamily": "tetris-grid",
+      "structuralDNA": "CSS grid with explicit areas: dominant L + four smaller cells.",
+      "interaction": "click-cell",
+      "previewClass": "fac-l17",
+      "suggestedReactFile": "layouts/GridLTetris.tsx"
+    },
+    {
+      "id": "p18",
+      "slug": "hub-cross-corners",
+      "label": "Hub — centered card; corners + fifth thumb",
+      "patternFamily": "hub-radial",
+      "structuralDNA": "Copy in center; four corner images; fifth item in auxiliary rail.",
+      "interaction": "click-corner-or-thumb",
+      "previewClass": "fac-l18",
+      "suggestedReactFile": "layouts/HubCrossCorners.tsx"
+    },
+    {
+      "id": "p19",
+      "slug": "flow-masonry",
+      "label": "Masonry flow — column-balanced cards",
+      "patternFamily": "masonry-flow",
+      "structuralDNA": "Multi-column masonry with varied heights; breaks from rigid strip rhythm.",
+      "interaction": "click-tile",
+      "previewClass": "fac-l19",
+      "suggestedReactFile": "layouts/FlowMasonry.tsx"
+    },
+    {
+      "id": "p20",
+      "slug": "masthead-vertical-strip",
+      "label": "Masthead — vertical side label + copy + bottom strip",
+      "patternFamily": "masthead-sidebar",
+      "structuralDNA": "Vertical-rl label as spine; main copy; horizontal strip as footer band.",
+      "interaction": "hover-expand-horizontal",
+      "previewClass": "fac-l20",
+      "suggestedReactFile": "layouts/MastheadVerticalStrip.tsx"
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GLC — Section previews archive (reference only)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/glc-base.css" />
+  <style>
+    body { margin: 0; background: var(--gray-100); color: var(--text-900); font-family: var(--font-body); font-size: 14px; line-height: 1.55; }
+    .arc-wrap { max-width: 960px; margin: 0 auto; padding: 48px 32px 96px; }
+    .arc-banner {
+      background: var(--charcoal-deep); color: var(--white); padding: 24px 28px;
+      border-left: 5px solid var(--yellow-core); margin-bottom: 36px;
+    }
+    .arc-banner h1 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 34px); text-transform: uppercase; margin: 0 0 10px; letter-spacing: 0.03em; }
+    .arc-banner p { margin: 0; color: rgba(255,255,255,0.82); font-size: 14px; max-width: 720px; }
+    .arc-banner strong { color: var(--yellow-core); }
+    h2 { font-family: var(--font-display); font-size: 18px; text-transform: uppercase; letter-spacing: 0.06em; margin: 36px 0 14px; color: var(--charcoal-deep); border-bottom: 2px solid var(--yellow-core); padding-bottom: 8px; }
+    table.arc-table { width: 100%; border-collapse: collapse; background: var(--white); box-shadow: var(--shadow-card); font-size: 13px; }
+    table.arc-table th, table.arc-table td { border: 1px solid var(--gray-200); padding: 10px 12px; text-align: left; vertical-align: top; }
+    table.arc-table th { background: var(--off-white); font-family: var(--font-display); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    table.arc-table code { font-size: 11px; background: var(--gray-100); padding: 2px 6px; }
+    ul.arc-list { margin: 0; padding-left: 1.2em; }
+    ul.arc-list li { margin-bottom: 8px; }
+    .arc-meta { font-size: 12px; color: var(--text-600); margin-top: 8px; }
+    .arc-links a { color: var(--charcoal-deep); font-weight: 700; }
+    .arc-localhost {
+      background: var(--white); border: 2px solid var(--yellow-core); padding: 20px 22px; margin: 24px 0 28px;
+      box-shadow: var(--shadow-card);
+    }
+    .arc-localhost h3 { font-family: var(--font-display); font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px; color: var(--charcoal-deep); }
+    .arc-localhost p { margin: 0 0 10px; font-size: 13px; color: var(--text-600); }
+    .arc-localhost ul { margin: 0; padding: 0; list-style: none; }
+    .arc-localhost li { margin-bottom: 8px; font-size: 13px; }
+    .arc-localhost a { word-break: break-all; color: #0b5cab; font-weight: 600; }
+    .arc-localhost code { font-size: 12px; background: var(--gray-100); padding: 2px 8px; }
+  </style>
+</head>
+<body>
+  <div class="arc-wrap">
+    <header class="arc-banner">
+      <h1>Section previews — offline reference</h1>
+      <p><strong>Not a live production page.</strong> This file is a catalog of every generated static preview in this repo so you can find slugs, filenames, and variant counts later. For side-by-side embedded viewing, use <code>glc-all-section-previews.html</code> over HTTP. Last updated: 2026-03-31.</p>
+    </header>
+
+    <aside class="arc-localhost" aria-label="Localhost preview URLs">
+      <h3>View in browser (not in the editor)</h3>
+      <p>Run <code>npx serve . -p 3456</code> from the project root, then open:</p>
+      <ul>
+        <li><a href="http://localhost:3456/glc-all-section-previews.html">http://localhost:3456/glc-all-section-previews.html</a> — combined previews</li>
+        <li><a href="http://localhost:3456/glc-section-previews-archive.html">http://localhost:3456/glc-section-previews-archive.html</a> — this index (rendered)</li>
+        <li><a href="http://localhost:3456/services-variants-preview.html">http://localhost:3456/services-variants-preview.html</a> — services A–L</li>
+        <li><a href="http://localhost:3456/featured-accordion-variants-preview.html">http://localhost:3456/featured-accordion-variants-preview.html</a> — accordion 20 layouts</li>
+        <li><a href="http://localhost:3456/index.html">http://localhost:3456/index.html</a> — static homepage</li>
+      </ul>
+    </aside>
+
+    <p class="arc-links"><strong>Quick open (same folder, relative):</strong>
+      <a href="glc-all-section-previews.html">glc-all-section-previews.html</a> (combined iframes) ·
+      <a href="services-variants-preview.html">services-variants-preview.html</a> ·
+      <a href="featured-accordion-variants-preview.html">featured-accordion-variants-preview.html</a> ·
+      <a href="featured-accordion-pattern-registry.json">featured-accordion-pattern-registry.json</a>
+    </p>
+
+    <h2>Preview files summary</h2>
+    <table class="arc-table" aria-label="Preview files">
+      <thead>
+        <tr>
+          <th>Section / area</th>
+          <th>File</th>
+          <th>Variants</th>
+          <th>Registry / notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>#services</code> band (homepage services explorations)</td>
+          <td><code>services-variants-preview.html</code></td>
+          <td>Options <strong>A–L</strong> (12 blocks in one scroll)</td>
+          <td>Labels in-page: Option A … Option L. Mirrors <code>index.html</code> / <code>glc-base.css</code> patterns.</td>
+        </tr>
+        <tr>
+          <td>Featured accordion (interactive strip / layouts)</td>
+          <td><code>featured-accordion-variants-preview.html</code></td>
+          <td><strong>20</strong> patterns (<code>fac-l01</code> … <code>fac-l20</code>)</td>
+          <td>Slugs in <code>featured-accordion-pattern-registry.json</code>; <code>data-pattern-slug</code> on each section.</td>
+        </tr>
+        <tr>
+          <td>Combined viewer (embeds both)</td>
+          <td><code>glc-all-section-previews.html</code></td>
+          <td>2 iframes (full pages above)</td>
+          <td>Use with local HTTP server; see note in file.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Services preview — Option A–L (cheat sheet)</h2>
+    <p class="arc-meta">Locate each block in <code>services-variants-preview.html</code> by searching for <code>Option A</code>, <code>Option B</code>, … or the CSS comment for that option.</p>
+    <table class="arc-table" aria-label="Services options">
+      <thead>
+        <tr><th>Option</th><th>Pattern (short)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A</td><td>Baseline / homepage-adjacent — off-white services band, blueprint watermark, grid aligned with production language.</td></tr>
+        <tr><td>B</td><td>Balanced split — full-bleed imagery | same service cards (2×3).</td></tr>
+        <tr><td>C</td><td>Sticky editorial rail + charcoal summary rows (card language).</td></tr>
+        <tr><td>D</td><td>Why-DNA flagship — charcoal mesh, 50/50, reason rows, clipped media + chip.</td></tr>
+        <tr><td>E</td><td>Vertical timeline — off-white, rail + nodes (not a grid or accordion).</td></tr>
+        <tr><td>F</td><td>Tabbed single surface — interaction + one hero read panel.</td></tr>
+        <tr><td>G</td><td>Light theme — 3-image mosaic + light mini-cards.</td></tr>
+        <tr><td>H</td><td>Dark theme — 4-image collage + light inset panel.</td></tr>
+        <tr><td>I</td><td>Dual band — light stripe + dark stripe, two images each.</td></tr>
+        <tr><td>J</td><td>Bento + dark field + glassmorphism + lift hover + neon-accent CTAs.</td></tr>
+        <tr><td>K</td><td>Split-screen sticky visual + 3-col grid desktop / horizontal scroll mobile.</td></tr>
+        <tr><td>L</td><td>Z-pattern rows + reveal on scroll + single-open FAQ.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Featured accordion — 20 layout slugs</h2>
+    <p class="arc-meta">Use <code>layoutVariant</code> in <code>AccordionSectionProps</code> (<code>glc-site/src/content/types.ts</code>) when implementing in Next. Preview class maps to markup in <code>featured-accordion-variants-preview.html</code>.</p>
+    <table class="arc-table" aria-label="Accordion layout slugs">
+      <thead>
+        <tr><th>#</th><th>Slug</th><th>Preview class</th><th>Label (from registry)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td><code>split-copy-left-strip-right</code></td><td><code>fac-l01</code></td><td>Split column — copy left, expanding strips right</td></tr>
+        <tr><td>02</td><td><code>split-strip-left-copy-right</code></td><td><code>fac-l02</code></td><td>Mirrored split — strips left, copy right-aligned</td></tr>
+        <tr><td>03</td><td><code>stack-strip-top-copy-bottom</code></td><td><code>fac-l03</code></td><td>Stack — full-width strip band, then copy</td></tr>
+        <tr><td>04</td><td><code>tab-stage-copy-above</code></td><td><code>fac-l04</code></td><td>Tab stage — tab row + single large image</td></tr>
+        <tr><td>05</td><td><code>split-copy-left-vertical-expanders</code></td><td><code>fac-l05</code></td><td>Split — copy | stacked rows that grow in height</td></tr>
+        <tr><td>06</td><td><code>river-zigzag-rows</code></td><td><code>fac-l06</code></td><td>River — alternating image/text rows</td></tr>
+        <tr><td>07</td><td><code>stage-hero-filmstrip</code></td><td><code>fac-l07</code></td><td>Stage + filmstrip — hero + thumb rail</td></tr>
+        <tr><td>08</td><td><code>grid-bento-asymmetric</code></td><td><code>fac-l08</code></td><td>Bento — asymmetric grid with one hero cell</td></tr>
+        <tr><td>09</td><td><code>step-connector-rail</code></td><td><code>fac-l09</code></td><td>Step rail — numbered steps + connector + preview</td></tr>
+        <tr><td>10</td><td><code>morph-circle-row</code></td><td><code>fac-l10</code></td><td>Morph row — circles expand to rounded squares</td></tr>
+        <tr><td>11</td><td><code>panel-diagonal-split</code></td><td><code>fac-l11</code></td><td>Diagonal split — charcoal copy panel | media rail</td></tr>
+        <tr><td>12</td><td><code>rail-index-numbers</code></td><td><code>fac-l12</code></td><td>Index rail — vertical 01–N beside copy + strips</td></tr>
+        <tr><td>13</td><td><code>bleed-band-float-card</code></td><td><code>fac-l13</code></td><td>Bleed band — full-bleed image + overlapping card</td></tr>
+        <tr><td>14</td><td><code>editorial-magazine-stack</code></td><td><code>fac-l14</code></td><td>Editorial — long copy column | stacked squares</td></tr>
+        <tr><td>15</td><td><code>grid-equal-five</code></td><td><code>fac-l15</code></td><td>Equal five — uniform columns, border selection</td></tr>
+        <tr><td>16</td><td><code>split-photo-chips</code></td><td><code>fac-l16</code></td><td>50/50 — half-bleed photo | copy + chip selectors</td></tr>
+        <tr><td>17</td><td><code>grid-l-tetris</code></td><td><code>fac-l17</code></td><td>L-grid — one tall tile + four satellites</td></tr>
+        <tr><td>18</td><td><code>hub-cross-corners</code></td><td><code>fac-l18</code></td><td>Hub — centered card; corners + fifth thumb</td></tr>
+        <tr><td>19</td><td><code>flow-masonry</code></td><td><code>fac-l19</code></td><td>Masonry flow — column-balanced cards</td></tr>
+        <tr><td>20</td><td><code>masthead-vertical-strip</code></td><td><code>fac-l20</code></td><td>Masthead — vertical side label + copy + bottom strip</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implementation reminder</h2>
+    <ul class="arc-list">
+      <li><strong>React source of truth (production):</strong> <code>glc-site/src/components/sections/</code> — e.g. <code>featured-accordion.tsx</code>, services band components. Previews are static HTML for design QA.</li>
+      <li><strong>Content:</strong> <code>glc-site/src/content/pages/home.json</code> — add <code>layoutVariant</code> on accordion when layouts are ported.</li>
+      <li><strong>Reuse workflow</strong> (accordion): see <code>reuseWorkflow</code> in <code>featured-accordion-pattern-registry.json</code>.</li>
+    </ul>
+  </div>
+</body>
+</html>

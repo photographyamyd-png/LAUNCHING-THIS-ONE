@@ -1,0 +1,714 @@
+# GLC CURSOR INJECTION — MASTER BUILD RULES
+## Ground Level Contracting | Design System Integration Guide
+**Version:** 2026-03-31 | **Authority:** GLC_MASTER_SYSTEM.html (PCL DNA Build)
+
+**Supersedes:** On any conflict with `CLAUDE.md`, older token values, or informal notes elsewhere in the repo, **this file plus `GLC_MASTER_SYSTEM.html` win.**
+
+---
+
+## HOW TO USE THIS FILE IN CURSOR
+
+Drop this file into your project root as `.cursorrules` **and** keep `GLC_MASTER_SYSTEM.html` in the same directory. When prompting Cursor for any page work, prefix with:
+
+> *"Refer to `.cursorrules` and `GLC_MASTER_SYSTEM.html` as the single source of truth. Apply the INHERIT + INJECT rules defined there before writing any code."*
+
+---
+
+## ══════════════════════════════════════════════
+## PART 1 — THE TWO LAWS
+## ══════════════════════════════════════════════
+
+### LAW 1 — INHERIT (what to keep from the existing build)
+When editing any page that already exists in the Cursor build:
+
+1. **Keep all existing routing** — file paths, `<a href>` links, and page relationships stay exactly as they are.
+2. **Keep all existing content** — headlines, body copy, phone numbers, addresses, and service descriptions are preserved unless explicitly told to change them.
+3. **Keep existing `<section id="">` anchor IDs** — do not rename existing section anchors, as they may be linked from other pages.
+4. **Keep any custom images or real photo URLs** — only placeholder/Unsplash images may be replaced or upgraded. Never remove a real project photo.
+5. **Keep any existing form logic, API integrations, or contact form handlers** — these are not touched unless the task explicitly calls for it.
+
+### LAW 2 — INJECT (what this document adds on top)
+When any existing page is opened for editing, apply the following injections **without destroying what's inherited above**:
+
+1. Replace the entire `:root` CSS variable block with the GLC Master Token System (Part 2 below).
+2. Replace the existing `<header>` block with the GLC Mega Nav (Part 3 below) — verbatim.
+3. Replace the existing `<footer>` block with the GLC 4-col Dark Footer (Part 3 below) — verbatim.
+4. Migrate any existing section's styles to use the GLC token variables (`var(--yellow-core)`, `var(--charcoal)`, etc.) rather than hardcoded values.
+5. Add `.gl-reveal` scroll reveal classes to all visible content blocks.
+6. Ensure the Master JS block (Part 6) is present at bottom of `<body>`.
+7. Apply the correct Layout Pattern (Part 4) to each section based on the PCL→GLC map below.
+
+---
+
+## ══════════════════════════════════════════════
+## PART 2 — DESIGN TOKEN SYSTEM (SINGLE SOURCE OF TRUTH)
+## ══════════════════════════════════════════════
+
+The following `:root` block is the **only** place colors, spacing, fonts, and shadows are defined.
+**NEVER hardcode a hex value anywhere in the codebase. Always use `var(--token-name)`.**
+
+```css
+:root {
+  /* ── BRAND COLORS ──────────────────────────────────────────── */
+  --yellow-core:     #F2B705;   /* CANONICAL. Never approximate. */
+  --gold:            #D9A004;   /* Hover states ONLY */
+  --yellow-tint:     rgba(242,183,5,0.08);
+  --yellow-tint-md:  rgba(242,183,5,0.14);
+  --yellow-tint-lg:  rgba(242,183,5,0.22);
+  --yellow-glow:     0 0 0 3px rgba(242,183,5,0.28);
+
+  /* ── NEUTRALS ──────────────────────────────────────────────── */
+  --charcoal:#202020;   /* Section backgrounds (dark) */
+  --charcoal-deep:   #1E1C1A;   /* Footer, nav, deepest overlays */
+  --charcoal-mid:    #3A3632;   /* Borders, rails */
+  --white:           #FFFFFF;
+  --off-white:       #F2F2F2;   /* Alternating section bg */
+  --soft-smoke:      #F2F2F2;   /* Alias for --off-white */
+
+  /* ── TEXT INK ───────────────────────────────────────────────── */
+  --text-900:        #0E0D0C;
+  --text-700:        #3A3632;
+  --text-500:        #6B6560;
+  --text-400:        #9C9690;
+  --gray-200:        #E0DEDA;
+  --gray-100:        #F7F6F4;
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+  --font-display:    'Oswald', sans-serif;
+  --font-body:       'Plus Jakarta Sans', sans-serif;
+  --font-accent:     'Source Serif 4', serif;  /* italic pull-quotes ONLY */
+
+  /* ── LAYOUT ─────────────────────────────────────────────────── */
+  --container-max:   1200px;
+  --section-v:       96px;
+  --section-v-sm:    64px;
+  --gap-grid:        2px;       /* Tile grid gap — intentional tight */
+
+  /* ── BORDER RADIUS ──────────────────────────────────────────── */
+  --r: 0; --r-sm: 0; --r-md: 0; --r-lg: 0; --r-xl: 0;
+  /* !! ZERO EVERYWHERE. Only exception: border-radius:50% on decorative circles */
+
+  /* ── SHADOWS ────────────────────────────────────────────────── */
+  --shadow-sm:       0 2px 8px rgba(0,0,0,0.08);
+  --shadow-card:     0 4px 24px rgba(0,0,0,0.12);
+  --shadow-elevate:  0 8px 40px rgba(0,0,0,0.20);
+  --shadow-editorial:0 1px 0 rgba(0,0,0,0.10);
+  --shadow-heavy:    0 16px 60px rgba(0,0,0,0.30);
+
+  /* ── EASING ─────────────────────────────────────────────────── */
+  --ease-expo:       cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ── Z-INDEX ────────────────────────────────────────────────── */
+  --z-header:        900;
+  --z-mega:          850;
+  --z-backdrop:      800;
+  --z-drawer:        910;
+  --z-preloader:     999;
+
+  /* ── HEADER HEIGHTS ─────────────────────────────────────────── */
+  --header-utility-h: 36px;
+  --header-nav-h:     68px;
+  --header-total-h:   calc(var(--header-utility-h) + var(--header-nav-h) + 3px);
+}
+```
+
+### Google Fonts (paste in every page `<head>`)
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@1,8..60,500&display=swap" rel="stylesheet">
+```
+
+---
+
+## ══════════════════════════════════════════════
+## PART 3 — SHARED BLOCKS (COPY VERBATIM TO EVERY PAGE)
+## ══════════════════════════════════════════════
+
+### PRELOADER
+Copy the `#gl-preloader` div from `GLC_MASTER_SYSTEM.html` verbatim as the first child of `<body>` on every page.
+
+### HEADER / MEGA NAV
+Copy the entire `<header id="gl-header">` block from `GLC_MASTER_SYSTEM.html` verbatim.
+- **Utility bar** → phone + location + "Commercial Project Dispatch — Available Now"
+- **Gold strip** → `<div class="gl-header__strip"></div>`
+- **Desktop mega nav** → Services mega + Company mega
+- **Mobile drawer** → `#gl-drawer` block with hamburger trigger
+- **Backdrop** → `#gl-backdrop` overlay div
+
+**Active state:** Add `aria-current="page"` to the matching `<a>` in the nav for each inner page.
+
+### FOOTER
+Copy the entire `<footer id="footer">` block from `GLC_MASTER_SYSTEM.html` verbatim.
+- 4-column layout: Brand+Contact | Services | Company | Coverage
+- Yellow underline accent on column titles
+- Footer bar: copyright + legal links
+- **Do not modify the footer structure** — only update `href` links if a new page is added.
+
+---
+
+## ══════════════════════════════════════════════
+## PART 4 — PCL → GLC PATTERN MAP
+## (What every section looks like and which CSS pattern to use)
+## ══════════════════════════════════════════════
+
+This is the master translation of PCL Construction's layout DNA into GLC's design language.
+Every section on every page maps to one of these patterns.
+
+```
+PCL PATTERN                                  GLC IMPLEMENTATION                          CSS PATTERN
+──────────────────────────────────────────────────────────────────────────────────────────────────
+Preloader intro animation              →  Charcoal → logo reveal + progress bar       #gl-preloader
+Full-bleed hero slider (3-5 images)    →  3-slide crossfade hero + service bar        .hero__slide / .hero__service-bar
+Mega-menu sticky nav                   →  Mega nav (Services + Company dropdowns)     .gl-mega--services / .gl-mega--company
+Rotating declaratives strip            →  Yellow marquee trust ticker                 .gl-marquee
+Editorial white-space split sections   →  About split (charcoal ground, 1fr/1fr)      #about / .about__inner
+Project photo tile grid w/ overlays    →  6 Services photo tile grid                  .services__grid / .svc-tile
+Animated stats dashboard               →  4-stat counter row (white bg)               #stats / .stat-cell[data-counter]
+Featured project case-study showcase   →  2-3 featured project panels (wide + 2)      .projects__grid / .project-panel
+Zigzag split why-us section            →  "Why Ground Level" 4-reason split           #why / .why__reasons
+Office/coverage map section            →  Coverage region list + map                  #coverage / .coverage__areas
+News + Insights editorial grid         →  Testimonials 3-card grid                    #testimonials / .testimonial-card
+Dual CTA ("Project / Career")          →  Dual CTA ("Project / Contact")              #cta / .cta__panels
+4-col dark footer w/ sustainability    →  4-col dark footer                           #footer / .footer__main
+```
+
+### Section Background Alternation Rule
+Every page must alternate section backgrounds in this order (never two adjacent sections the same):
+
+```
+--charcoal-deep  (Hero / Preloader)
+--yellow-core    (Marquee strip — always immediately after hero)
+--charcoal       (About / Why / Coverage)
+--white          (Stats / Projects)
+--off-white      (Services / Process / Testimonials)
+--charcoal-deep  (CTA / Footer)
+```
+
+### 3-Plane Depth Rule (ALL sections must follow)
+Every section has three to 4 four visual layers:
+1. **GROUND** — The section background (flat color, never gradient except radial accents)
+2. **STRUCTURE** — Architectural elements: rails, clip-paths, photo shells, grid tiles
+3. **READ** — The typography and CTAs on the top surface
+
+Never place body text (`--text-500`) directly on a dark background. Use `--font-body` white variants (`.gl-prose--light` / `color:rgba(255,255,255,0.62)`) on dark sections.
+
+---
+
+## ══════════════════════════════════════════════
+## PART 5 — FULL COMPONENT LIBRARY
+## ══════════════════════════════════════════════
+
+All components defined here are already in `GLC_MASTER_SYSTEM.html`. Use these classes — never create one-off styles.
+
+### Typography Classes
+| Class | Use |
+|---|---|
+| `.gl-h1` | Oswald 700 uppercase, clamp(52px→88px), H1 only |
+| `.gl-h2` | Oswald 700 uppercase, clamp(36px→54px), section headlines |
+| `.gl-h3` | Oswald 700 uppercase, clamp(20px→28px), card/tile titles |
+| `.gl-eyebrow` | 11px/800/uppercase yellow, always above a headline, has `::before` yellow line |
+| `.gl-eyebrow--dark` | Eyebrow on light backgrounds |
+| `.gl-eyebrow--light` | Eyebrow on dark backgrounds (white text, yellow line) |
+| `.gl-prose` | 15px body, `--text-500` — light section use only |
+| `.gl-prose--light` | White/62% opacity — dark section body text |
+| `.gl-prose--sm` | 13px body variant |
+| `.gl-pullquote` | Source Serif 4 italic — flagship pull-quotes only |
+| `.gl-metric--lg` | Oswald 700, clamp(48px→72px), stat numbers |
+| `.gl-metric--md` | Oswald 700, clamp(32px→48px) |
+| `.gl-metric--accent` | Yellow stat numbers |
+
+### Button System
+| Class | Use |
+|---|---|
+| `.gl-btn` | Base button class — ALWAYS include with a modifier |
+| `.gl-btn--primary` | Yellow fill, dark text — primary CTA |
+| `.gl-btn--ghost` | Transparent, white border — on dark sections |
+| `.gl-btn--ghost-dark` | Transparent, dark border — on light sections |
+| `.gl-btn--link` | Text-only arrow link, yellow |
+| `.gl-btn__arrow` | Arrow SVG inside button — gets `translateX` on hover |
+
+### Scroll Reveal
+| Class | Use |
+|---|---|
+| `.gl-reveal` | Default: fade up 24px |
+| `.gl-reveal--up` | Stronger fade up 40px |
+| `.gl-reveal--left` | Fade in from left |
+| `.gl-reveal--right` | Fade in from right |
+| `.gl-reveal--scale` | Scale up from 0.94 |
+| `.gl-delay-1` through `.gl-delay-5` | Stagger delays (0.1s → 0.5s) |
+
+Add `.gl-reveal` to every visible content block. JS (`IntersectionObserver`) handles the rest — no changes needed.
+
+### Layout Patterns (Catalog Reference)
+
+#### A-Series — Grid Layouts
+| ID | Pattern | Use |
+|---|---|---|
+| A1 | Full-bleed photo panel | Hero, project panels, wide showcase panels |
+| A3 | Staggered tile grid | Services grid (3-col), testimonials (3-col) |
+| A4 | Off-grid floating accent | Float stat chips, About media float badges |
+| A5 | Horizontal scroll rail | Mobile service bar |
+| A6 | Partial border frame | Why section photo border treatment |
+
+#### B-Series — Split / Stack Layouts
+| ID | Pattern | Use |
+|---|---|---|
+| B2 | Full-bleed media split | About (1fr/1fr, charcoal bg), Why (mirrored) |
+| B4 | Statement band / pull-quote | Dual CTA panels |
+| B6 | Sticky scope strip | Inner service pages — sub-nav anchors |
+| B7 | Accordion | Service detail FAQ sections |
+| B8 | Vertical stepper | Process section (4-step rail) |
+| B9 | Hub stage card | Service detail flagship section (split panel + spec deck) |
+
+#### C-Series — Data / Dashboard
+| ID | Pattern | Use |
+|---|---|---|
+| C2 | Tri-column specs/stats | Stats row (4 cells with counters) |
+| C3 | Masonry grid | Projects page filter grid |
+
+### Component: Service Tile (`.svc-tile`)
+```html
+<a href="/services/[slug]/" class="svc-tile gl-reveal">
+  <div class="svc-tile__bg" style="background-image:url('...')"></div>
+  <div class="svc-tile__overlay"></div>
+  <div class="svc-tile__content">
+    <div class="svc-tile__num">01</div>
+    <div class="svc-tile__title">Service Name</div>
+    <div class="svc-tile__desc">Short description.</div>
+    <div class="svc-tile__arrow">View Service →</div>
+  </div>
+</a>
+```
+- Yellow top bar scales in on hover (`::before` scaleX)
+- Description and arrow reveal on hover (max-height / opacity transition)
+
+### Component: Project Panel (`.project-panel`)
+```html
+<a href="/projects/[slug]/" class="project-panel [project-panel--wide] gl-reveal">
+  <div class="project-panel__bg" style="background-image:url('...')"></div>
+  <div class="project-panel__scrim"></div>
+  <div class="project-panel__info">
+    <span class="project-panel__tag">Category</span>
+    <div class="project-panel__title">Project Name</div>
+    <div class="project-panel__meta">Location • Year</div>
+    <div class="project-panel__cta">View Project →</div>
+  </div>
+</a>
+```
+- Add `.project-panel--wide` to first panel (spans 2 cols, 21:9 ratio)
+
+### Component: Stat Cell (`.stat-cell`)
+```html
+<div class="stat-cell gl-reveal" data-counter="500">
+  <span class="stat-cell__num"><span class="counter-val">500</span><span class="stat-cell__suffix">+</span></span>
+  <span class="stat-cell__label">Label</span>
+  <span class="stat-cell__sub">Subtext</span>
+</div>
+```
+- `data-counter` value is the target number. JS animates from 0 on scroll.
+- Yellow bottom bar slides in on hover
+
+### Component: Testimonial Card (`.testimonial-card`)
+```html
+<div class="testimonial-card gl-reveal">
+  <span class="testimonial-card__mark">"</span>
+  <p class="testimonial-card__text">Quote text...</p>
+  <div class="testimonial-card__rule"></div>
+  <div class="testimonial-card__name">First Last</div>
+  <div class="testimonial-card__role">Title, Company</div>
+</div>
+```
+
+### Component: Why Reason (`.why__reason`)
+```html
+<div class="why__reason">
+  <div class="why__reason-num">01</div>
+  <div>
+    <div class="why__reason-title">Reason Title</div>
+    <div class="why__reason-text">Supporting sentence.</div>
+  </div>
+</div>
+```
+
+### Component: Coverage Area Card (`.coverage__area`)
+```html
+<div class="coverage__area">
+  <div class="coverage__area-dot"></div>
+  <div>
+    <div class="coverage__area-name">Region Name</div>
+    <div class="coverage__area-sub">Sub-description</div>
+  </div>
+</div>
+```
+
+### Component: Accordion Item (`.gl-accordion__item`)
+```html
+<div class="gl-accordion__item">
+  <button class="gl-accordion__trigger">
+    Question Text
+    <svg class="gl-accordion__chevron" viewBox="0 0 24 24">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </button>
+  <div class="gl-accordion__body">
+    <div class="gl-accordion__content">Answer text.</div>
+  </div>
+</div>
+```
+
+### Component: Page Hero (Inner Pages)
+```html
+<section class="page-hero">
+  <div class="page-hero__bg" style="background-image:url('...')"></div>
+  <div class="page-hero__scrim"></div>
+  <div class="page-hero__inner">
+    <div class="page-hero__breadcrumb">
+      <a href="/">Home</a> › <a href="/services/">Services</a> › <span>Page Name</span>
+    </div>
+    <h1 class="gl-h1 page-hero__title">Title <em>Accent</em></h1>
+    <p class="page-hero__sub">Subtitle text.</p>
+  </div>
+</section>
+```
+
+### Component: Scope Strip (Inner Service Pages)
+```html
+<div class="gl-scope-strip">
+  <div class="gl-scope-strip__inner">
+    <a href="#overview" class="gl-scope-strip__link is-active">Overview</a>
+    <a href="#scope" class="gl-scope-strip__link">Scope of Work</a>
+    <a href="#process" class="gl-scope-strip__link">Our Process</a>
+    <a href="#faq" class="gl-scope-strip__link">FAQ</a>
+    <a href="#contact" class="gl-scope-strip__link">Get a Quote</a>
+  </div>
+</div>
+```
+Scroll spy JS automatically sets `.is-active` as sections come into view.
+
+### Component: Hub Stage (B9 — Service Detail Pages)
+```html
+<section id="overview" class="gl-hub">
+  <div class="gl-hub__shell">
+    <div class="gl-hub__panel">
+      <div class="gl-eyebrow">Service Name</div>
+      <h2 class="gl-h2" style="color:var(--white);">Headline</h2>
+      <p class="gl-prose gl-prose--light">Body copy.</p>
+    </div>
+    <div class="gl-hub__media">
+      <div class="gl-hub__media-bg" style="background-image:url('...')"></div>
+      <div class="gl-hub__media-scrim"></div>
+    </div>
+  </div>
+  <div class="gl-hub__bridge">
+    <!-- 3 stat chips here -->
+  </div>
+  <div class="gl-hub__deck">
+    <!-- Spec rows here (.gl-hub__spec-row) -->
+  </div>
+</section>
+```
+
+---
+
+## ══════════════════════════════════════════════
+## PART 6 — PAGE MAP & MIGRATION INSTRUCTIONS
+## ══════════════════════════════════════════════
+
+### Page Map
+```
+/index.html                              Homepage (full PCL DNA sequence)
+/about/index.html                        About Page
+/services/index.html                     Services Hub
+/services/excavation/index.html          Service Detail
+/services/foundations/index.html         Service Detail
+/services/septic-utilities/index.html    Service Detail
+/services/drainage-hardscaping/index.html Service Detail
+/services/hauling-clearing/index.html    Service Detail
+/services/snow-removal/index.html        Service Detail
+/projects/index.html                     Projects / Portfolio
+/coverage/index.html                     Coverage Areas
+/contact/index.html                      Contact
+```
+
+---
+
+### `/index.html` — Homepage Migration
+**Section sequence (in order):**
+
+1. `#gl-preloader` — Charcoal fullscreen logo reveal
+2. `<header id="gl-header">` — Mega nav (verbatim copy)
+3. `#hero` — Full-bleed 3-slide crossfade hero + service bar
+   - Slides: excavation site / foundations pour / grading operation
+   - Overlay stat cards (right column): years + projects + regions
+   - Service bar: 6 icons below hero fold
+4. `.gl-marquee` — Yellow trust ticker (immediately after hero, no gap)
+5. `#about` — Charcoal 50/50 split: photo (clip-path) left / copy right
+6. `#stats` — White 4-stat counter row (animated on scroll)
+7. `#services` — Off-white 6-tile photo grid (3×2)
+8. `#projects` — White featured project panels (1 wide + 2 standard)
+9. `#why` — Charcoal-deep 50/50 split: copy+reasons left / photo right
+10. `#process` — Off-white 4-step horizontal stepper
+11. `#coverage` — Charcoal coverage region cards + map
+12. `#testimonials` — Off-white 3-card testimonial grid
+13. `#cta` — Dual CTA panels: yellow (Start a Project) + dark (Contact)
+14. `<footer id="footer">` — 4-col dark footer (verbatim copy)
+
+---
+
+### `/about/index.html` — About Page Migration
+**Inherit:** Any existing content (team bios, company story, values)
+**Inject pattern sequence:**
+1. Shared header (verbatim)
+2. `.page-hero` — Dark hero with about page breadcrumb
+3. `#about-story` — B2 expanded split (full editorial with photo)
+4. `#values` — Off-white 2×2 or 3×2 credential grid (reuse `.about__cred`)
+5. `#team` (if applicable) — White editorial grid
+6. `#equipment` (if applicable) — Service tile style grid for equipment fleet
+7. `#cta` — Dual CTA band (reuse from homepage, verbatim)
+8. Shared footer (verbatim)
+
+---
+
+### `/services/index.html` — Services Hub Migration
+**Inherit:** Any existing service descriptions
+**Inject pattern sequence:**
+1. Shared header
+2. `.page-hero` — Dark hero, breadcrumb: Home › Services
+3. `.gl-marquee` — Yellow ticker strip
+4. `#services-grid` — Off-white 6-tile grid (same as homepage services section, full width)
+5. `#why` — Charcoal why-GLC split section
+6. `#cta` — Dual CTA
+7. Shared footer
+
+---
+
+### `/services/[slug]/index.html` — Service Detail Pages (×6)
+**Applies to:** excavation, foundations, septic-utilities, drainage-hardscaping, hauling-clearing, snow-removal
+
+**Inject pattern sequence:**
+1. Shared header
+2. `.page-hero` — Dark hero with service photo bg, breadcrumb: Home › Services › [Service]
+3. `.gl-scope-strip` — Sticky sub-nav (Overview / Scope of Work / Process / FAQ / Get a Quote)
+4. `#overview.gl-hub` — B9 Hub Stage (flagship split + bridge stats + spec deck)
+5. `#scope` — Off-white section: scope of work list / project types (use `.gl-prose-depth`)
+6. `#process` — Charcoal or off-white accordion (B7) with service-specific process steps
+7. `#faq` — White accordion (B7) with 4-6 FAQs relevant to the service
+8. Related services — 3-tile strip linking to other services
+9. `#cta` / `#contact` — Dual CTA or contact form section
+10. Shared footer
+
+**Service-specific stat chips for `.gl-hub__bridge`:**
+- Excavation: 500+ Projects / 15+ Years / 4 Regions
+- Foundations: 200+ Foundations / Civil Certified / All Soil Types
+- Septic: Licensed OWEA / Municipal & Commercial / Permits Handled
+- Drainage: Storm + Surface / Armor Stone / Interlock
+- Hauling: All Material Types / Full Logistics / Same-Day Available
+- Snow: Seasonal Contracts / 24hr Response / Commercial Only
+
+---
+
+### `/projects/index.html` — Projects Page Migration
+**Inject pattern sequence:**
+1. Shared header
+2. `.page-hero` — "Ground Level Projects" hero
+3. Filter strip — Category buttons (All / Excavation / Foundations / Drainage / etc.)
+4. `#projects-grid` — C3 masonry grid of project panels (`.project-panel`)
+   - Use `.project-panel--wide` for hero/feature projects
+   - Show: project name, category tag, location, year
+5. `#cta` — Dual CTA
+6. Shared footer
+
+---
+
+### `/coverage/index.html` — Coverage Page Migration
+**Inject pattern sequence:**
+1. Shared header
+2. `.page-hero` — "Coverage Across Ontario" hero
+3. `#coverage` — Charcoal coverage section (full width, expanded from homepage version)
+   - Left: copy + service territory description
+   - Right: 2×3 grid of `.coverage__area` cards
+4. Per-region sections (B2 split) for each of: Barrie / Simcoe County / Muskoka / Sudbury
+5. `#cta` — Dual CTA
+6. Shared footer
+
+---
+
+### `/contact/index.html` — Contact Page Migration
+**Inherit:** All existing form fields, handlers, validation
+**Inject pattern sequence:**
+1. Shared header
+2. `.page-hero` — "Start a Project" or "Get a Quote" hero
+3. `#contact-split` — B2 split layout:
+   - Left: contact form (styled with GLC tokens — inputs use `border:1px solid var(--gray-200)`, focus `border-color:var(--yellow-core)`)
+   - Right: contact info panel (phone, email, address, coverage areas) using footer contact row styles
+4. `#coverage` — Coverage map/regions strip (compact version)
+5. Shared footer
+
+---
+
+## ══════════════════════════════════════════════
+## PART 7 — MASTER JAVASCRIPT BLOCK
+## ══════════════════════════════════════════════
+
+Paste this entire `<script>` block at the bottom of `<body>` on **every page**.
+Copy verbatim from `GLC_MASTER_SYSTEM.html` — do not split into separate files unless extracting to `site.js`.
+
+The script handles:
+- `#gl-preloader` fade-out on `window.load`
+- `.scrolled` class on `#gl-header` after 40px scroll
+- Mega menu hover + backdrop + keyboard (Enter/Space/Escape)
+- Mobile drawer open/close/overlay
+- Hero crossfade slider with dot navigation (5500ms interval)
+- `.gl-reveal` scroll reveal via IntersectionObserver
+- `[data-counter]` animated number counters (1800ms ease-out cubic)
+- `.gl-accordion__trigger` accordion toggle
+- `.gl-scope-strip__link` scroll spy (rootMargin `-40% 0px -55% 0px`)
+- Smooth anchor scroll with `--header-total-h` offset
+
+---
+
+## ══════════════════════════════════════════════
+## PART 8 — HARD RULES (ABSOLUTE — NEVER VIOLATE)
+## ══════════════════════════════════════════════
+
+```
+[RULE 01]  Brand yellow is ONLY #F2B705 — accessed via var(--yellow-core). Never approximate with #FFB800, #F5BC00, or any other value.
+[RULE 02]  border-radius is ZERO everywhere. Only border-radius:50% on decorative circles (e.g., coverage dot, marquee separator). No rounded cards, no rounded buttons, no rounded inputs.
+[RULE 03]  Font stack: Oswald for all display/headings, Plus Jakarta Sans for all body/UI, Source Serif 4 italic for pull-quotes ONLY. No other fonts.
+[RULE 04]  --container-max:1200px is the hard maximum. No section content exceeds this width.
+[RULE 05]  Never place --text-500 grey body text directly on a dark section background. Use gl-prose--light (white/62%) instead.
+[RULE 06]  Never create one-off button styles. Use only the .gl-btn class system.
+[RULE 07]  Never create one-off type styles. Use only the .gl-h1/.gl-h2/.gl-h3/.gl-eyebrow/.gl-prose class system.
+[RULE 08]  All transitions use var(--ease-expo) — cubic-bezier(0.22,1,0.36,1). Never use linear or ease-in-out for UI transitions.
+[RULE 09]  --gap-grid:2px between tiles and panels is intentional. Do not increase this gap.
+[RULE 10]  The nav and footer HTML structure is fixed. Never alter the .gl-header__ or .footer__ class trees. Only add modifier classes.
+[RULE 11]  Never use gradient backgrounds for section fills — only flat CSS color tokens. Gradients are allowed only for photo scrims and subtle radial texture overlays.
+[RULE 12]  Section padding uses --section-v (96px) for standard and --section-v-sm (64px) for compact. Never use arbitrary pixel values for section vertical padding.
+[RULE 13]  All visible content blocks must have .gl-reveal. Use .gl-delay-1 through .gl-delay-5 to stagger items in a sequence.
+[RULE 14]  Service tile images use aspect-ratio:4/3. Project panels use 16:10 (standard) or 21:9 (wide/hero). Never alter these ratios.
+[RULE 15]  Yellow (#F2B705) is a structural color used for: accent bars, eyebrow lines, stat numbers, hover borders, CTA primary background. It is NEVER used as a large section background except the marquee strip and the primary CTA panel.
+```
+
+---
+
+## ══════════════════════════════════════════════
+## PART 9 — RESPONSIVE BREAKPOINTS
+## ══════════════════════════════════════════════
+
+```css
+/* Tablet — @media (max-width: 1024px) */
+.hero__content-inner     → single column (stats panel hidden)
+.hero__service-bar-grid  → 3 columns
+.about__inner, .why__inner → single column (media stacks above copy)
+.services__header        → single column
+.services__grid          → 2 columns
+.stats__inner            → 2×2 grid
+.testimonials__grid      → 2 columns
+.projects__grid          → single column (wide panel loses --wide)
+.coverage__inner         → single column
+.coverage__areas         → 2 columns
+.footer__main            → 2 columns (brand spans full width)
+
+/* Mobile — @media (max-width: 768px) */
+:root → --section-v becomes 64px
+.gl-header__utility, .gl-header__nav → hidden
+.gl-header__mobile → flex (hamburger + mobile logo)
+.hero__service-bar-grid → 2 columns
+.services__grid, .testimonials__grid → single column
+.stats__inner → 2×2
+.process__steps → 2×2 (rail hidden)
+.coverage__areas → single column
+.cta__panels → single column
+.footer__main → single column, 20px padding
+.footer__bar-inner → flex-direction:column
+```
+
+---
+
+## ══════════════════════════════════════════════
+## PART 10 — SEO & SCHEMA
+## ══════════════════════════════════════════════
+
+### Paste in every page `<head>`
+```html
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://groundlevelcontracting.com/[page-path]/">
+```
+
+### LocalBusiness JSON-LD (Homepage only — already in master)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Ground Level Contracting",
+  "telephone": "+17056194902",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "PO BOX 193 STN Main",
+    "addressLocality": "Barrie",
+    "addressRegion": "ON",
+    "postalCode": "L4M 4T2",
+    "addressCountry": "CA"
+  },
+  "areaServed": ["Barrie","Simcoe County","Muskoka","Sudbury"],
+  "slogan": "From Concept to Creation"
+}
+```
+
+### Service Page JSON-LD (each service detail page)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "[Service Name]",
+  "provider": { "@type": "LocalBusiness", "name": "Ground Level Contracting" },
+  "areaServed": ["Barrie","Simcoe County","Muskoka","Sudbury"]
+}
+```
+
+---
+
+## ══════════════════════════════════════════════
+## PART 11 — CURSOR PROMPT TEMPLATES
+## (Copy-paste these when starting any page task in Cursor)
+## ══════════════════════════════════════════════
+
+### Starting a new page from scratch
+```
+Using GLC_MASTER_SYSTEM.html as the design reference and .cursorrules as the rule set:
+- Build /[page]/index.html following the page sequence defined in Part 6 of .cursorrules
+- Copy the NAV block and FOOTER block verbatim from GLC_MASTER_SYSTEM.html
+- Use the exact CSS token system from :root (Part 2)
+- Apply layout patterns from Part 5 component library
+- Follow all 3-plane depth rules (Part 4)
+- Add .gl-reveal to all visible content blocks
+- Include the Master JS block at bottom of body (Part 7)
+- Follow all Hard Rules in Part 8
+```
+
+### Migrating an existing page
+```
+Using GLC_MASTER_SYSTEM.html as the design reference and .cursorrules as the rule set:
+- INHERIT: keep all existing content, links, form handlers, and section IDs
+- INJECT: replace the :root token block, swap nav/footer with GLC verbatim copies, migrate section styles to GLC tokens, add .gl-reveal classes, apply correct layout pattern from Part 5
+- Do NOT change any existing href values, copy text, or form fields
+- Follow all Hard Rules in Part 8
+```
+
+### Fixing a specific section
+```
+Using .cursorrules Part 8 Hard Rules:
+- The [section name] section on [page] needs to match the [pattern name] pattern from Part 5
+- Keep all content intact
+- Correct the CSS to use GLC tokens (var(--yellow-core), var(--charcoal), etc.)
+- Ensure .gl-reveal is applied with appropriate .gl-delay-N stagger
+```
+
+---
+
+*This file is the combined source of truth for the GLC website build.*
+*GLC_MASTER_SYSTEM.html contains the full rendered HTML + CSS + JS reference implementation.*
+*This .cursorrules file contains all rules, migration instructions, and component documentation.*
+*Together, these two files govern the entire site.*

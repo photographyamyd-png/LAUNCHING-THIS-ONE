@@ -1,0 +1,5 @@
+/* Tailwind for homepage embed only — omit preflight to avoid resetting glc-base.css */
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
+
+@source "./**/*.{ts,tsx}";
